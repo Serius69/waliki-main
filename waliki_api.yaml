@@ -1,0 +1,813 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Serius69/Waliki/1.0.0
+info:
+  title: Waliki
+  # Added by API Auto Mocking Plugin
+
+  description: API REST demo para los mockups de la aplicacion Web Waliki
+  termsOfService: http://waliki.com/terms/
+  version: 1.0.0
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# host: twitter.com
+# basePath: /api/v1
+
+
+#servers:
+#- description: Entorno local
+#  url: https://localhost:8080/
+
+tags:
+  - name: RegistroDonante
+    description: Endpoints para el mockup de Registro usuario - donante
+  - name: PerfilDonanteProyectoVigente
+    description: Endpoints para el mockup de Perfil de donante - Proyectos Vigentes
+  - name: PerfilDonanteProyectoProceso
+    description: Endpoints para el mockup de Perfil de donante - Proyectos en Proceso
+  - name: ListadoDonadores
+    description: Endpoints para el mockup de Listado de donadores
+  - name: VerificacionDonacione
+    description: Endpoints para el mockup de Verificacion de donaciones realizada
+
+# schemes:
+# - http
+paths:
+  /contrato/{contratoId}:
+    get:
+      tags:
+        - RegistroDonante
+      summary: Buscar un contrato por su Id
+      description: Retorna los datos de un contrato ( id - contrato - tipo_contrato )
+      operationId: getContratoById
+      parameters:
+        - name: contratoId
+          in: path
+          description: ID del contrato a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/contrato'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contrato'
+        400:
+          description: Formato de ID invalid (solo numeros)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        404:
+          description: No existen contratos en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  ########################################################################
+  /donador:
+    get:
+      tags:
+        - ListadoDonadores
+      summary: Muestra todos los donadores
+      description: Retorna todos los donadores registrados en el sistema
+      operationId: getAllDonador
+      responses:
+        200:
+          description: Se encontro los donadores almacenados en la base de datos
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/donador'
+        404:
+          description: No existen donadores en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    post:
+      tags:
+        - RegistroDonante
+      summary: Agrega un nuevo donador
+      operationId: addDonador
+      requestBody:
+        description: Registra un nuevo donador con los datos que se tiene  en el mockup
+          Nombre usuario
+          Correo electronico
+          Nomero de telefono
+          Direccion
+          Contrasenia
+          Confirmar Contrasenia
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/donador'
+        required: true
+      responses:
+        200:
+          description: Se registro con exito el nuevo donante
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/donador'
+        404:
+          description: No existen donadores en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  ##############################################################
+  /proyecto/estado:
+    get:
+      tags:
+        - PerfilDonanteProyectoVigente
+      summary: Muestra los proyectos vigentes
+      description: Retorna todos los proyectos que aun esten en estado de Vigencia  Imagen - Monto a recaudar - Dias que falta
+      operationId: getProyectoVigente
+      responses:
+        200:
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proyecto'
+        304:
+          description: Sin modificaciones
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proyecto'
+        404:
+          description: No existen proyectos vigentes en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /donador/{nombre_persona}:
+    get:
+      tags:
+        - ListadoDonadores
+      summary: Busqueda de donador por nombre
+      operationId: getDonadorByName
+      parameters:
+        - name: nombre_persona
+          in: path
+          description: 'Nombre del donador(persona) a buscar '
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/donador'
+        400:
+          description: Invalid username supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /donador/{donadorId}:
+    get:
+      tags:
+        - VerificacionDonacione
+      summary: Buscar donador por Id
+      description: Busca un donador por su nombre y retorna todos los proyectos en los que participo
+      operationId: getDonadorById
+      parameters:
+        - name: donadorId
+          in: path
+          description: ID del donador a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/donador'
+        404:
+          description: No se encontro el donador solicitado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /proyecto/{proyectoId2}:
+    get:
+      tags:
+        - VerificacionDonacione
+      summary: Buscar proyecto por Id
+      description: Busca un proyecto
+      operationId: getProyectoById
+      parameters:
+        - name: proyectoId2
+          in: path
+          description: ID del donador a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proyecto'
+        404:
+          description: No se encontro el donador solicitado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /donacion/{donacionId}:
+    get:
+      tags:
+        - VerificacionDonacione
+      summary: Mostrar las donaciones de diferentes proyectos
+      description: Muestra todas las donaciones que un determinado donador realizo data( Proyectos que participo / Monto )
+      operationId: getDonacionesByIdProyecto
+      parameters:
+        - name: donacionId
+          in: path
+          description: ID de la donacion
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/donacion'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/donacion'
+        404:
+          description: No se encontro el donador solicitado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /cuenta/{cuentaId}:
+    get:
+      tags:
+        - VerificacionDonacione
+      summary: Mostrar las donaciones de diferentes proyectos
+      description: Muestra todas las donaciones que un determinado donador realizo data( Proyectos que participo / Monto )
+      operationId: getCuentaByIdCuenta
+      parameters:
+        - name: cuentaId
+          in: path
+          description: ID de la cuenta
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/cuenta'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cuenta'
+        404:
+          description: No se encontro el donador solicitado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /project/{nombreproyecto}:
+    get:
+      tags:
+        - PerfilDonanteProyectoVigente
+      summary: Get user by user name
+      operationId: getProyectoByName
+      parameters:
+        - name: nombreproyecto
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/proyecto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proyecto'
+        400:
+          description: Nombre del proyecto invalido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        404:
+          description: No existen proyectos en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+
+  /estado/findproyectoByStatus:
+    get:
+      tags:
+        - PerfilDonanteProyectoProceso
+      summary: Finds Pets by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findProjectByStatus
+      parameters:
+        - name: estado
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              default: proceso
+              enum:
+                - vigente
+                - proceso
+                - completado
+      responses:
+        200:
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/proyecto'
+        404:
+          description: No existen donaciones en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /donacion:
+    post:
+      tags:
+        - ConfirmarDonacion
+      summary: Agrega una nueva donacion
+      operationId: addDonacion
+      requestBody:
+        description: Objeto donador se agrega
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/donacion'
+        required: true
+      responses:
+        200:
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/donacion'
+        404:
+          description: No existen donaciones en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        405:
+          description: Entrada de datos invalida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+#########################
+#Components
+#########################
+components:
+  #################
+  #Schemas
+  ##################
+  schemas:
+    error:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int64
+        errorMessage:
+          type: string
+          description:  Mensaje del error
+        errorDescription:
+          type: string
+          description: La descripcion en detalle del error
+
+    cuenta:
+      type: object
+      properties:
+        id_cuenta:
+          type: integer
+          format: int64
+        id_banco:
+          type: string
+          description: id del emprendedor
+          example: 1
+        id_tipo_cuenta:
+          type: string
+          description: id del tipo de cuenta
+          example: 1
+        numero_cuenta:
+          type: integer
+          description:  Numero de cuenta bancaria
+          example: 34123124
+        id_emprendedor:
+          type: integer
+          description: id del emprendedor
+          example: 1
+
+    estado:
+      type: object
+      properties:
+        id_estado:
+          type: integer
+          description: Codigo unico del estado
+        estado:
+          type: string
+          enum:
+            - vigente
+            - en proceso
+            - completado
+        completado:
+          type: boolean
+          default: false
+    area:
+      type: object
+      properties:
+        id_fecha:
+          type: integer
+          description: Codigo unico de la fecha valor minimo 1
+        anio:
+          type: string
+    tipo_contrato:
+      properties:
+        id_tipo_contrato:
+          type: integer
+          description: Codigo unico del tipo de emprendimiento valor minimo 1
+        tipo_contrato:
+          type: string
+          description: El tipo de emprendimiento que puede ser (basico, intermedio)
+
+    tipo_emprendimiento:
+      properties:
+        id_tipo_emprendimiento:
+          type: integer
+          description: Codigo unico del tipo de emprendimiento valor minimo 1
+        tipo_emprendimiento:
+          type: string
+          description: El tipo de emprendimiento que puede ser (basico, intermedio)
+        id_area:
+          $ref: '#/components/schemas/area'
+
+    fecha:
+      type: object
+      properties:
+        id_fecha:
+          type: integer
+          description: Codigo unico de la fecha valor minimo 1
+        anio:
+          type: integer
+          description: anio cardinal
+        mes:
+          type: string
+          description: Mes (Enero....Diciembre)
+        dia:
+          type: integer
+        fecha:
+          type: string
+          description: Mes (Enero....Diciembre)
+    tipo_usuario:
+      type: object
+      properties:
+        id_tipo_usuario:
+          type: integer
+          format: int32
+          description: Codigo unico de la fecha valor minimo 1
+        tipo_usuario:
+          type: string
+          description: Codigo unico de la fecha valor minimo 1
+    imagen:
+      type: object
+      properties:
+        id_imagen:
+          type: integer
+          format: int64
+        src_imagen:
+          type: string
+          format: int64
+          description: codigo de ubicacion de la imagen
+        nombre:
+          type: string
+          description: nombre de la imagen
+
+    departamento:
+      type: object
+      properties:
+        id_departamento:
+          type: integer
+          format: int64
+        departamento:
+          type: string
+
+    ciudad:
+      type: object
+      properties:
+        id_ciudad:
+          type: integer
+          format: int64
+        ciudad:
+          type: string
+        id_departamento:
+          $ref: '#/components/schemas/departamento'
+
+    direccion:
+      type: object
+      properties:
+        id_persona:
+          type: integer
+          format: int64
+        id_ciudad:
+          $ref: '#/components/schemas/ciudad'
+        zona:
+          type: string
+        calle:
+          type: string
+        longitud:
+          type: integer
+        latitud:
+          type: integer
+
+    persona:
+      type: object
+      properties:
+        id_persona:
+          type: integer
+          description: Codigo unico de la persona
+          example: 1
+        nombre_persona:
+          type: string
+          description: Nombre de la persona
+          example: 'Jose'
+        apellido_paterno:
+          type: string
+          description: Apellido paterno de la persona
+          example: 'Lopez'
+        apellido_materno:
+          type: string
+          description: Apellido materno de la persona
+        apellido_casado:
+          type: string
+          description: Apellido de casada de la persona(mujer) este espacio es opcional
+        telefono:
+          type: integer
+          description: Telefono celular o local de la persona natural
+        fecha_nacimiento:
+          type: string
+          format: date-time
+          description: Fecha de nacimiento en formato dd/mm/aa
+        id_direccion:
+          $ref: '#/components/schemas/direccion'
+
+    usuario:
+      type: object
+      properties:
+        id_usuario:
+          type: integer
+          format: int64
+          description: Codigo unico del usuario
+        id_tipo_usuario:
+          $ref: '#/components/schemas/tipo_usuario'
+        usuario:
+          type: integer
+          format: int64
+        contrasena:
+          type: string
+          format: password
+      xml:
+        name: usuario
+
+    contrato:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Codigo unico del contrato
+
+        contrato:
+          type: string
+          description: Contenido del contrato
+          example: 'Contrato 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        id_tipo_contrato:
+          $ref: '#/components/schemas/tipo_contrato'
+      xml:
+        name: contrato
+
+    emprendedor:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/tipo_usuario'
+        id_imagen:
+          $ref: '#/components/schemas/imagen'
+        id_tipo_emprendimiento:
+          $ref: '#/components/schemas/tipo_emprendimiento'
+        id_contrato:
+          $ref: '#/components/schemas/contrato'
+        id_persona:
+          $ref: '#/components/schemas/persona'
+        id_usuario:
+          $ref: '#/components/schemas/usuario'
+    donador:
+      type: object
+      properties:
+        id_donador:
+          type: integer
+          description: Codigo unico del usuario
+        id_contrato:
+          $ref: '#/components/schemas/contrato'
+        id_persona:
+          $ref: '#/components/schemas/persona'
+        id_usuario:
+          $ref: '#/components/schemas/usuario'
+      xml:
+        name: donador
+
+    proyecto:
+      type: object
+      properties:
+        id_proyecto:
+          type: integer
+          format: int64
+          description: Codigo unico del proyecto valor minimo
+        nombreproyecto:
+          type: string
+          description: Nombre del proyecto
+        descripcion:
+          type: string
+          description: Descripcion especifica de que trata el proyecto almacenado
+        monto_recaudar:
+          type: number
+          format: double
+          description: Monto objetivo a recaudar
+        id_fecha_inicio:
+          $ref: '#/components/schemas/fecha'
+        id_fecha_final:
+          $ref: '#/components/schemas/usuario'
+        id_emprendedor:
+          $ref: '#/components/schemas/emprendedor'
+        id_estado:
+          $ref: '#/components/schemas/estado'
+    donacion:
+      type: object
+      properties:
+        id_donacion:
+          type: integer
+          format: int64
+          description: Codigo unico del proyecto valor minimo
+          example: 1
+        id_proyecto:
+          $ref: '#/components/schemas/proyecto'
+        id_donador:
+          $ref: '#/components/schemas/donador'
+        id_fecha:
+          $ref: '#/components/schemas/fecha'
+        monto:
+          type: integer
+          format: int64
+        hora:
+          type: string
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        minimum: 0
+      description: La cantidad de elementos que se deben omitir antes de devolver los resultados
+    limitParam:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
+        default: 1
+      description: La cantidad de elemento para devolver
