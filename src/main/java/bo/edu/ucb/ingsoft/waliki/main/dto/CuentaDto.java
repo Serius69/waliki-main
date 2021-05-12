@@ -8,4 +8,7 @@ public class CuentaDto {
     public String emprendedorId;
     public String personaId;
 
+    public CuentaDto(){
+
+    }
 }

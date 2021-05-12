@@ -43,7 +43,7 @@ public class ProyectoDao {
         return result;
     }
 
-    public ProyectoDto findProyectoByVigencia(Integer proyectoId) {
+    public ProyectoDto findProyectoVigente(Integer proyectoId) {
         ProyectoDto result = new ProyectoDto();
         try {
             Connection conn = dataSource.getConnection();
@@ -72,7 +72,7 @@ public class ProyectoDao {
         return result;
     }
 
-    public ProyectoDto getProyectoVigente (Integer proyectoId) {
+    public ProyectoDto findProyectoEnProgreso (Integer proyectoId) {
         ProyectoDto result = new ProyectoDto();
         ImagenDto result2 = new ImagenDto();
         try {
