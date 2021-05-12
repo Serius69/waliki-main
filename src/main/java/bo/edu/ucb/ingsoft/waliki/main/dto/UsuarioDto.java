@@ -10,6 +10,8 @@ public class UsuarioDto {
     public String codigo_verificacion;
     public Integer personaId;
 
+
+
     public UsuarioDto (){
 
     }
