@@ -47,8 +47,6 @@ public class UsuarioBl {
         return usuarioDao.findUsuarioById(usuarioId);
     }
 
-
-
     public DonadorDto crearDonador(DonadorDto donador) {
         // Computamos el numero de seguro social, conformado por los tres primeros caracteres
         // del nombre mas los tres primeros del apelliod
