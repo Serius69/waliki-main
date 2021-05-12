@@ -1,8 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ImagenDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.PersonaDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 

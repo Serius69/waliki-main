@@ -12,7 +12,6 @@ import java.sql.Statement;
 public class DonacionDao {
 
     private DataSource dataSource;
-
     @Autowired
     private SequenceDao sequenceDao;
 
