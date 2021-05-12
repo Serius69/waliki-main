@@ -1,2 +1,10 @@
-#El usuario crea una cuenta como donador
-POST http://localhost:8080/ming/v1/users/signup
+GET http://localhost:8080/donador
+Accept: application/json
+
+###
+
+
+
+
+
+
