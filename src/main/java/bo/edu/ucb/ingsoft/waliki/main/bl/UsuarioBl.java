@@ -15,6 +15,8 @@ public class UsuarioBl {
     @Autowired
     PersonaDao personaDao;
     DonadorDao donadorDao;
+    @Autowired
+    UsuarioDao usuarioDao;
 
     public PersonaDto crearPersona(PersonaDto persona) {
         // Computamos el numero de seguro social, conformado por los tres primeros caracteres
@@ -32,8 +34,6 @@ public class UsuarioBl {
         return personaDao.findAllPersonas();
     }
 
-    @Autowired
-    UsuarioDao usuarioDao;
 
     public UsuarioDto crearUsuario(UsuarioDto usuario) {
         // Computamos el numero de seguro social, conformado por los tres primeros caracteres

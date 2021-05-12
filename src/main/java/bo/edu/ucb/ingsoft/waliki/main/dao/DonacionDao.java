@@ -1,9 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonacionDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonadorDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.PersonaDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.UsuarioDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import bo.edu.ucb.ingsoft.waliki.main.models.Donacion;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,6 +36,7 @@ public class DonacionDao {
     public DonacionDto findDonacionById(Integer donacionId) {
         DonacionDto result = new DonacionDto();
         PersonaDto result2 = new PersonaDto();
+        ProyectoDto result3 = new ProyectoDto();
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
@@ -57,9 +55,10 @@ public class DonacionDao {
 
             if (rs.next()) {
                 result.donacionId = rs.getInt("id_persona");
-                result.fecha = rs.getString("id_contrato");
-                result.monto = rs.getString("id_usuario");
-                result2.nombre = rs.getString("pr.nombre");
+                result.fecha = rs.getString("fecha");
+                result.monto = rs.getString("monto");
+                result2.nombre = rs.getString("pe.nombre");
+                result3.nombre= rs.getString("pr.nombre");
             } else { // si no hay valores de BBDD
                 result = null;
             }
