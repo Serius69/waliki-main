@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 import java.util.List;
 
 public class UsuarioApi {
-
     @Autowired
     public DataSource dataSource;
     @Autowired

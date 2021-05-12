@@ -1,7 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
@@ -10,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ContratoDao {
+    @Autowired
     private DataSource dataSource;
 
     public ContratoDto findContratoById(Integer contratoId) {
