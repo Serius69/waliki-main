@@ -41,15 +41,15 @@ public class UsuarioDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
+                    "SELECT pr.nombre_proyecto, monto, SUM(monto)" +
                             "FROM donador d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
                             "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_persona = " + donadorId +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {
@@ -72,15 +72,15 @@ public class UsuarioDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
+                    "SELECT pr.nombre_proyecto, monto, SUM(monto)" +
                             "FROM donador d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
                             "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_persona = " + usuarioId +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {

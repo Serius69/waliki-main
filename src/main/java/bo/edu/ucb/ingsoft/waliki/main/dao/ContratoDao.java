@@ -21,7 +21,6 @@ public class ContratoDao {
             ResultSet rs = stmt.executeQuery(
                     "SELECT contrato " +
                             "FROM contrato co " +
-                            "JOIN tipo_contrato tc  ON co.id_tipo_contrato = tc.id_tipo_contrato " +
                             "  WHERE co.id_contrato = " + contratoId +" " +
                             "GROUP BY co.id_contrato;" +
                             "     ");
