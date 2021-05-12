@@ -1,8 +1,8 @@
 package bo.edu.ucb.ingsoft.waliki.main.api;
 
+import bo.edu.ucb.ingsoft.waliki.main.bl.DonadorBl;
 import bo.edu.ucb.ingsoft.waliki.main.bl.UsuarioBl;
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonadorDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.PersonaDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +20,8 @@ public class UsuarioApi {
     public DataSource dataSource;
     @Autowired
     private UsuarioBl usuarioBl;
+    @Autowired
+    private DonadorBl donadorBl;
     @Autowired
     private UsuarioBl gestionPersonaBl;
 
@@ -67,18 +69,37 @@ public class UsuarioApi {
         return usuarioBl.findAllDonadores();
     }
 
-
+//crear un nuevo donador
     @PostMapping(path = "/donador")
-    public DonadorDto createDonador(@RequestBody DonadorDto donador) {
+    public DonadorDto createDonador(@RequestBody DonadorDto donador, UsuarioDto usuario, PersonaDto persona, DireccionDto direccion) {
         // Validar que los datos enviados son correctos.
-        if (donador.donadorId == null || donador.contratoId.equals("")) {  // nombre: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre debe ser obligatorio" );
+        if (usuario.usuario == null || usuario.usuario.trim().equals("")) {  // nombre: "     "
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre de usuario debe ser obligatorio" );
         }
-
-        if (donador.donadorId == null || donador.contratoId.equals("")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El apellido debe ser obligatorio" );
+        if (persona.correo_electronico == null || persona.correo_electronico.equals("")) {  // nombre: "     "
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El correo electronico debe ser obligatorio" );
+        }
+        if (persona.telefono == null || persona.telefono.trim().equals("")) {  // nombre: "     "
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El numero de telefono debe ser obligatorio" );
+        }
+        if (direccion.zona == null || direccion.zona.trim().equals("")) {  // nombre: "     "
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "la direccion debe ser obligatoria" );
+        }
+        if (usuario.contrasena == null || usuario.contrasena.trim().equals("")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La contrasenia debe ser obligatoria" );
         }
 
         return usuarioBl.crearDonador(donador);
     }
+
+    @GetMapping(path = "/donador/{donadorId}")
+    public ContratoDto findContrato (@PathVariable Integer contratoId) {
+        ContratoDto contrato = donadorBl.findContrato(contratoId);
+        if (contrato != null) {
+            return donadorBl.findContrato(contratoId);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + contratoId );
+        }
+    }
+
 }
