@@ -92,7 +92,7 @@ public class UsuarioApi {
         return usuarioBl.crearDonador(donador);
     }
 
-    @GetMapping(path = "/donador/{donadorId}")
+    @GetMapping(path = "/contrato/contratoId")
     public ContratoDto findContrato (@PathVariable Integer contratoId) {
         ContratoDto contrato = donadorBl.findContrato(contratoId);
         if (contrato != null) {
