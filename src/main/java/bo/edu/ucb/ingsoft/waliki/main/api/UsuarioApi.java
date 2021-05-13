@@ -46,7 +46,7 @@ public class UsuarioApi {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre debe ser obligatorio" );
         }
 
-        if (persona.apellidoPaterno == null || persona.apellidoPaterno.trim().equals("")) {
+        if (persona.apellidos == null || persona.apellidos.trim().equals("")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El apellido debe ser obligatorio" );
         }
 
@@ -75,10 +75,10 @@ public class UsuarioApi {
         if (usuario.usuario == null || usuario.usuario.trim().equals("")) {  // nombre: "     "
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre de usuario debe ser obligatorio" );
         }
-        if (persona.correo_electronico == null || persona.correo_electronico.equals("")) {  // nombre: "     "
+        if (usuario.correoElectronico == null || usuario.correoElectronico.equals("")) {  // nombre: "     "
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El correo electronico debe ser obligatorio" );
         }
-        if (persona.telefono == null || persona.telefono.trim().equals("")) {  // nombre: "     "
+        if (usuario.telefono == null || usuario.telefono.trim().equals("")) {  // nombre: "     "
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El numero de telefono debe ser obligatorio" );
         }
         if (direccion.zona == null || direccion.zona.trim().equals("")) {  // nombre: "     "

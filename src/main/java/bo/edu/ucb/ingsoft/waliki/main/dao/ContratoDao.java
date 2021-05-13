@@ -19,7 +19,7 @@ public class ContratoDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT contrato " +
+                    "SELECT contenido " +
                             "FROM contrato co " +
                             "  WHERE co.id_contrato = " + contratoId +" " +
                             "GROUP BY co.id_contrato;" +

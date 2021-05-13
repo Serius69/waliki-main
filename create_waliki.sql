@@ -316,7 +316,7 @@ ALTER TABLE emprendedor ADD CONSTRAINT Emprendedor_Imagen
 -- Reference: Emprendedor_Tipo_Emprendimiento (table: emprendedor)
 ALTER TABLE emprendedor ADD CONSTRAINT Emprendedor_Tipo_Emprendimiento
     FOREIGN KEY (id_tipo_emprendimiento)
-    REFERENCES tipo_emprendimiento (id_tipo_emprendimiento)  
+    REFERENCES tipo_emprendimiento (id_tipo_emprendimiento)
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;

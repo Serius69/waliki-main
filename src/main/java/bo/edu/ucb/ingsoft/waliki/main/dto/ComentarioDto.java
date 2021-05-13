@@ -6,7 +6,7 @@ public class ComentarioDto {
     public Integer donadorId;
     public String comentario;
     public String fecha;
-
+    public String hora;
     public ComentarioDto(){
 
     }

@@ -28,10 +28,8 @@ public class PersonaDao {
             stmt.execute("INSERT INTO persona VALUES ("
                     + persona.personaId +", '"
                     + persona.nombre +"', '"
-                    + persona.apellidoPaterno+"','"
-                    + persona.apellidoMaterno+"','"
-                    + persona.apellidoCasado+"','"
-                    + persona.telefono+"','"
+                    + persona.apellidos+"','"
+                    + persona.fechaNacimimento+"','"
                     + persona.direccionId+"') "
             );
         } catch (Exception ex) {
@@ -51,7 +49,7 @@ public class PersonaDao {
             if (rs.next()) {
                 result.personaId = rs.getInt("id_persona");
                 result.nombre = rs.getString("nombre");
-                result.apellidoPaterno = rs.getString("apellido_paterno");
+                result.apellidos = rs.getString("apellidos");
             } else { // si no hay valores de BBDD
                 result = null;
             }
@@ -67,14 +65,12 @@ public class PersonaDao {
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id_persona, nombre, apellido_paterno FROM persona");
+            ResultSet rs = stmt.executeQuery("SELECT id_persona, nombre_persona, apellidos FROM persona");
             while (rs.next()) {
                 PersonaDto persona = new PersonaDto();
                 persona.personaId = rs.getInt("id_persona");
                 persona.nombre = rs.getString("nombre");
-                persona.apellidoPaterno = rs.getString("apellido_paterno");
-                persona.apellidoMaterno = rs.getString("apellido_materno");
-                persona.apellidoCasado = rs.getString("apellido_casado");
+                persona.apellidos = rs.getString("apellido_paterno");
                 persona.telefono = rs.getString("telefono");
                 persona.direccionId = rs.getString("id_direccion");
                 persona.correo_electronico = rs.getString("correo_electronico");
