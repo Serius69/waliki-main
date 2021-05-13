@@ -117,7 +117,7 @@ public class UsuarioApi {
         if (contrato == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el contrato:" + contratoId );
         } else {
-            return donadorBl.findContratoById(contratoId);
+            return contrato;
         }
     }
 

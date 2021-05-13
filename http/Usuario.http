@@ -12,11 +12,11 @@ Accept: application/json
   "contratoId": 2
 }
 
-### Muestra los proyectos Vigentes - Funciona
+### Muestra los proyectos Vigentes - Falla
 GET http://localhost:8080/estado/1
 accept: application/json
 
-### Muestra los proyectos en proceso - Funciona
+### Muestra los proyectos en proceso - Falla
 GET http://localhost:8080/estado/2
 accept: application/json
 

@@ -22,7 +22,13 @@ public class DonacionDao {
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute(String.format("INSERT INTO donacion VALUES ('%d', '%d', '%d', '%s', '%s', '%s') ", donacion.donacionId, donacion.proyectoId, donacion.donadorId, donacion.monto, donacion.hora, donacion.fecha_donacion));
+            stmt.execute(String.format("INSERT INTO donacion VALUES ('%d', '%d', '%d', '%s', '%s', '%s') ",
+                    donacion.donacionId,
+                    donacion.proyectoId,
+                    donacion.donadorId,
+                    donacion.monto,
+                    donacion.hora,
+                    donacion.fecha_donacion));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
