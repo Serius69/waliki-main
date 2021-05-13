@@ -1,3 +1,11 @@
+--banco
+insert into banco (id_banco, nombre_banco) values (1, 'Stehr Inc');
+insert into banco (id_banco, nombre_banco) values (2, 'Conn LLC');
+insert into banco (id_banco, nombre_banco) values (3, 'Beier-Casper');
+insert into banco (id_banco, nombre_banco) values (4, 'Marvin-Stroman');
+insert into banco (id_banco, nombre_banco) values (5, 'Wiza Inc');
+
+
 -- tipo emprendimiento
 insert into tipo_emprendimiento (id_tipo_emprendimiento, tipo, area)values (1, 'basico', 1);
 insert into tipo_emprendimiento (id_tipo_emprendimiento, tipo, area) values (2, 'intermedio', 3);
@@ -664,3 +672,319 @@ insert into imagen_proyecto (id_imagen, id_proyecto, descripcion) values (17, 17
 insert into imagen_proyecto (id_imagen, id_proyecto, descripcion) values (18, 18, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.');
 insert into imagen_proyecto (id_imagen, id_proyecto, descripcion) values (19, 19, 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.');
 insert into imagen_proyecto (id_imagen, id_proyecto, descripcion) values (20, 20, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.');
+-- comentario
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (1, 11, 19, 'Fusce consequat. Nulla nisl. Nunc nisl.
+
+Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', '12/28/2020', '9:14');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (2, 9, 30, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '9/17/2020', '20:45');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (3, 16, 12, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.
+
+Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '2/4/2021', '8:43');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (4, 14, 21, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', '2/12/2021', '16:32');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (5, 28, 24, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.
+
+Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.', '7/3/2020', '0:12');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (6, 1, 18, 'Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '6/29/2020', '2:00');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (7, 5, 29, 'Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '6/8/2020', '23:22');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (8, 24, 20, 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.
+
+Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', '8/24/2020', '9:52');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (9, 22, 6, 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
+
+Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.
+
+Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '9/9/2020', '20:36');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (10, 20, 22, 'Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '4/13/2021', '6:36');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (11, 20, 20, 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.
+
+Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '3/21/2021', '6:22');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (12, 6, 18, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.
+
+Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', '1/30/2021', '16:07');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (13, 26, 22, 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', '8/8/2020', '3:30');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (14, 26, 6, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '8/7/2020', '11:26');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (15, 17, 18, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', '12/1/2020', '4:29');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (16, 19, 22, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
+
+In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', '8/24/2020', '11:39');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (17, 9, 13, 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+
+Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
+
+Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.', '6/24/2020', '19:50');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (18, 24, 16, 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
+
+Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.
+
+Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', '11/14/2020', '10:48');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (19, 17, 2, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
+
+Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.', '7/13/2020', '3:01');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (20, 25, 15, 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.
+
+Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
+
+Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', '6/10/2020', '10:08');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (21, 21, 23, 'Fusce consequat. Nulla nisl. Nunc nisl.', '3/17/2021', '18:14');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (22, 7, 22, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.
+
+Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '10/21/2020', '12:47');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (23, 16, 24, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', '3/1/2021', '12:50');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (24, 25, 8, 'Sed ante. Vivamus tortor. Duis mattis egestas metus.', '6/17/2020', '10:48');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (25, 5, 12, 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', '10/11/2020', '5:05');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (26, 22, 28, 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+
+Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', '7/1/2020', '12:46');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (27, 24, 18, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '11/17/2020', '7:04');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (28, 6, 4, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
+
+Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
+
+Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', '1/19/2021', '10:46');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (29, 24, 16, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', '4/13/2021', '1:07');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (30, 11, 22, 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.
+
+Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', '4/14/2021', '0:29');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (31, 15, 22, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '10/29/2020', '23:28');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (32, 7, 23, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '12/12/2020', '12:57');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (33, 23, 3, 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', '7/16/2020', '9:33');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (34, 30, 20, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
+
+Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.', '10/23/2020', '1:57');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (35, 13, 2, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.
+
+Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '7/5/2020', '21:03');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (36, 1, 6, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
+
+Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', '8/11/2020', '23:10');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (37, 4, 9, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+
+Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', '1/31/2021', '11:51');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (38, 21, 4, 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.
+
+Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+
+Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', '2/25/2021', '11:23');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (39, 2, 4, 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', '3/30/2021', '6:30');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (40, 19, 2, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '8/4/2020', '19:52');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (41, 24, 25, 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', '3/22/2021', '22:40');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (42, 24, 30, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', '6/14/2020', '11:47');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (43, 27, 9, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.
+
+Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', '10/15/2020', '20:44');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (44, 25, 11, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
+
+Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '7/20/2020', '7:27');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (45, 24, 29, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', '6/4/2020', '14:56');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (46, 14, 22, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', '2/24/2021', '1:14');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (47, 4, 20, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', '11/25/2020', '9:33');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (48, 11, 20, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '12/6/2020', '23:06');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (49, 1, 13, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
+
+Fusce consequat. Nulla nisl. Nunc nisl.
+
+Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', '9/12/2020', '13:17');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (50, 6, 18, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.', '5/31/2020', '15:48');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (51, 21, 25, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2/19/2021', '18:08');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (52, 18, 13, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.', '12/31/2020', '5:59');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (53, 11, 2, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
+
+Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.', '5/10/2020', '0:11');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (54, 9, 25, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.
+
+Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
+
+Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', '7/29/2020', '11:38');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (55, 28, 27, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '4/21/2021', '8:25');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (56, 11, 30, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.
+
+Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.
+
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '2/5/2021', '3:56');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (57, 18, 8, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
+
+Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', '9/8/2020', '10:34');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (58, 17, 22, 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
+
+Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.
+
+Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', '7/5/2020', '14:37');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (59, 5, 26, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.
+
+In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', '10/22/2020', '7:44');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (60, 5, 6, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
+
+Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.', '2/3/2021', '9:11');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (61, 5, 28, 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', '1/5/2021', '12:41');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (62, 27, 9, 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+
+Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', '7/29/2020', '0:15');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (63, 24, 14, 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', '1/11/2021', '22:00');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (64, 29, 25, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+
+Phasellus in felis. Donec semper sapien a libero. Nam dui.
+
+Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.', '4/29/2021', '20:53');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (65, 13, 23, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
+
+Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', '3/24/2021', '15:16');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (66, 28, 27, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
+
+Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+
+Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.', '7/12/2020', '6:20');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (67, 8, 25, 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
+
+Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '11/28/2020', '12:01');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (68, 27, 15, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
+
+Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.', '9/27/2020', '2:31');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (69, 20, 18, 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', '11/7/2020', '10:49');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (70, 14, 28, 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', '12/15/2020', '18:53');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (71, 17, 13, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
+
+Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+
+Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', '7/13/2020', '14:53');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (72, 26, 28, 'Fusce consequat. Nulla nisl. Nunc nisl.', '4/20/2021', '18:23');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (73, 29, 5, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '4/24/2021', '17:50');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (74, 25, 5, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '6/27/2020', '15:15');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (75, 27, 27, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
+
+Fusce consequat. Nulla nisl. Nunc nisl.', '5/3/2020', '6:53');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (76, 20, 11, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '5/11/2020', '22:52');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (77, 5, 5, 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.
+
+Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.
+
+Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '5/5/2020', '13:29');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (78, 26, 13, 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', '6/29/2020', '16:41');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (79, 5, 7, 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+
+Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', '1/23/2021', '7:51');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (80, 28, 19, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '10/13/2020', '1:22');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (81, 22, 2, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
+
+In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', '12/7/2020', '1:51');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (82, 19, 22, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
+
+Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', '7/14/2020', '22:38');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (83, 11, 23, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
+
+Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', '9/17/2020', '5:16');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (84, 2, 10, 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', '11/25/2020', '19:07');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (85, 1, 22, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.', '12/22/2020', '5:32');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (86, 7, 29, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.
+
+Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.
+
+Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', '8/4/2020', '19:13');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (87, 24, 9, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
+
+Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+
+Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.', '10/3/2020', '16:31');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (88, 2, 16, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
+
+Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', '3/5/2021', '7:03');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (89, 12, 17, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+
+Phasellus in felis. Donec semper sapien a libero. Nam dui.
+
+Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.', '5/4/2020', '22:32');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (90, 16, 1, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
+
+In congue. Etiam justo. Etiam pretium iaculis justo.', '3/17/2021', '17:49');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (91, 2, 10, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', '5/17/2020', '23:45');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (92, 6, 17, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '5/19/2020', '9:16');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (93, 27, 8, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.
+
+Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+
+Sed ante. Vivamus tortor. Duis mattis egestas metus.', '8/4/2020', '19:42');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (94, 13, 15, 'Fusce consequat. Nulla nisl. Nunc nisl.', '6/27/2020', '10:16');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (95, 29, 11, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', '11/7/2020', '0:22');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (96, 11, 2, 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
+
+Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', '1/26/2021', '3:47');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (97, 8, 19, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', '11/23/2020', '5:38');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (98, 2, 19, 'In congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '1/7/2021', '2:59');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (99, 22, 14, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.
+
+Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '2/2/2021', '13:29');
+insert into comentario (id_comentario, id_proyecto, id_donador, contenido, fecha, hora) values (100, 10, 25, 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.
+
+Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+
+Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', '10/14/2020', '10:23');
+
