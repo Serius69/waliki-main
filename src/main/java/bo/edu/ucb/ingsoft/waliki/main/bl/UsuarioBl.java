@@ -19,10 +19,6 @@ public class UsuarioBl {
     UsuarioDao usuarioDao;
 
     public PersonaDto crearPersona(PersonaDto persona) {
-        // Computamos el numero de seguro social, conformado por los tres primeros caracteres
-        // del nombre mas los tres primeros del apelliod
-        persona.nroSS = persona.nombre.substring(0,3).toUpperCase() + persona.apellidoPaterno.substring(0,3);
-
         return personaDao.crearPersona(persona);
     }
 
@@ -36,10 +32,6 @@ public class UsuarioBl {
 
 
     public UsuarioDto crearUsuario(UsuarioDto usuario) {
-        // Computamos el numero de seguro social, conformado por los tres primeros caracteres
-        // del nombre mas los tres primeros del apelliod
-        //donador.donadorId = donador.nombre.substring(0,3).toUpperCase() + donador.apellido.substring(0,3);
-
         return usuarioDao.crearUsuario(usuario);
     }
 

@@ -55,7 +55,6 @@ public class UsuarioDao {
             if (rs.next()) {
                 result.usuarioId = rs.getInt("id_persona");
                 result.usuario = rs.getString("usuario");
-                result.codigo_verificacion = rs.getString("codigo_verficacion");
             } else { // si no hay valores de BBDD
                 result = null;
             }
@@ -84,9 +83,8 @@ public class UsuarioDao {
                             "     ");
 
             if (rs.next()) {
-                result.usuarioId = rs.getInt("id_persona");
-                result.usuario = rs.getString("id_contrato");
-                result.codigo_verificacion = rs.getString("id_usuario");
+                result.usuarioId = rs.getInt("id_usuario");
+                result.usuario = rs.getString("username");
             } else { // si no hay valores de BBDD
                 result = null;
             }

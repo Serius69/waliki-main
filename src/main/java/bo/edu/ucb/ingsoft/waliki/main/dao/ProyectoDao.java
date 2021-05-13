@@ -24,12 +24,12 @@ public class ProyectoDao {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT id_proyecto, nombre, monto_recaudar, fecha_inicio, fecha_fin " +
+                    "SELECT id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio, fecha_fin " +
                     "FROM proyecto ");
             while (rs.next()) {
                 ProyectoDto proyecto = new ProyectoDto();
                 proyecto.proyectoId = rs.getInt("id_persona");
-                proyecto.nombre = rs.getString("nombre");
+                proyecto.nombreProyecto = rs.getString("nombre");
                 proyecto.montoRecaudar = rs.getString("monto_recaudar");
                 proyecto.fechaInicio = rs.getString("fecha_inicio");
                 proyecto.fechaFin = rs.getString("fecha_fin");
@@ -48,17 +48,17 @@ public class ProyectoDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT nombre, monto_recaudar, fecha_inicio " +
+                    "SELECT nombre_proyecto, monto_recaudar, fecha_inicio " +
                             "FROM proyecto p " +
                             "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                             "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                             "JOIN estado e ON p.id_estado = e.id_estado " +
                             "  WHERE p.id_estado = " + 1 +" " +
-                            "GROUP BY p.nombre, p.monto_recaudar, p.fecha_inicio;" +
+                            "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio;" +
                             "     ");
 
             if (rs.next()) {
-                result.nombre = rs.getString("nombre");
+                result.nombreProyecto = rs.getString("nombre");
                 result.montoRecaudar= rs.getString("monto_recaudar");
                 result.fechaInicio= rs.getString("fecha_inicio");
             } else { // si no hay valores de BBDD
@@ -78,13 +78,13 @@ public class ProyectoDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT src_imagen, p.nombre, fecha_inicio, fecha_fin " +
+                    "SELECT src_imagen, p.nombre_proyecto, fecha_inicio, fecha_fin " +
                             "FROM proyecto p " +
                             "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                             "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                             "JOIN estado e ON p.id_estado = e.id_estado " +
                             "  WHERE p.id_estado = " + 2 +" " +
-                            "GROUP BY img.src_imagen, p.nombre, p.fecha_inicio, p.fecha_fin;" +
+                            "GROUP BY img.src_imagen, p.nombre_proyecto, p.fecha_inicio, p.fecha_fin;" +
                             "     ");
 
             if (rs.next()) {

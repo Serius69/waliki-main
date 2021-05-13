@@ -21,12 +21,13 @@ public class DonacionDao {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             stmt.execute("" +
-                    "INSERT INTO donador VALUES ("
+                    "INSERT INTO donacion VALUES ("
                     + donacion.donacionId +", '"
-                    + donacion.fecha +"', '"
-                    + donacion.monto +"', '"
                     + donacion.proyectoId +"', '"
-                    + donacion.donadorId+"') ");
+                    + donacion.donadorId +"', '"
+                    + donacion.monto +"', '"
+                    + donacion.hora +"', '"
+                    + donacion.fecha_donacion+"') ");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -41,23 +42,23 @@ public class DonacionDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
-                            "FROM donador d " +
+                    "SELECT pr.nombre_proyecto, monto, SUM(monto)" +
+                            "FROM donacion d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                            "JOIN usuario us ON us.id_usuario = d.id_donador " +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_donacion = " + donacionId +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {
                 result.donacionId = rs.getInt("id_persona");
-                result.fecha = rs.getString("fecha");
+                result.fecha_donacion = rs.getString("fecha");
                 result.monto = rs.getString("monto");
                 result2.nombre = rs.getString("pe.nombre");
-                result3.nombre= rs.getString("pr.nombre");
+                result3.fechaInicio= rs.getString("pr.nombre");
             } else { // si no hay valores de BBDD
                 result = null;
             }

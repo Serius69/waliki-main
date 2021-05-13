@@ -13,10 +13,8 @@ import java.util.List;
 
 @Service
 public class PersonaDao {
-
     @Autowired
     private DataSource dataSource;
-
     @Autowired
     private SequenceDao sequenceDao;
 
@@ -44,7 +42,7 @@ public class PersonaDao {
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id_persona, nombre, apellido_paterno FROM persona" +
+            ResultSet rs = stmt.executeQuery("SELECT id_persona, nombre_persona, apellidos FROM persona" +
                     "  WHERE id_persona = " + personaId);  //FIXME SQL INJECTION !!!!!
             if (rs.next()) {
                 result.personaId = rs.getInt("id_persona");
@@ -71,9 +69,8 @@ public class PersonaDao {
                 persona.personaId = rs.getInt("id_persona");
                 persona.nombre = rs.getString("nombre");
                 persona.apellidos = rs.getString("apellido_paterno");
-                persona.telefono = rs.getString("telefono");
-                persona.direccionId = rs.getString("id_direccion");
-                persona.correo_electronico = rs.getString("correo_electronico");
+                persona.direccionId = rs.getInt("id_direccion");
+                persona.fechaNacimimento = rs.getString("correo_electronico");
                 result.add(persona);
             }
         } catch (Exception ex) {
