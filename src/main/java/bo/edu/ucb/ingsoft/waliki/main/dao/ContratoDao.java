@@ -1,6 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,10 @@ public class ContratoDao {
             Statement stmt = conn.createStatement();
 
             try (ResultSet rs = stmt.executeQuery(
-                    "SELECT * " +
-                            "FROM contrato co " +
-                            "  WHERE co.id_contrato = " + 1 + " " +
-                            "GROUP BY co.id_contrato;" +
+                    "SELECT id_contrato, contenido, tipo_contrato " +
+                            "FROM contrato  " +
+                            "  WHERE id_contrato = " + contratoId + " " +
+                            "GROUP BY id_contrato;" +
                             "     ")) {
 
                 if (rs.next()) {

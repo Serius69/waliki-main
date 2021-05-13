@@ -21,7 +21,7 @@ public class DonadorBl {
         return donaciondao.findDonacionById(donacionId);
     }
 
-    public ContratoDto findContrato(Integer contratoId) {
+    public ContratoDto findContratoById(Integer contratoId) {
         return contratodao.findContratoById(contratoId);
     }
 
