@@ -1,7 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.api;
 
-import bo.edu.ucb.ingsoft.waliki.main.bl.DonadorBl;
-import bo.edu.ucb.ingsoft.waliki.main.bl.UsuarioBl;
+import bo.edu.ucb.ingsoft.waliki.main.bl.*;
 import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -89,8 +88,6 @@ public class UsuarioApi {
         return usuarioBl.crearDonador(donador);
         }
 
-
-
 /*crear un nuevo donador
     @PostMapping(path = "/donador")
     public DonadorDto createDonador(@RequestBody DonadorDto donador, UsuarioDto usuario, PersonaDto persona, DireccionDto direccion) {
@@ -113,7 +110,6 @@ public class UsuarioApi {
 
         return usuarioBl.crearDonador(donador);
     }
-//
 */
     @GetMapping(path = "/contrato/{contratoId}")
     public ContratoDto findContrato (@PathVariable Integer contratoId) {

@@ -1,11 +1,9 @@
 package bo.edu.ucb.ingsoft.waliki.main.api;
 
-import bo.edu.ucb.ingsoft.waliki.main.bl.DonadorBl;
-import bo.edu.ucb.ingsoft.waliki.main.bl.UsuarioBl;
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonacionDto;
+import bo.edu.ucb.ingsoft.waliki.main.bl.*;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +15,6 @@ import javax.sql.DataSource;
 public class DonadorApi {
     @Autowired
     public DataSource dataSource;
-    @Autowired
-    private UsuarioBl usuarioBl;
     @Autowired
     private DonadorBl donadorBl;
 

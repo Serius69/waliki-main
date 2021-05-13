@@ -1,9 +1,7 @@
 package bo.edu.ucb.ingsoft.waliki.main.bl;
 
-import bo.edu.ucb.ingsoft.waliki.main.dao.ContratoDao;
-import bo.edu.ucb.ingsoft.waliki.main.dao.DonacionDao;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonacionDto;
+import bo.edu.ucb.ingsoft.waliki.main.dao.*;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
