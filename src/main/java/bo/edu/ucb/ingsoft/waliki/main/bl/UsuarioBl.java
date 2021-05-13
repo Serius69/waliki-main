@@ -40,16 +40,16 @@ public class UsuarioBl {
     }
 
     public DonadorDto crearDonador(DonadorDto donador) {
-        // Computamos el numero de seguro social, conformado por los tres primeros caracteres
-        // del nombre mas los tres primeros del apelliod
-        //donador.donadorId = donador.nombre.substring(0,3).toUpperCase() + donador.apellido.substring(0,3);
-
         return donadorDao.crearDonador(donador);
     }
 
     public DonadorDto findDonadorById(Integer donadorId) {
         return donadorDao.findDonadorById(donadorId);
     }
+    public DonadorDto findDonadorByName(String nombreDonador, String apellidoDonador) {
+        return donadorDao.findDonadorByName(nombreDonador,apellidoDonador);
+    }
+
 
     public List<DonadorDto> findAllDonadores() {
         return donadorDao.findAllDonadores();

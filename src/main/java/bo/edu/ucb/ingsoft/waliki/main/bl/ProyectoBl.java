@@ -20,5 +20,8 @@ public class ProyectoBl {
     public ProyectoDto findProyectoEnProgreso (Integer estadoId) {
         return proyectoDao.findProyectoEnProgreso(estadoId);
     }
+    public ProyectoDto findProyectoByName (String nombreProyecto) {
+        return proyectoDao.findProyectoByName(nombreProyecto);
+    }
 
 }

@@ -14,6 +14,7 @@ import java.util.List;
 public class ProyectoApi {
     @Autowired
     public DataSource dataSource;
+    @Autowired
     private ProyectoBl proyectoBl;
 
     @GetMapping(path = "/proyecto")
@@ -21,13 +22,31 @@ public class ProyectoApi {
         return proyectoBl.findAllProyectos();
     }
 
-    @GetMapping(path = "/proyecto/estado")
-    public ProyectoDto findDonadorById(@PathVariable Integer estadoId) {
+    @GetMapping(path = "/proyecto/estado/1")
+    public ProyectoDto findProyectoenprogreso(@PathVariable Integer estadoId) {
+        ProyectoDto proyecto = proyectoBl.findProyectoEnProgreso(estadoId);
+        if (proyecto != null) {
+            return proyectoBl.findProyectoEnProgreso(estadoId);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existen proyectos en progreso:" + estadoId );
+        }
+    }
+    @GetMapping(path = "/proyecto/estado/2")
+    public ProyectoDto findProyectoVigente(@PathVariable Integer estadoId) {
         ProyectoDto proyecto = proyectoBl.findProyectoVigente(estadoId);
         if (proyecto != null) {
             return proyectoBl.findProyectoVigente(estadoId);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + estadoId );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + estadoId );
+        }
+    }
+    @GetMapping(path = "/proyecto/{nombreproyecto}")
+    public ProyectoDto findProyectoByName(@PathVariable String nombreProyecto) {
+        ProyectoDto proyecto = proyectoBl.findProyectoByName(nombreProyecto);
+        if (proyecto != null) {
+            return proyectoBl.findProyectoByName(nombreProyecto);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + nombreProyecto );
         }
     }
 

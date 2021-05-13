@@ -59,7 +59,17 @@ public class UsuarioApi {
         if (donador != null) {
             return usuarioBl.findDonadorById(personaId);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + personaId );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con ID:" + personaId );
+        }
+    }
+// Buscar un donador por su nombre
+    @GetMapping(path = "/donador/{nombre_persona}")
+    public DonadorDto findDonadorByName(@PathVariable String nombrePersona, String apellidoDonador) {
+        DonadorDto donador = usuarioBl.findDonadorByName(nombrePersona,apellidoDonador);
+        if (donador != null) {
+            return usuarioBl.findDonadorByName(nombrePersona,apellidoDonador);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + nombrePersona );
         }
     }
 

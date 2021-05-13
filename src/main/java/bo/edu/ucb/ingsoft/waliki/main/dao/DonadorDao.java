@@ -33,22 +33,23 @@ public class DonadorDao {
         return donador;
     }
 
-    public DonadorDto findDonadorByNombre(String donadorId) {
+    public DonadorDto findDonadorByName(String nombreDonador, String apellidoDonador) {
         DonadorDto result = new DonadorDto();
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
+                    "SELECT nombre_proyecto, dn.monto " +
                             "FROM donador d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
                             "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
-                            "  WHERE id_persona = " + donadorId +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "  WHERE  pe.nombre_persona = " + nombreDonador +" " +
+                            " AND pe.apellidos =  " +apellidoDonador +" " +
+                            "GROUP BY  pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {

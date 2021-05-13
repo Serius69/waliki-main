@@ -2,6 +2,7 @@ package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.ImagenDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
@@ -101,4 +102,34 @@ public class ProyectoDao {
         return result;
     }
 
+    public ProyectoDto findProyectoByName(String nombreProyecto) {
+        ProyectoDto result = new ProyectoDto();
+        try {
+            Connection conn = dataSource.getConnection();
+            Statement stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT nombre_proyecto, monto_recaudar, fecha_inicio," +
+                            "FROM proyecto p " +
+                            "JOIN emprendedor em ON p.id_emprendedor = em.id_emprendedor " +
+                            "JOIN usuario us ON us.id_usuario = em.id_usuario " +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
+
+                            "  WHERE nombre_proyecto = " + nombreProyecto +" " +
+                            "GROUP BY p.nombre_proyecto,pe.nombre_persona, p.monto_recaudar, fecha_inicio, fecha_fin;" +
+                            "     ");
+
+            if (rs.next()) {
+                result.proyectoId = rs.getInt("id_proyecto");
+                result.nombreProyecto = rs.getString("nombre_proyecto");
+                result.proyectoId = rs.getInt("id_proyecto");
+                result.nombreProyecto = rs.getString("nombre_proyecto");
+            } else { // si no hay valores de BBDD
+                result = null;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 }
