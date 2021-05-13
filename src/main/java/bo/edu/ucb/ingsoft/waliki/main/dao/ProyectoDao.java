@@ -44,8 +44,8 @@ public class ProyectoDao {
         return result;
     }
 
-    public ProyectoDto findProyectoVigente(Integer proyectoId) {
-        ProyectoDto result = new ProyectoDto();
+    public List<ProyectoDto> findProyectoVigente(Integer estadoId) {
+        List<ProyectoDto> result = new ArrayList<>();
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
@@ -56,17 +56,17 @@ public class ProyectoDao {
                             "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                             "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                             "JOIN estado e ON p.id_estado = e.id_estado " +
-                            "  WHERE p.id_estado = " + proyectoId +" " +
+                            "  WHERE p.id_estado = " + estadoId +" " +
                             "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio;" +
                             "     ");
 
-            if (rs.next()) {
-                result.nombreProyecto = rs.getString("nombre");
-                result.montoRecaudar= rs.getString("monto_recaudar");
-                result.fechaInicio= rs.getString("fecha_inicio");
-            } else { // si no hay valores de BBDD
-                result = null;
-            }
+            while (rs.next()) {
+                ProyectoDto proyecto = new ProyectoDto();
+                proyecto.nombreProyecto = rs.getString("nombre");
+                proyecto.montoRecaudar= rs.getString("monto_recaudar");
+                proyecto.fechaInicio= rs.getString("fecha_inicio");
+                result.add(proyecto);
+            } 
         } catch (Exception ex) {
             ex.printStackTrace();
         }

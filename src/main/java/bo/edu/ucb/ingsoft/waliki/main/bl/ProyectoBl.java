@@ -16,7 +16,7 @@ public class ProyectoBl {
         return proyectoDao.findAllProyectos();
     }
 
-    public ProyectoDto findProyectoVigente (Integer estadoId) {
+    public List<ProyectoDto> findProyectoVigente (Integer estadoId) {
         return proyectoDao.findProyectoVigente(estadoId);
     }
     public ProyectoDto findProyectoEnProgreso (Integer estadoId) {

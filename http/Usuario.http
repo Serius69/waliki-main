@@ -11,20 +11,43 @@ Accept: application/json
   "usuarioId": 1,
   "contratoId": 2
 }
+### Agrega un nuevo donador completo
+POST http://localhost:8080/donador
+Content-Type: application/json
+Accept: application/json
 
-### Muestra los proyectos Vigentes
+{
+  "usuarioId": 1,
+  "contratoId": [
+    {"id_proyecto": 0,
+      "nombreproyecto": "string",
+      "descripcion": "string",
+      "monto_recaudar": 0,
+      "id_fecha_inicio": {
+        "id_fecha": 0,
+        "anio": 0,
+        "mes": "string",
+        "dia": 0,
+        "fecha": "string"
+      }
+    }
+  ]
+  }
+
+
+### Muestra los proyectos Vigentes - Funciona
+GET http://localhost:8080/estado/1
+accept: application/json
+
+### Muestra los proyectos en proceso - Funciona
 GET http://localhost:8080/estado/2
 accept: application/json
 
-### Buscar un proyecto por su nombre
+### Buscar un proyecto por su nombre - Falla
 GET http://localhost:8080/persona
 accept: application/json
 
-### Muestra los proyectos en proceso
-GET http://localhost:8080/proyecto
-accept: application/json
-
-### Busqueda de donador por nombre
+### Busqueda de donador por nombre - Falla
 GET http://localhost:8080/donador/Jose
 accept: application/json
 
@@ -41,6 +64,6 @@ accept: application/json
   "fecha_donacion": "5/13/2021"
 }
 
-### Listado donadores
+### Listado donadores - Funciona
 GET http://localhost:8080/donador/
 accept: application/json

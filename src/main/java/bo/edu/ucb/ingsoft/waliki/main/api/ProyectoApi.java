@@ -34,13 +34,8 @@ public class ProyectoApi {
         }
     }
     @GetMapping(path = "/estado/{estadoId}")
-    public ProyectoDto findProyectoVigente(@PathVariable Integer estadoId) {
-        ProyectoDto proyecto = proyectoBl.findProyectoVigente(estadoId);
-        if (proyecto != null) {
-            return proyectoBl.findProyectoVigente(estadoId);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + estadoId );
-        }
+    public List<ProyectoDto> findProyectoVigente(@PathVariable Integer estadoId) {
+        return proyectoBl.findProyectoVigente(estadoId);
     }
     @GetMapping(path = "/proyecto/{nombreproyecto}")
     public ProyectoDto findProyectoByName(@PathVariable String nombreproyecto) {

@@ -6,10 +6,10 @@ public class ProyectoDto {
     public String nombreProyecto;
     public String descripcion;
     public String montoRecaudar;
-    public String emprendedorId;
+    public Integer emprendedorId;
     public String horaInicio;
     public String horaFin;
-    public String estadoId;
+    public Integer estadoId;
     public String fechaInicio;
     public String fechaFin;
 
