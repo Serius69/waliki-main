@@ -20,18 +20,20 @@ public class ContratoDao {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT contenido " +
+            try (ResultSet rs = stmt.executeQuery(
+                    "SELECT * " +
                             "FROM contrato co " +
-                            "  WHERE co.id_contrato = " + contratoId +" " +
+                            "  WHERE co.id_contrato = " + 1 + " " +
                             "GROUP BY co.id_contrato;" +
-                            "     ");
+                            "     ")) {
 
-            if (rs.next()) {
-                result.contratoId = rs.getInt("co.id_contrato");
-                result.contrato = rs.getString("co.contrato");
-            } else { // si no hay valores de BBDD
-                result = null;
+                if (rs.next()) {
+                    result.contratoId = rs.getInt("id_contrato");
+                    result.contrato = rs.getString("contenido");
+                } else { // si no hay valores de BBDD
+                    result.contratoId = rs.getInt("id_contrato");
+                    result.contrato = rs.getString("contenido");
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

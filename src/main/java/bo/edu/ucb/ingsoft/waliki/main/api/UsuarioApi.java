@@ -29,7 +29,7 @@ public class UsuarioApi {
         if (persona != null) {
             return gestionPersonaBl.findPersonaById(personaId);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + personaId );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + personaId);
         }
     }
 
@@ -42,11 +42,11 @@ public class UsuarioApi {
     public PersonaDto createPersona(@RequestBody PersonaDto persona) {
         // Validar que los datos enviados son correctos.
         if (persona.nombre == null || persona.nombre.trim().equals("")) {  // nombre: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre debe ser obligatorio" );
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre debe ser obligatorio");
         }
 
         if (persona.apellidos == null || persona.apellidos.trim().equals("")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El apellido debe ser obligatorio" );
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El apellido debe ser obligatorio");
         }
 
         return gestionPersonaBl.crearPersona(persona);
@@ -58,17 +58,18 @@ public class UsuarioApi {
         if (donador != null) {
             return usuarioBl.findDonadorById(donadorId);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con ID:" + donadorId );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con ID:" + donadorId);
         }
     }
-// Buscar un donador por su nombre
+
+    // Buscar un donador por su nombre
     @GetMapping(path = "/donador/{nombre_persona}")
     public DonadorDto findDonadorByName(@PathVariable String nombre_persona) {
         DonadorDto donador = usuarioBl.findDonadorByName(nombre_persona);
         if (donador != null) {
             return usuarioBl.findDonadorByName(nombre_persona);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + nombre_persona );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + nombre_persona);
         }
     }
 
@@ -78,7 +79,21 @@ public class UsuarioApi {
 
     }
 
-//crear un nuevo donador
+    @PostMapping(path = "/donador")
+    public DonadorDto createDonador(@RequestBody DonadorDto donador) {
+        // Validar que los datos enviados son correctos.
+        if (donador.usuarioId == null) {  // id_usuario: "     "
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El correo electronico debe ser obligatorio");
+        }
+        if (donador.contratoId == null) {  // id-contrato: "     "
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El numero de telefono debe ser obligatorio");
+        }
+            return usuarioBl.crearDonador(donador);
+        }
+
+
+
+/*crear un nuevo donador
     @PostMapping(path = "/donador")
     public DonadorDto createDonador(@RequestBody DonadorDto donador, UsuarioDto usuario, PersonaDto persona, DireccionDto direccion) {
         // Validar que los datos enviados son correctos.
@@ -100,7 +115,8 @@ public class UsuarioApi {
 
         return usuarioBl.crearDonador(donador);
     }
-
+//
+*/
     @GetMapping(path = "/contrato/{contratoId}")
     public ContratoDto findContrato (@PathVariable Integer contratoId) {
         ContratoDto contrato = donadorBl.findContrato(contratoId);

@@ -8,8 +8,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "id_contrato": "1",
-  "id_usuario": "50"
+  "id_usuario": 1,
+  "id_contrato": 2
 }
 
 ### Muestra los proyectos Vigentes
@@ -25,7 +25,7 @@ POST http://localhost:8080/donador
 accept: application/json
 
 ### Busqueda de donador por nombre
-POST http://localhost:8080/donador/
+GET http://localhost:8080/donador/{{nombre_persona}}}
 accept: application/json
 
 ###
@@ -33,8 +33,13 @@ GET http://localhost:8080/donador
 accept: application/json
 
 ### Agrega una nueva donacion
-POST http://localhost:8080/donador
+POST http://localhost:8080/donacion
 accept: application/json
+
+ {
+
+ }
+
 
 ###
 GET http://localhost:8080/persona
