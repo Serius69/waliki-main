@@ -20,14 +20,12 @@ public class UsuarioApi {
     private UsuarioBl usuarioBl;
     @Autowired
     private DonadorBl donadorBl;
-    @Autowired
-    private UsuarioBl gestionPersonaBl;
 
     @GetMapping(path = "/persona/{personaId}")
     public PersonaDto findPersonaById(@PathVariable Integer personaId) {
-        PersonaDto persona = gestionPersonaBl.findPersonaById(personaId);
+        PersonaDto persona = usuarioBl.findPersonaById(personaId);
         if (persona != null) {
-            return gestionPersonaBl.findPersonaById(personaId);
+            return usuarioBl.findPersonaById(personaId);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + personaId);
         }
@@ -35,7 +33,7 @@ public class UsuarioApi {
 
     @RequestMapping(value = "/persona", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PersonaDto> findAllPersonas() {
-        return gestionPersonaBl.findAllPersonas();
+        return usuarioBl.findAllPersonas();
     }
 
     @PostMapping(path = "/persona")
@@ -49,7 +47,7 @@ public class UsuarioApi {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El apellido debe ser obligatorio");
         }
 
-        return gestionPersonaBl.crearPersona(persona);
+        return usuarioBl.crearPersona(persona);
     }
 
     @GetMapping(path = "/donador/{donadorId}")

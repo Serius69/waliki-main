@@ -13,7 +13,7 @@ public class DonadorBl {
     DonacionDao donaciondao;
     @Autowired
     ContratoDao contratodao;
-    public DonacionDto crearDonacion(DonacionDto donacion) {
+    public DonacionDto addDonacion(DonacionDto donacion) {
          return donaciondao.crearDonacion(donacion);
     }
 
