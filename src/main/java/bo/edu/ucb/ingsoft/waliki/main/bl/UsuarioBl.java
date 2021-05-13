@@ -7,9 +7,11 @@ import bo.edu.ucb.ingsoft.waliki.main.dto.DonadorDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.PersonaDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UsuarioBl {
 
     @Autowired
@@ -46,8 +48,8 @@ public class UsuarioBl {
     public DonadorDto findDonadorById(Integer donadorId) {
         return donadorDao.findDonadorById(donadorId);
     }
-    public DonadorDto findDonadorByName(String nombreDonador, String apellidoDonador) {
-        return donadorDao.findDonadorByName(nombreDonador,apellidoDonador);
+    public DonadorDto findDonadorByName(String nombreDonador) {
+        return donadorDao.findDonadorByName(nombreDonador);
     }
 
 

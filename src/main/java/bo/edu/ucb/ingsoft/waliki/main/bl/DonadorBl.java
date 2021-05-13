@@ -5,7 +5,9 @@ import bo.edu.ucb.ingsoft.waliki.main.dao.DonacionDao;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.DonacionDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DonadorBl {
     @Autowired
     DonacionDao donaciondao;
@@ -22,10 +24,5 @@ public class DonadorBl {
     public ContratoDto findContrato(Integer contratoId) {
         return contratodao.findContratoById(contratoId);
     }
-
-
-
-
-
 
 }

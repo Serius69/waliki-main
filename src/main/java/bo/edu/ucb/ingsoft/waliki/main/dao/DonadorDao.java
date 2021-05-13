@@ -37,7 +37,7 @@ public class DonadorDao {
         return donador;
     }
 
-    public DonadorDto findDonadorByName(String nombreDonador, String apellidoDonador) {
+    public DonadorDto findDonadorByName(String nombreDonador) {
         DonadorDto result = new DonadorDto();
         ProyectoDto result2 = new ProyectoDto();
         PersonaDto result3 = new PersonaDto();
@@ -54,7 +54,6 @@ public class DonadorDao {
                             "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE  pe.nombre_persona = " + nombreDonador +" " +
-                            " AND pe.apellidos =  " +apellidoDonador +" " +
                             "GROUP BY  pr.nombre_proyecto, dn.monto;" +
                             "     ");
 

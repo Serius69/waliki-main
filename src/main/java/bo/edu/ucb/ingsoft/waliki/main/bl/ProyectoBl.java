@@ -3,9 +3,11 @@ package bo.edu.ucb.ingsoft.waliki.main.bl;
 import bo.edu.ucb.ingsoft.waliki.main.dao.ProyectoDao;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProyectoBl {
     @Autowired
     ProyectoDao proyectoDao;

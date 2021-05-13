@@ -5,15 +5,14 @@ import bo.edu.ucb.ingsoft.waliki.main.bl.UsuarioBl;
 import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
 import java.util.List;
 
+@RestController
 public class UsuarioApi {
     @Autowired
     public DataSource dataSource;
@@ -34,7 +33,7 @@ public class UsuarioApi {
         }
     }
 
-    @GetMapping(path = "/persona")
+    @RequestMapping(value = "/persona", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PersonaDto> findAllPersonas() {
         return gestionPersonaBl.findAllPersonas();
     }
@@ -54,28 +53,29 @@ public class UsuarioApi {
     }
 
     @GetMapping(path = "/donador/{donadorId}")
-    public DonadorDto findDonadorById(@PathVariable Integer personaId) {
-        DonadorDto donador = usuarioBl.findDonadorById(personaId);
+    public DonadorDto findDonadorById(@PathVariable Integer donadorId) {
+        DonadorDto donador = usuarioBl.findDonadorById(donadorId);
         if (donador != null) {
-            return usuarioBl.findDonadorById(personaId);
+            return usuarioBl.findDonadorById(donadorId);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con ID:" + personaId );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con ID:" + donadorId );
         }
     }
 // Buscar un donador por su nombre
     @GetMapping(path = "/donador/{nombre_persona}")
-    public DonadorDto findDonadorByName(@PathVariable String nombrePersona, String apellidoDonador) {
-        DonadorDto donador = usuarioBl.findDonadorByName(nombrePersona,apellidoDonador);
+    public DonadorDto findDonadorByName(@PathVariable String nombre_persona) {
+        DonadorDto donador = usuarioBl.findDonadorByName(nombre_persona);
         if (donador != null) {
-            return usuarioBl.findDonadorByName(nombrePersona,apellidoDonador);
+            return usuarioBl.findDonadorByName(nombre_persona);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + nombrePersona );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + nombre_persona );
         }
     }
 
     @GetMapping(path = "/donador")
     public List<DonadorDto> findAllDonadores() {
         return usuarioBl.findAllDonadores();
+
     }
 
 //crear un nuevo donador
@@ -101,13 +101,13 @@ public class UsuarioApi {
         return usuarioBl.crearDonador(donador);
     }
 
-    @GetMapping(path = "/contrato/contratoId")
+    @GetMapping(path = "/contrato/{contratoId}")
     public ContratoDto findContrato (@PathVariable Integer contratoId) {
         ContratoDto contrato = donadorBl.findContrato(contratoId);
         if (contrato != null) {
             return donadorBl.findContrato(contratoId);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + contratoId );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el contrato:" + contratoId );
         }
     }
 

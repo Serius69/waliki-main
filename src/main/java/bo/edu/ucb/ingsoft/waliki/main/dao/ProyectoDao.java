@@ -4,6 +4,7 @@ import bo.edu.ucb.ingsoft.waliki.main.dto.ImagenDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ProyectoDao {
     @Autowired
     private DataSource dataSource;
