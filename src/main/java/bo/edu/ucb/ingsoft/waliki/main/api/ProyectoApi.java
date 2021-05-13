@@ -46,5 +46,4 @@ public class ProyectoApi {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + nombreproyecto );
         }
     }
-
 }

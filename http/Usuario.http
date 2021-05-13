@@ -11,29 +11,6 @@ Accept: application/json
   "usuarioId": 1,
   "contratoId": 2
 }
-### Agrega un nuevo donador completo
-POST http://localhost:8080/donador
-Content-Type: application/json
-Accept: application/json
-
-{
-  "usuarioId": 1,
-  "contratoId": [
-    {"id_proyecto": 0,
-      "nombreproyecto": "string",
-      "descripcion": "string",
-      "monto_recaudar": 0,
-      "id_fecha_inicio": {
-        "id_fecha": 0,
-        "anio": 0,
-        "mes": "string",
-        "dia": 0,
-        "fecha": "string"
-      }
-    }
-  ]
-  }
-
 
 ### Muestra los proyectos Vigentes - Funciona
 GET http://localhost:8080/estado/1

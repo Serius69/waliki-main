@@ -25,8 +25,8 @@ public class DonadorDao {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             stmt.execute("" +
-                    "INSERT INTO donador VALUES ("
-                    + donador.donadorId +", '"
+                    "INSERT INTO donador VALUES ( '"
+                    + donador.donadorId +"', '"
                     + donador.contratoId +"', '"
                     + donador.usuarioId+"') ");
         } catch (Exception ex) {
