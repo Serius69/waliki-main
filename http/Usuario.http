@@ -6,12 +6,8 @@ accept: application/json
 POST http://localhost:8080/donador
 accept: application/json
 
-### Agrega un nuevo donador Swagger editor
-POST https://virtserver.swaggerhub.com/Serius69/Waliki/1.0.0/donador
-accept: application/json
-
 ### Muestra los proyectos Vigentes
-GET http://localhost:8080/donador/{donadorId}
+GET http://localhost:8080/donador/1
 accept: application/json
 
 ### Buscar un proyecto por su nombre
@@ -27,18 +23,12 @@ POST http://localhost:8080/donador
 accept: application/json
 
 ###
-GET http://localhost:8080/waliki/donador
+GET http://localhost:8080/donador
 accept: application/json
 
 ### Agrega una nueva donacion
 POST http://localhost:8080/donador
 accept: application/json
-
-### Muestra uno de los contratos
-GET https://virtserver.swaggerhub.com/Serius69/Waliki/1.0.0/contrato/1
-
-### Muestra la donacion 1
-GET https://virtserver.swaggerhub.com/Serius69/Waliki/1.0.0/donacion/1
 
 ###
 GET http://localhost:8080/persona

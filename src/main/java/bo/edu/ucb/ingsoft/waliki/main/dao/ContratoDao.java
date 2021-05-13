@@ -28,8 +28,8 @@ public class ContratoDao {
                             "     ");
 
             if (rs.next()) {
-                result.contratoId = rs.getInt("id_contrato");
-                result.contrato = rs.getString("contrato");
+                result.contratoId = rs.getInt("co.id_contrato");
+                result.contrato = rs.getString("co.contrato");
             } else { // si no hay valores de BBDD
                 result = null;
             }
