@@ -2,9 +2,15 @@
 GET http://localhost:8080/contrato/1
 accept: application/json
 
-### Agregar un nuevo donador localhost:8080
+### Agrega un nuevo donador
 POST http://localhost:8080/donador
-accept: application/json
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id_contrato": "1",
+  "id_usuario": "50"
+}
 
 ### Muestra los proyectos Vigentes
 GET http://localhost:8080/donador/1
@@ -19,7 +25,7 @@ POST http://localhost:8080/donador
 accept: application/json
 
 ### Busqueda de donador por nombre
-POST http://localhost:8080/donador
+POST http://localhost:8080/donador/
 accept: application/json
 
 ###
