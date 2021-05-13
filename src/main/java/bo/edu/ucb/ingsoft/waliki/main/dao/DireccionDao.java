@@ -11,11 +11,8 @@ import java.sql.Statement;
 
 @Service
 public class DireccionDao {
-    private final DataSource dataSource;
-
-    public DireccionDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    @Autowired
+    private DataSource dataSource;
 
     public ContratoDto findDireccionById(Integer direccionId) {
         ContratoDto result = new ContratoDto();

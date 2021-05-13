@@ -12,13 +12,10 @@ import java.sql.Statement;
 
 @Service
 public class DonacionDao {
-    private final DataSource dataSource;
-    private final SequenceDao sequenceDao;
-
-    public DonacionDao(DataSource dataSource, SequenceDao sequenceDao) {
-        this.dataSource = dataSource;
-        this.sequenceDao = sequenceDao;
-    }
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private SequenceDao sequenceDao;
 
     public DonacionDto crearDonacion (DonacionDto donacion) {
         donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");
@@ -55,7 +52,7 @@ public class DonacionDao {
                             "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_donacion = " + donacionId +" " +
-                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto, monto;" +
+                            "GROUP BY pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {

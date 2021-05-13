@@ -11,11 +11,8 @@ import java.sql.Statement;
 
 @Service
 public class ContratoDao {
-    private final DataSource dataSource;
-
-    public ContratoDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    @Autowired
+    private DataSource dataSource;
 
     public ContratoDto findContratoById(Integer contratoId) {
         ContratoDto result = new ContratoDto();
@@ -26,7 +23,7 @@ public class ContratoDao {
             ResultSet rs = stmt.executeQuery(
                     "SELECT contenido " +
                             "FROM contrato co " +
-                            "  WHERE co.id_contrato = " + contratoId +" " +
+                            "  WHERE co.id_contrato = " + 1 +" " +
                             "GROUP BY co.id_contrato;" +
                             "     ");
 
