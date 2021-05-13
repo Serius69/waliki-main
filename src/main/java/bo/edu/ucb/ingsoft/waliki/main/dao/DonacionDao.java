@@ -44,7 +44,7 @@ public class DonacionDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre_proyecto, SUM(dn.monto)" +
+                    "SELECT pr.nombre_proyecto, d.monto " +
                             "FROM donacion d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
@@ -56,8 +56,8 @@ public class DonacionDao {
                             "     ");
 
             if (rs.next()) {
-                result.donacionId = rs.getInt("id_persona");
-                result.fecha_donacion = rs.getString("fecha");
+                result.donacionId = rs.getInt("id_donacion");
+                result.fecha_donacion = rs.getString("fecha_donaciop");
                 result.monto = rs.getDouble("monto");
                 result2.nombre = rs.getString("pe.nombre");
                 result3.fechaInicio= rs.getString("pr.nombre");

@@ -67,7 +67,7 @@ public class UsuarioApi {
         if (donador != null) {
             return usuarioBl.findDonadorByName(nombre_persona);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la persona con codigo:" + nombre_persona);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con nombre:" + nombre_persona);
         }
     }
 
@@ -81,10 +81,10 @@ public class UsuarioApi {
     public DonadorDto createDonador(@RequestBody DonadorDto donador) {
         // Validar que los datos enviados son correctos.
         if (donador.usuarioId == null) {  // id_usuario: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El correo electronico debe ser obligatorio");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo de usuario es obligatorio");
         }
         if (donador.contratoId == null) {  // id-contrato: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El numero de telefono debe ser obligatorio");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo de contrato es obligatorio");
         }
         return usuarioBl.crearDonador(donador);
         }
