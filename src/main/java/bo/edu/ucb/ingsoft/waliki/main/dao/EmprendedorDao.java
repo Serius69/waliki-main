@@ -1,8 +1,8 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonadorDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.EmprendedorDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -11,8 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EmprendedorDao {
-
     @Autowired
     private DataSource dataSource;
 
@@ -37,26 +37,27 @@ public class EmprendedorDao {
 
     public EmprendedorDto findEmprendedorByNombre(String nombreEmprendedor) {
         EmprendedorDto result = new EmprendedorDto();
+        ProyectoDto result1 = new ProyectoDto();
+        PersonaDto result2 = new PersonaDto();
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
     //areglar sql
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
-                            "FROM donador d " +
-                            "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
-                            "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                    "SELECT nombre_persona, nombre_proyecto " +
+                            "FROM emprendedor em " +
+                            "JOIN proyecto pr ON  em.id_emprendedor= pr.id_emprendedor " +
+                            "JOIN usuario us ON us.id_usuario = em.id_usuario " +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_persona = " + nombreEmprendedor +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto;" +
                             "     ");
 
             if (rs.next()) {
                 result.emprendedorId = rs.getInt("id_emprendedor");
-                result.contratoId = rs.getInt("id_contrato");
-                result.usuarioId = rs.getInt("id_usuario");
+                result1.nombreProyecto = rs.getString("nombre_proyecto");
+                result2.nombre = rs.getString("nombre_persona");
             } else { // si no hay valores de BBDD
                 result = null;
             }
@@ -73,15 +74,14 @@ public class EmprendedorDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
-                            "FROM donador d " +
-                            "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
-                            "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                    "SELECT nombre_persona, nombre_proyecto " +
+                            "FROM emprendedor em " +
+                            "JOIN proyecto pr ON  em.id_emprendedor= pr.id_emprendedor " +
+                            "JOIN usuario us ON us.id_usuario = em.id_usuario " +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_persona = " + emprendedorId +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto;" +
                             "     ");
 
             if (rs.next()) {
@@ -103,13 +103,13 @@ public class EmprendedorDao {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pe.nombre, pr.nombre, monto " +
+                    "SELECT * " +
                             "FROM donador d " +
                             "JOIN proyecto pr ON d.id_donador=pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador=dn.id_donacion " +
                             "JOIN usuario us ON us.id_usuario=d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona=us.id_persona " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                            "JOIN persona pe ON pe.id_persona=us.id_persona_fk " +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto;" +
                             "");
             while (rs.next()) {
                 EmprendedorDto emprendedor = new EmprendedorDto();

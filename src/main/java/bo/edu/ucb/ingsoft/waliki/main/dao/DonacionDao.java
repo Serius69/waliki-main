@@ -3,14 +3,16 @@ package bo.edu.ucb.ingsoft.waliki.main.dao;
 import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import bo.edu.ucb.ingsoft.waliki.main.models.Donacion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+@Service
 public class DonacionDao {
-
+    @Autowired
     private DataSource dataSource;
     @Autowired
     private SequenceDao sequenceDao;
@@ -42,7 +44,7 @@ public class DonacionDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre_proyecto, monto, SUM(monto)" +
+                    "SELECT pr.nombre_proyecto, SUM(dn.monto)" +
                             "FROM donacion d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
@@ -50,7 +52,7 @@ public class DonacionDao {
                             "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
                             "  WHERE id_donacion = " + donacionId +" " +
-                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
+                            "GROUP BY pe.nombre_persona , pr.nombre_proyecto, monto;" +
                             "     ");
 
             if (rs.next()) {

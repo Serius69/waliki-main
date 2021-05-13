@@ -1,12 +1,14 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+@Service
 public class DireccionDao {
 
     private DataSource dataSource;
@@ -20,9 +22,9 @@ public class DireccionDao {
             ResultSet rs = stmt.executeQuery(
                     "SELECT  *" +
                             "FROM direccion di " +
-                            "JOIN persona pe  ON pe.id_direccion = di.id_direccion " +
-                            "JOIN usuario us  ON us.id_persona = pe.id_persona " +
-                            "  WHERE pe.id_direccion = " + direccionId +" " +
+                            "JOIN persona pe  ON pe.id_direccion_fk = di.id_direccion " +
+                            "JOIN usuario us  ON us.id_persona_fk = pe.id_persona " +
+                            "  WHERE pe.id_direccion_fk = " + direccionId +" " +
                             "GROUP BY pe.id_persona;" +
                             "     ");
 
