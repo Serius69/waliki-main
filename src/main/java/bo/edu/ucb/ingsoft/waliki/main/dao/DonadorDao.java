@@ -1,6 +1,8 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.DonadorDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.PersonaDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
@@ -35,6 +37,8 @@ public class DonadorDao {
 
     public DonadorDto findDonadorByName(String nombreDonador, String apellidoDonador) {
         DonadorDto result = new DonadorDto();
+        ProyectoDto result2 = new ProyectoDto();
+        PersonaDto result3 = new PersonaDto();
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
@@ -53,9 +57,9 @@ public class DonadorDao {
                             "     ");
 
             if (rs.next()) {
-                result.donadorId = rs.getInt("id_persona");
-                result.contratoId = rs.getInt("id_contrato");
-                result.usuarioId = rs.getInt("id_usuario");
+                result.donadorId = rs.getInt("id_donador");
+                result2.nombreProyecto = rs.getString("nombre_proyecto");
+                result3.nombre = rs.getString("id_usuario");
             } else { // si no hay valores de BBDD
                 result = null;
             }
@@ -72,15 +76,15 @@ public class DonadorDao {
             Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre, monto, SUM(monto)" +
+                    "SELECT nombre_proyecto, dn.monto " +
                             "FROM donador d " +
                             "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
                             "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
                             "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona" +
+                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
-                    "  WHERE id_persona = " + donadorId +" " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
+                    "  WHERE d.id_donador = " + donadorId +" " +
+                            "GROUP BY  pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {
@@ -102,13 +106,8 @@ public class DonadorDao {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "SELECT pe.nombre, pr.nombre, monto " +
+                    "SELECT * " +
                             "FROM donador d " +
-                            "JOIN proyecto pr ON d.id_donador=pr.id_proyecto " +
-                            "JOIN donacion dn ON d.id_donador=dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario=d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona=us.id_persona " +
-                            "GROUP BY pe.nombre , pr.nombre, dn.monto;" +
                             "");
             while (rs.next()) {
                 DonadorDto donador = new DonadorDto();
