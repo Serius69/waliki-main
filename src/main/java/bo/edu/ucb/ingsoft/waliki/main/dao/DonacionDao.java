@@ -12,10 +12,13 @@ import java.sql.Statement;
 
 @Service
 public class DonacionDao {
-    @Autowired
-    private DataSource dataSource;
-    @Autowired
-    private SequenceDao sequenceDao;
+    private final DataSource dataSource;
+    private final SequenceDao sequenceDao;
+
+    public DonacionDao(DataSource dataSource, SequenceDao sequenceDao) {
+        this.dataSource = dataSource;
+        this.sequenceDao = sequenceDao;
+    }
 
     public DonacionDto crearDonacion (DonacionDto donacion) {
         donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");

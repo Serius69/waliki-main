@@ -11,8 +11,11 @@ import java.sql.Statement;
 
 @Service
 public class ContratoDao {
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
+
+    public ContratoDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public ContratoDto findContratoById(Integer contratoId) {
         ContratoDto result = new ContratoDto();

@@ -1,6 +1,7 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.ContratoDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -10,8 +11,11 @@ import java.sql.Statement;
 
 @Service
 public class DireccionDao {
+    private final DataSource dataSource;
 
-    private DataSource dataSource;
+    public DireccionDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public ContratoDto findDireccionById(Integer direccionId) {
         ContratoDto result = new ContratoDto();
