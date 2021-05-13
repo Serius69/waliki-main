@@ -66,7 +66,8 @@ public class ProyectoDao {
                 proyecto.montoRecaudar= rs.getString("monto_recaudar");
                 proyecto.fechaInicio= rs.getString("fecha_inicio");
                 result.add(proyecto);
-            } 
+            }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -98,6 +99,7 @@ public class ProyectoDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -129,6 +131,7 @@ public class ProyectoDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -37,6 +37,7 @@ public class CuentaDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

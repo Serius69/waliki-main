@@ -24,6 +24,7 @@ public class SequenceDao {
             if (rs.next()) {
                 resultado = rs.getInt(1);
             }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

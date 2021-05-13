@@ -61,6 +61,7 @@ public class UsuarioDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

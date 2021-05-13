@@ -114,10 +114,10 @@ public class UsuarioApi {
     @GetMapping(path = "/contrato/{contratoId}")
     public ContratoDto findContrato (@PathVariable Integer contratoId) {
         ContratoDto contrato = donadorBl.findContratoById(contratoId);
-        if (contrato != null) {
-            return donadorBl.findContratoById(contratoId);
-        } else {
+        if (contrato == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el contrato:" + contratoId );
+        } else {
+            return donadorBl.findContratoById(contratoId);
         }
     }
 

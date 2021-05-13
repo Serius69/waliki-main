@@ -29,6 +29,7 @@ public class EmprendedorDao {
                     + emprendedor.emprendedorId +", '"
                     + emprendedor.contratoId +"', '"
                     + emprendedor.usuarioId+"') ");
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

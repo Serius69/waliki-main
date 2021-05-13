@@ -30,6 +30,7 @@ public class PersonaDao {
                     + persona.fechaNacimimento+"','"
                     + persona.direccionId+"') "
             );
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

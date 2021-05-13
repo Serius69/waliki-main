@@ -29,6 +29,7 @@ public class DonadorDao {
                     + donador.donadorId +"', '"
                     + donador.contratoId +"', '"
                     + donador.usuarioId+"') ");
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -104,7 +105,7 @@ public class DonadorDao {
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(
+            try (ResultSet rs = stmt.executeQuery(
                     "SELECT  nombre_persona, nombre_proyecto, monto " +
                             "FROM donador d " +
                             "JOIN proyecto pr  ON d.id_donador = pr.id_proyecto " +
@@ -112,14 +113,15 @@ public class DonadorDao {
                             "JOIN usuario us  ON us.id_usuario = d.id_usuario " +
                             "JOIN persona pe  ON pe.id_persona = us.id_persona_fk " +
                             "GROUP BY  pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
-                            " ");
-            while (rs.next()) {
-                ConsultaDto consulta = new ConsultaDto();
+                            " ")) {
+                while (rs.next()) {
+                    ConsultaDto consulta = new ConsultaDto();
 
-                consulta.nombrePersona = rs.getString("nombre_persona");
-                consulta.nombreProyecto = rs.getString("nombre_proyecto");
-                consulta.monto_donacion = rs.getDouble("monto");
-                result.add(consulta);
+                    consulta.nombrePersona = rs.getString("nombre_persona");
+                    consulta.nombreProyecto = rs.getString("nombre_proyecto");
+                    consulta.monto_donacion = rs.getDouble("monto");
+                    result.add(consulta);
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -26,10 +26,12 @@ public class ContratoDao {
                 if (rs.next()) {
                     result.contratoId = rs.getInt("id_contrato");
                     result.contrato = rs.getString("contenido");
+                    result.tipoContrato = rs.getString("tipo_contrato");
                 } else { // si no hay valores de BBDD
                     result.contratoId = 1;
                     result.contrato = "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.";
                 }
+                conn.close();
             }
         } catch (Exception ex) {
             ex.printStackTrace();

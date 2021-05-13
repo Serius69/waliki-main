@@ -35,6 +35,7 @@ public class DireccionDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
+            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
