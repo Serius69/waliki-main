@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
 import java.util.List;
 
+@RestController
 public class ProyectoApi {
     @Autowired
     public DataSource dataSource;
@@ -22,7 +24,7 @@ public class ProyectoApi {
         return proyectoBl.findAllProyectos();
     }
 
-    @GetMapping(path = "/proyecto/estado/1")
+    @GetMapping(path = "/proyecto/{estadoId}")
     public ProyectoDto findProyectoenprogreso(@PathVariable Integer estadoId) {
         ProyectoDto proyecto = proyectoBl.findProyectoEnProgreso(estadoId);
         if (proyecto != null) {
@@ -31,7 +33,7 @@ public class ProyectoApi {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existen proyectos en progreso:" + estadoId );
         }
     }
-    @GetMapping(path = "/proyecto/estado/2")
+    @GetMapping(path = "/estado/{estadoId}")
     public ProyectoDto findProyectoVigente(@PathVariable Integer estadoId) {
         ProyectoDto proyecto = proyectoBl.findProyectoVigente(estadoId);
         if (proyecto != null) {
@@ -41,12 +43,12 @@ public class ProyectoApi {
         }
     }
     @GetMapping(path = "/proyecto/{nombreproyecto}")
-    public ProyectoDto findProyectoByName(@PathVariable String nombreProyecto) {
-        ProyectoDto proyecto = proyectoBl.findProyectoByName(nombreProyecto);
+    public ProyectoDto findProyectoByName(@PathVariable String nombreproyecto) {
+        ProyectoDto proyecto = proyectoBl.findProyectoByName(nombreproyecto);
         if (proyecto != null) {
-            return proyectoBl.findProyectoByName(nombreProyecto);
+            return proyectoBl.findProyectoByName(nombreproyecto);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + nombreProyecto );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + nombreproyecto );
         }
     }
 

@@ -4,7 +4,7 @@ public class DonacionDto {
     public Integer donacionId;
     public String proyectoId;
     public String donadorId;
-    public String monto;
+    public Double monto;
     public String hora;
     public String fecha_donacion;
 

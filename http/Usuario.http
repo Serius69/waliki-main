@@ -1,4 +1,4 @@
-### Tomar un contrato
+### Tomar un contrato - Funciona
 GET http://localhost:8080/contrato/1
 accept: application/json
 
@@ -8,12 +8,12 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "id_usuario": 1,
-  "id_contrato": 2
+  "usuarioId": 1,
+  "contratoId": 2
 }
 
 ### Muestra los proyectos Vigentes
-GET http://localhost:8080/donador/1
+GET http://localhost:8080/estado/2
 accept: application/json
 
 ### Buscar un proyecto por su nombre
@@ -21,25 +21,21 @@ GET http://localhost:8080/persona
 accept: application/json
 
 ### Muestra los proyectos en proceso
-POST http://localhost:8080/donador
+GET http://localhost:8080/proyecto
 accept: application/json
 
 ### Busqueda de donador por nombre
 GET http://localhost:8080/donador/{{nombre_persona}}}
 accept: application/json
 
-###
-GET http://localhost:8080/donador
-accept: application/json
-
-### Agrega una nueva donacion
+### Agrega una nueva donacion - Funciona
 POST http://localhost:8080/donacion
 Content-Type: application/json
 accept: application/json
 
 {
-  "id_proyecto": 1,
-  "id_donador": 1,
+  "proyectoId": 1,
+  "donadorId": 1,
   "monto": 1000,
   "hora": "14:00",
   "fecha_donacion": "5/13/2021"
@@ -47,6 +43,6 @@ accept: application/json
 
 ### Mostrar todas las personas
 GET http://localhost:8080/persona
+accept: application/json
 
-###
-GET http://localhost:8080/persona/2
+### Listado donadores

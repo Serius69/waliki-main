@@ -51,14 +51,14 @@ public class DonacionDao {
                             "JOIN usuario us ON us.id_usuario = d.id_donador " +
                             "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
 
-                            "  WHERE id_donacion = " + donacionId +" " +
+                            "  WHERE d.id_donacion = " + donacionId +" " +
                             "GROUP BY pr.nombre_proyecto, dn.monto;" +
                             "     ");
 
             if (rs.next()) {
                 result.donacionId = rs.getInt("id_persona");
                 result.fecha_donacion = rs.getString("fecha");
-                result.monto = rs.getString("monto");
+                result.monto = rs.getDouble("monto");
                 result2.nombre = rs.getString("pe.nombre");
                 result3.fechaInicio= rs.getString("pr.nombre");
             } else { // si no hay valores de BBDD

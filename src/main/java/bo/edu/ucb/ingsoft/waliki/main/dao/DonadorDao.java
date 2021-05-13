@@ -1,8 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.DonadorDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.PersonaDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -100,22 +98,28 @@ public class DonadorDao {
         }
         return result;
     }
-
-    public List<DonadorDto> findAllDonadores() {
-        List<DonadorDto> result = new ArrayList<>();
+// Toma todos los donadores de la BD
+    public List<ConsultaDto> findAllDonadores() {
+        List<ConsultaDto> result = new ArrayList<>();
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "SELECT * " +
+                    "SELECT  nombre_persona, nombre_proyecto, monto " +
                             "FROM donador d " +
-                            "");
+                            "JOIN proyecto pr  ON d.id_donador = pr.id_proyecto " +
+                            "JOIN donacion dn  ON d.id_donador = dn.id_donacion " +
+                            "JOIN usuario us  ON us.id_usuario = d.id_usuario " +
+                            "JOIN persona pe  ON pe.id_persona = us.id_persona_fk " +
+                            "GROUP BY  pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
+                            " ");
             while (rs.next()) {
-                DonadorDto donador = new DonadorDto();
-                donador.donadorId = rs.getInt("id_donador");
-                donador.contratoId = rs.getInt("id_contrato");
-                donador.usuarioId = rs.getInt("id_usuario");
-                result.add(donador);
+                ConsultaDto consulta = new ConsultaDto();
+
+                consulta.nombrePersona = rs.getString("nombre_persona");
+                consulta.nombreProyecto = rs.getString("nombre_proyecto");
+                consulta.monto_donacion = rs.getDouble("monto");
+                result.add(consulta);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

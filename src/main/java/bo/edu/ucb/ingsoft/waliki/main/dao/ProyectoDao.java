@@ -56,7 +56,7 @@ public class ProyectoDao {
                             "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                             "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                             "JOIN estado e ON p.id_estado = e.id_estado " +
-                            "  WHERE p.id_estado = " + 1 +" " +
+                            "  WHERE p.id_estado = " + proyectoId +" " +
                             "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio;" +
                             "     ");
 

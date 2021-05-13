@@ -72,7 +72,7 @@ public class UsuarioApi {
     }
 
     @GetMapping(path = "/donador")
-    public List<DonadorDto> findAllDonadores() {
+    public List<ConsultaDto> findAllDonadores() {
         return usuarioBl.findAllDonadores();
 
     }
@@ -86,7 +86,7 @@ public class UsuarioApi {
         if (donador.contratoId == null) {  // id-contrato: "     "
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El numero de telefono debe ser obligatorio");
         }
-            return usuarioBl.crearDonador(donador);
+        return usuarioBl.crearDonador(donador);
         }
 
 
