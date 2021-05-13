@@ -25,7 +25,7 @@ GET http://localhost:8080/proyecto
 accept: application/json
 
 ### Busqueda de donador por nombre
-GET http://localhost:8080/donador/{{nombre_persona}}}
+GET http://localhost:8080/donador/Jose
 accept: application/json
 
 ### Agrega una nueva donacion - Funciona
@@ -41,8 +41,6 @@ accept: application/json
   "fecha_donacion": "5/13/2021"
 }
 
-### Mostrar todas las personas
-GET http://localhost:8080/persona
-accept: application/json
-
 ### Listado donadores
+GET http://localhost:8080/donador/
+accept: application/json
