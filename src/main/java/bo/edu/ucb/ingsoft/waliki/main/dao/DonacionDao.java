@@ -18,10 +18,10 @@ public class DonacionDao {
     private SequenceDao sequenceDao;
 
     public DonacionDto crearDonacion (DonacionDto donacion) {
-        donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
+            donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");
             stmt.execute(String.format("INSERT INTO donacion VALUES ('%d', '%d', '%d', '%s', '%s', '%s') ",
                     donacion.donacionId,
                     donacion.proyectoId,
