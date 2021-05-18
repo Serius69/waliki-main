@@ -2,7 +2,7 @@ package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.ImagenDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.UsuarioDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoVigenteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,34 +21,10 @@ public class ProyectoDao {
     @Autowired
     private SequenceDao sequenceDao;
 
-    public List<ProyectoDto> findAllProyectos() {
-        List<ProyectoDto> result = new ArrayList<>();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("" +
-                    "SELECT id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio, fecha_fin " +
-                    "FROM proyecto ");
-            while (rs.next()) {
-                ProyectoDto proyecto = new ProyectoDto();
-                proyecto.proyectoId = rs.getInt("id_persona");
-                proyecto.nombreProyecto = rs.getString("nombre");
-                proyecto.montoRecaudar = rs.getString("monto_recaudar");
-                proyecto.fechaInicio = rs.getString("fecha_inicio");
-                proyecto.fechaFin = rs.getString("fecha_fin");
-                result.add(proyecto);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
-    }
-
-    public List<ProyectoDto> findProyectoVigente(Integer estadoId) {
-        List<ProyectoDto> result = new ArrayList<>();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
+    public List<ProyectoVigenteDto> findProyectoVigente(Integer estadoId) {
+        List<ProyectoVigenteDto> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()){
 
             ResultSet rs = stmt.executeQuery(
                     "SELECT nombre_proyecto, monto_recaudar, fecha_inicio " +
@@ -61,13 +37,12 @@ public class ProyectoDao {
                             "     ");
 
             while (rs.next()) {
-                ProyectoDto proyecto = new ProyectoDto();
-                proyecto.nombreProyecto = rs.getString("nombre");
-                proyecto.montoRecaudar= rs.getString("monto_recaudar");
-                proyecto.fechaInicio= rs.getString("fecha_inicio");
+                ProyectoVigenteDto proyecto = new ProyectoVigenteDto();
+                proyecto.setNombreProyecto(rs.getString("nombre"));
+                proyecto.setMontoRQ(rs.getDouble("monto_recaudar"));
+                proyecto.setTiempoRestante(rs.getString("fecha_inicio"));
                 result.add(proyecto);
             }
-            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -77,9 +52,8 @@ public class ProyectoDao {
     public ProyectoDto findProyectoEnProgreso (Integer proyectoId) {
         ProyectoDto result = new ProyectoDto();
         ImagenDto result2 = new ImagenDto();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()){
 
             ResultSet rs = stmt.executeQuery(
                     "SELECT src_imagen, p.nombre_proyecto, fecha_inicio, fecha_fin " +
@@ -99,7 +73,6 @@ public class ProyectoDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
-            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -108,9 +81,8 @@ public class ProyectoDao {
 
     public ProyectoDto findProyectoByName(String nombreProyecto) {
         ProyectoDto result = new ProyectoDto();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()){
 
             ResultSet rs = stmt.executeQuery(
                     "SELECT nombre_proyecto, monto_recaudar, fecha_inicio," +
@@ -122,7 +94,6 @@ public class ProyectoDao {
                             "  WHERE nombre_proyecto = " + nombreProyecto +" " +
                             "GROUP BY p.nombre_proyecto,pe.nombre_persona, p.monto_recaudar, fecha_inicio, fecha_fin;" +
                             "     ");
-
             if (rs.next()) {
                 result.proyectoId = rs.getInt("id_proyecto");
                 result.nombreProyecto = rs.getString("nombre_proyecto");
@@ -131,7 +102,6 @@ public class ProyectoDao {
             } else { // si no hay valores de BBDD
                 result = null;
             }
-            conn.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

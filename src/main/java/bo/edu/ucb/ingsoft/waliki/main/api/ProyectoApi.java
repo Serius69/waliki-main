@@ -2,6 +2,7 @@ package bo.edu.ucb.ingsoft.waliki.main.api;
 
 import bo.edu.ucb.ingsoft.waliki.main.bl.ProyectoBl;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoVigenteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +20,6 @@ public class ProyectoApi {
     @Autowired
     private ProyectoBl proyectoBl;
 
-    @GetMapping(path = "/proyecto")
-    public List<ProyectoDto> findAllProyectos() {
-        return proyectoBl.findAllProyectos();
-    }
 
     @GetMapping(path = "/proyecto/{estadoId}")
     public ProyectoDto findProyectoenprogreso(@PathVariable Integer estadoId) {
@@ -34,7 +31,7 @@ public class ProyectoApi {
         }
     }
     @GetMapping(path = "/estado/{estadoId}")
-    public List<ProyectoDto> findProyectoVigente(@PathVariable Integer estadoId) {
+    public List<ProyectoVigenteDto> findProyectoVigente(@PathVariable Integer estadoId) {
         return proyectoBl.findProyectoVigente(estadoId);
     }
     @GetMapping(path = "/proyecto/{nombreproyecto}")

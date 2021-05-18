@@ -12,10 +12,7 @@ public class ProyectoBl {
     @Autowired
     ProyectoDao proyectoDao;
 
-    public List<ProyectoDto> findAllProyectos() {
-        return proyectoDao.findAllProyectos();
-    }
-    public List<ProyectoDto> findProyectoVigente (Integer estadoId) {
+    public List<ProyectoVigenteDto> findProyectoVigente (Integer estadoId) {
         return proyectoDao.findProyectoVigente(estadoId);
     }
     public ProyectoDto findProyectoEnProgreso (Integer estadoId) {

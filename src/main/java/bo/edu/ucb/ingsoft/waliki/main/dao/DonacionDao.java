@@ -1,7 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
 import bo.edu.ucb.ingsoft.waliki.main.dto.*;
-import bo.edu.ucb.ingsoft.waliki.main.models.Donacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +8,8 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DonacionDao {
@@ -18,10 +19,11 @@ public class DonacionDao {
     private SequenceDao sequenceDao;
 
     public DonacionDto crearDonacion (DonacionDto donacion) {
+        donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");
+
         try {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");
             stmt.execute(String.format("INSERT INTO donacion VALUES ('%d', '%d', '%d', '%s', '%s', '%s') ",
                     donacion.donacionId,
                     donacion.proyectoId,
