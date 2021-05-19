@@ -12,12 +12,23 @@ public class ProyectoBl {
     @Autowired
     ProyectoDao proyectoDao;
 
+    //Listado proyectos vigentes
     public List<ProyectoVigenteDto> findProyectoVigente (Integer estadoId) {
         return proyectoDao.findProyectoVigente(estadoId);
     }
-    public ProyectoDto findProyectoEnProgreso (Integer estadoId) {
-        return proyectoDao.findProyectoEnProgreso(estadoId);
+    //Listado proyectos en proceso
+    public List<ProyectoEnProcesoDto> findProyectoEnProceso (Integer estadoId) {
+        return proyectoDao.findProyectoEnProceso(estadoId);
     }
+    //Listado proyectos finalizados
+    public List<ProyectoFinalizadoDto> findProyectosFinalizados (Integer estadoId) {
+        return proyectoDao.findProyectosFinalizados(estadoId);
+    }
+    //Listado proyectos todos
+    public List<ProyectoDto> findAllProyectos (Integer estadoId) {
+        return proyectoDao.findAllProyectos(estadoId);
+    }
+    //Listado proyectos vigentes
     public ProyectoDto findProyectoByName (String nombreProyecto) {
         return proyectoDao.findProyectoByName(nombreProyecto);
     }

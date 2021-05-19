@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -20,16 +21,16 @@ public class DonadorDao {
     private SequenceDao sequenceDao;
 
     public DonadorDto crearDonador (DonadorDto donador) {
-        donador.donadorId = sequenceDao.getPrimaryKeyForTable("donador");
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
-            stmt.execute("" +
-                    "INSERT INTO donador VALUES ( '"
-                    + donador.donadorId +"', '"
-                    + donador.contratoId +"', '"
-                    + donador.usuarioId+"') ");
-            conn.close();
+        donador.setDonadorId(sequenceDao.getPrimaryKeyForTable("donador"));
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO donador VALUES (?,?,?) ")
+                ) {
+            pstmt.setInt(1, donador.getUsuarioId());
+            pstmt.setInt(2, donador.getContratoId());
+            pstmt.setInt(3, donador.getDonadorId());
+            pstmt.setInt(4, donador.getDonadorId());
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -40,26 +41,24 @@ public class DonadorDao {
         DonadorDto result = new DonadorDto();
         ProyectoDto result2 = new ProyectoDto();
         PersonaDto result3 = new PersonaDto();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT nombre_proyecto, dn.monto " +
-                            "FROM donador d " +
-                            "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
-                            "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
-
-                            "  WHERE  pe.nombre_persona = " + nombreDonador +" " +
-                            "GROUP BY  pr.nombre_proyecto, dn.monto;" +
-                            "     ");
-
+        try(
+                Connection conn = dataSource.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(
+                        "SELECT nombre_proyecto, dn.monto " +
+                        "FROM donador d " +
+                        "JOIN proyecto pr ON d.id_donador= pr.id_proyecto " +
+                        "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
+                        "JOIN usuario us ON us.id_usuario = d.id_usuario " +
+                        "JOIN persona pe ON pe.id_persona = us.id_persona_fk " +
+                        "WHERE  pe.nombre_persona = ? " +
+                        "GROUP BY  pr.nombre_proyecto, dn.monto; ")
+                )
+        {   pstmt.setString(1, nombreDonador);
+            ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                result.donadorId = rs.getInt("id_donador");
-                result2.nombreProyecto = rs.getString("nombre_proyecto");
-                result3.nombre = rs.getString("id_usuario");
+                result.setDonadorId(rs.getInt("id_donador"));
+                result2.setNombreProyecto(rs.getString("nombre_proyecto"));
+                result.setNombrePersona(rs.getString("id_usuario"));
             } else { // si no hay valores de BBDD
                 result = null;
             }
@@ -88,9 +87,9 @@ public class DonadorDao {
                             "     ");
 
             if (rs.next()) {
-                result.donadorId = rs.getInt("id_persona");
-                result.contratoId = rs.getInt("id_contrato");
-                result.usuarioId = rs.getInt("id_usuario");
+                result.setDonadorId(rs.getInt("id_persona"));
+                result.setContratoId(rs.getInt("id_contrato"));
+                result.setContratoId(rs.getInt("id_usuario"));
             } else { // si no hay valores de BBDD
                 result = null;
             }

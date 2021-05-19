@@ -2,6 +2,8 @@ package bo.edu.ucb.ingsoft.waliki.main.api;
 
 import bo.edu.ucb.ingsoft.waliki.main.bl.ProyectoBl;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoEnProcesoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoFinalizadoDto;
 import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoVigenteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,20 +22,28 @@ public class ProyectoApi {
     @Autowired
     private ProyectoBl proyectoBl;
 
-
-    @GetMapping(path = "/proyecto/{estadoId}")
-    public ProyectoDto findProyectoenprogreso(@PathVariable Integer estadoId) {
-        ProyectoDto proyecto = proyectoBl.findProyectoEnProgreso(estadoId);
-        if (proyecto != null) {
-            return proyectoBl.findProyectoEnProgreso(estadoId);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existen proyectos en progreso:" + estadoId );
-        }
-    }
+    //Listado proyecto vigente
     @GetMapping(path = "/estado/{estadoId}")
     public List<ProyectoVigenteDto> findProyectoVigente(@PathVariable Integer estadoId) {
         return proyectoBl.findProyectoVigente(estadoId);
     }
+    //Listado proyecto en proceso
+    @GetMapping(path = "/estado/{estadoId}")
+    public List<ProyectoEnProcesoDto> findProyectoEnProceso(@PathVariable Integer estadoId) {
+        return proyectoBl.findProyectoEnProceso(estadoId);
+    }
+    //Listado proyecto finalizado
+    @GetMapping(path = "/estado/{estadoId}")
+    public List<ProyectoFinalizadoDto> findProyectoFinalizado(@PathVariable Integer estadoId) {
+        return proyectoBl.findProyectosFinalizados(estadoId);
+    }
+    //Listado proyecto todos
+    @GetMapping(path = "/estado/{estadoId}")
+    public List<ProyectoDto> findAllProyectos(@PathVariable Integer estadoId) {
+        return proyectoBl.findAllProyectos(estadoId);
+    }
+
+    //Buscar proyecto por nombre
     @GetMapping(path = "/proyecto/{nombreproyecto}")
     public ProyectoDto findProyectoByName(@PathVariable String nombreproyecto) {
         ProyectoDto proyecto = proyectoBl.findProyectoByName(nombreproyecto);

@@ -61,7 +61,7 @@ public class DonacionDao {
                 result.fecha_donacion = rs.getString("fecha_donaciop");
                 result.monto = rs.getDouble("monto");
                 result2.nombre = rs.getString("pe.nombre");
-                result3.fechaInicio= rs.getString("pr.nombre");
+                result3.setFechaInicio(rs.getString("pr.nombre"));
             } else { // si no hay valores de BBDD
                 result = null;
             }

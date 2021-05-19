@@ -4,7 +4,6 @@ public class ProyectoVigenteDto {
 
     private Integer proyectoId;
     private String nombreProyecto;
-    private String imagen;
     private Double montoRQ;
     private String tiempoRestante;
 
@@ -27,14 +26,6 @@ public class ProyectoVigenteDto {
 
     public void setMontoRQ(Double montoRQ) {
         this.montoRQ = montoRQ;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
     }
 
     public String getNombreProyecto() {
