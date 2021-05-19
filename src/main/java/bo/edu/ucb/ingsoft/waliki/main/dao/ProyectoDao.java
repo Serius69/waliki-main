@@ -1,8 +1,6 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.ImagenDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoVigenteDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,29 +47,81 @@ public class ProyectoDao {
         return result;
     }
 
-    public ProyectoDto findProyectoEnProgreso (Integer proyectoId) {
-        ProyectoDto result = new ProyectoDto();
-        ImagenDto result2 = new ImagenDto();
+    public List<ProyectoEnProcesoDto> findProyectoEnProceso(Integer estadoId) {
+        List<ProyectoEnProcesoDto> result = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement()){
 
             ResultSet rs = stmt.executeQuery(
-                    "SELECT src_imagen, p.nombre_proyecto, fecha_inicio, fecha_fin " +
+                    "SELECT nombre_proyecto, monto_recaudar, fecha_inicio " +
                             "FROM proyecto p " +
                             "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                             "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                             "JOIN estado e ON p.id_estado = e.id_estado " +
-                            "  WHERE p.id_estado = " + 2 +" " +
-                            "GROUP BY img.src_imagen, p.nombre_proyecto, p.fecha_inicio, p.fecha_fin;" +
+                            "  WHERE p.id_estado = " + estadoId +" " +
+                            "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio;" +
                             "     ");
 
-            if (rs.next()) {
-                result2.srcImagen = rs.getString("src_imagen");
-                result.montoRecaudar= rs.getString("p.nombre");
-                result.fechaInicio= rs.getString("fecha_inicio");
-                result.fechaFin= rs.getString("fecha_fin");
-            } else { // si no hay valores de BBDD
-                result = null;
+            while (rs.next()) {
+                ProyectoVigenteDto proyecto = new ProyectoVigenteDto();
+                proyecto.setNombreProyecto(rs.getString("nombre"));
+                proyecto.setMontoRQ(rs.getDouble("monto_recaudar"));
+                proyecto.setTiempoRestante(rs.getString("fecha_inicio"));
+                result.add(proyecto);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    public List<ProyectoDto> findProyectoVigente(Integer estadoId) {
+        List<ProyectoDto> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()){
+
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT nombre_proyecto, monto_recaudar, fecha_inicio " +
+                            "FROM proyecto p " +
+                            "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
+                            "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
+                            "JOIN estado e ON p.id_estado = e.id_estado " +
+                            "  WHERE p.id_estado = " + estadoId +" " +
+                            "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio;" +
+                            "     ");
+
+            while (rs.next()) {
+                ProyectoVigenteDto proyecto = new ProyectoVigenteDto();
+                proyecto.setNombreProyecto(rs.getString("nombre"));
+                proyecto.setMontoRQ(rs.getDouble("monto_recaudar"));
+                proyecto.setTiempoRestante(rs.getString("fecha_inicio"));
+                result.add(proyecto);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    public List<ProyectoFinalizadoDto> findProyectoVigente(Integer estadoId) {
+        List<ProyectoVigenteDto> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()){
+
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT nombre_proyecto, monto_recaudar, fecha_inicio " +
+                            "FROM proyecto p " +
+                            "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
+                            "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
+                            "JOIN estado e ON p.id_estado = e.id_estado " +
+                            "  WHERE p.id_estado = " + estadoId +" " +
+                            "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio;" +
+                            "     ");
+
+            while (rs.next()) {
+                ProyectoVigenteDto proyecto = new ProyectoVigenteDto();
+                proyecto.setNombreProyecto(rs.getString("nombre"));
+                proyecto.setMontoRQ(rs.getDouble("monto_recaudar"));
+                proyecto.setTiempoRestante(rs.getString("fecha_inicio"));
+                result.add(proyecto);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
