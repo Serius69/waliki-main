@@ -13,7 +13,6 @@ Accept: application/json
   "numeroTelefono": 789456,
   "direccion": "Obrajes calle 2",
   "contrasena": 123456
-
 }
 
 ### Busqueda de donador por nombre - Falla
