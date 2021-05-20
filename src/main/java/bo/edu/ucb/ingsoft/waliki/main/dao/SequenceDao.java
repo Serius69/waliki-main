@@ -14,7 +14,8 @@ public class SequenceDao {
     @Autowired
     private DataSource dataSource;
     public int getPrimaryKeyForTable(String nombreTabla) {
-        String nombreSecuencia = nombreTabla.toLowerCase() + "_" + nombreTabla.toLowerCase() + "_id_seq";
+        //Select nextval(donador_id_donador_seq.)proyecto_id_proyecto_seq
+        String nombreSecuencia = nombreTabla.toLowerCase() + "_id_" + nombreTabla.toLowerCase() + "_seq";
         // SELECT nextval('persona_persona_id_seq');
         int resultado = 0;
         try (Connection conn = dataSource.getConnection();

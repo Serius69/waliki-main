@@ -17,22 +17,23 @@ public class ProyectoBl {
     }
 
     //Listado proyectos vigentes
-    public List<ProyectoVigenteDto> findProyectoVigente (Integer estadoId) {
-        return proyectoDao.findProyectoVigente(estadoId);
+    public List<ProyectoVigenteDto> findProyectoVigente (Integer estado) {
+        return proyectoDao.findProyectoVigente(estado);
     }
     //Listado proyectos en proceso
     public List<ProyectoEnProcesoDto> findProyectoEnProceso (Integer estadoId) {
         return proyectoDao.findProyectoEnProceso(estadoId);
     }
     //Listado proyectos finalizados
-    public List<ProyectoFinalizadoDto> findProyectosFinalizados (Integer estadoId) {
-        return proyectoDao.findProyectosFinalizados(estadoId);
+    public List<ProyectoFinalizadoDto> findProyectosFinalizado (Integer estadoId) {
+        return proyectoDao.findProyectoFinalizado(estadoId);
     }
     //Listado proyectos todos
-    public List<ProyectoDto> findAllProyectos (Integer estadoId) {
-        return proyectoDao.findAllProyectos(estadoId);
+    public List<ConsultaProyectoDto> findAllProyectos () {
+        return proyectoDao.findAllProyectos();
     }
     //Listado proyectos vigentes
+
     public ProyectoDto findProyectoByName (String nombreProyecto) {
         return proyectoDao.findProyectoByName(nombreProyecto);
     }

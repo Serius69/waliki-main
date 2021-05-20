@@ -1,12 +1,8 @@
-### Tomar un contrato - Funciona
-GET http://localhost:8080/contrato/1
-accept: application/json
 
-### Buscar un proyecto por su nombre - Falla
+
+### Buscar una persona por su nombre - Falla
 GET http://localhost:8080/persona
 accept: application/json
-
-
 
 ### Agrega una nueva donacion - Funciona
 POST http://localhost:8080/donacion

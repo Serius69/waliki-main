@@ -4,7 +4,7 @@ public class ProyectoEnProcesoDto {
 
     private Integer proyectoId;
     private String nombreProyecto;
-    private String srcImagen;
+    //private String srcImagen;
     private String fechaInicio;
     private String fechaFinal;
     private Double proceso;
@@ -39,13 +39,9 @@ public class ProyectoEnProcesoDto {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getSrcImagen() {
-        return srcImagen;
-    }
+    //public String getSrcImagen() {        return srcImagen;    }
 
-    public void setSrcImagen(String srcImagen) {
-        this.srcImagen = srcImagen;
-    }
+    //public void setSrcImagen(String srcImagen) {        this.srcImagen = srcImagen;    }
 
     public String getNombreProyecto() {
         return nombreProyecto;

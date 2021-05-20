@@ -34,22 +34,35 @@ public class ProyectoApi {
     }
 
     //Listado proyecto vigente
-    @GetMapping(path = "/estado/{estadoId}")
+    @GetMapping(path = "estado/{estadoId}")
     public ResponseDto findProyecto(@PathVariable Integer estadoId) {
-        if (estadoId==1 ) {  // nombre_proyecto: "     "
+        if (estadoId==1 ) {  // Proyectos vigentes
             return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");
         }
-        if (estadoId==2 ) {  // nombre_proyecto: "     "
+        if (estadoId==2 ) {  // Proyectos en proceso
             return new ResponseDto(true, proyectoBl.findProyectoEnProceso(estadoId), "Proyectos en proceso");
         }
-        if (estadoId==3 ) {  // nombre_proyecto: "     "
-            return new ResponseDto(true, proyectoBl.findProyectosFinalizados(estadoId), "Proyectos finalizados ");
+        if (estadoId==3 ) {  // Proyectos Finalizados
+            return new ResponseDto(true, proyectoBl.findProyectosFinalizado(estadoId), "Proyectos finalizados ");
         }
-        if (estadoId==4 ) {  // nombre_proyecto: "     "
-            return new ResponseDto(true, proyectoBl.findAllProyectos(estadoId), "Todos los proyectos");
+        if (estadoId==4 ) {  // Todos los proyectos
+            return new ResponseDto(true, proyectoBl.findAllProyectos(), "Todos los proyectos");
         }
         return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");
     }
+
+
+    @GetMapping(path = "/nombreProyecto/{nombre_proyecto}")
+    public ResponseDto findPersonaById(@PathVariable String nombre_proyecto) {
+        ProyectoDto proyecto = proyectoBl.findProyectoByName(nombre_proyecto);
+        if (proyecto != null) {
+            return new ResponseDto( true, proyecto, null);
+        } else {
+            return new ResponseDto( false, null, "No existe la persona con codigo:");
+        }
+    }
+
+
     /*
     //Listado proyecto en proceso
     @GetMapping(path = "/estado/{estadoId}")

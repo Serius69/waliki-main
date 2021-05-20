@@ -23,7 +23,7 @@ public class DireccionDao {
             ResultSet rs = stmt.executeQuery(
                     "SELECT  *" +
                             "FROM direccion di " +
-                            "JOIN persona pe  ON pe.id_direccion_fk = di.id_direccion " +
+                            "JOIN persona pe  ON pe.id_direccion_fk = id_direccion " +
                             "JOIN usuario us  ON us.id_persona_fk = pe.id_persona " +
                             "  WHERE pe.id_direccion_fk = " + direccionId +" " +
                             "GROUP BY pe.id_persona;" +

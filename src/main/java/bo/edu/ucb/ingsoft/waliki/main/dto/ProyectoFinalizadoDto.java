@@ -7,7 +7,6 @@ public class ProyectoFinalizadoDto {
     private Double montoFinalRecaudado;
     private String fechaInicio;
     private String fechaFin;
-    private Integer estadoId;
 
     public Integer getProyectoId() {
         return proyectoId;
@@ -49,11 +48,4 @@ public class ProyectoFinalizadoDto {
         this.nombreProyecto = nombreProyecto;
     }
 
-    public Integer getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Integer estadoId) {
-        this.estadoId = estadoId;
-    }
 }

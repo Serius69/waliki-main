@@ -16,5 +16,9 @@ Accept: application/json
 }
 
 ### Busqueda de donador por nombre - Falla
-GET http://localhost:8080/donador/Jose
+GET http://localhost:8080/donador/Garold
+Content-Type: application/json
+
+### Tomar un contrato - Funciona
+GET http://localhost:8080/contrato/1
 accept: application/json
