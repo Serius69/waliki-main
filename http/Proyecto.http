@@ -10,10 +10,18 @@ Accept: application/json
   "descripcion": "El siguiente proyecto es un dato de prueba"
 }
 
-### Muestra los proyectos Vigentes - Falla
+### Muestra los proyectos Vigentes - Funcioma
 GET http://localhost:8080/estado/1
 accept: application/json
 
-### Muestra los proyectos en proceso - Falla
+### Muestra los proyectos en proceso - Funcioma
 GET http://localhost:8080/estado/2
+accept: application/json
+
+### Muestra los proyectos en proceso - Funcioma
+GET http://localhost:8080/estado/3
+accept: application/json
+
+### Muestra los proyectos en proceso - Funcioma
+GET http://localhost:8080/estado/4
 accept: application/json

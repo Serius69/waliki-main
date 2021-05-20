@@ -34,7 +34,7 @@ public class ProyectoApi {
     }
 
     //Listado proyecto vigente
-    @GetMapping(path = "/proyecto/estado/{estadoId}")
+    @GetMapping(path = "/estado/{estadoId}")
     public ResponseDto findProyecto(@PathVariable Integer estadoId) {
         if (estadoId==1 ) {  // nombre_proyecto: "     "
             return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");

@@ -49,39 +49,7 @@ public class UsuarioApi {
         return usuarioBl.crearPersona(persona);
     }
 
-    // Buscar un donador por su nombre
-    @GetMapping(path = "/donador/{nombre_persona}")
-    public DonadorDto findDonadorByName(@PathVariable String nombre_persona) {
-        DonadorDto donador = usuarioBl.findDonadorByName(nombre_persona);
-        if (donador != null) {
-            return usuarioBl.findDonadorByName(nombre_persona);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con nombre:" + nombre_persona);
-        }
-    }
 
-
-
-    @PostMapping(path = "/donador")
-    public DonadorDto createDonador(@RequestBody DonadorDto donador) {
-        // Validar que los datos enviados son correctos.
-        if (donador.getNombreUsuario() == null || donador.getNombreUsuario().trim().equals("") ) {  // nombre usuario: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre de usuario es obligatorio");
-        }
-        if (donador.getCorreoElectronico() == null || donador.getCorreoElectronico().trim().equals("")) {  // correo electronico: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El correo electronico es obligatorio");
-        }
-        if (donador.getNumeroTelefono() == null || donador.getNumeroTelefono()<0) {  // numero telefnono: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El numero de telefono es obligatorio y mayor a 0");
-        }
-        if (donador.getDireccion() == null || donador.getDireccion().trim().equals("")) {  // direccion: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "la direccion es obligatoria");
-        }
-        if (donador.getContrasena() == null || donador.getContrasena().trim().equals("")) {  // contrasenia: "     "
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La contrasenia es obligatoria");
-        }
-        return usuarioBl.crearDonador(donador);
-        }
 
 /*crear un nuevo donador
     @PostMapping(path = "/donador")

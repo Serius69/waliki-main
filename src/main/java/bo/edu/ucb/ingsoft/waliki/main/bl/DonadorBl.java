@@ -26,8 +26,18 @@ public class DonadorBl {
     public ContratoDto findContratoById(Integer contratoId) {
         return contratodao.findContratoById(contratoId);
     }
+    //Listado donadores
     public List<ConsultaDto> findAllDonadores() {
         return donadorDao.findAllDonadores();
+    }
+    //Busca un donador por su nombre
+    public DonadorDto findDonadorByName(String nombreDonador) {
+        return donadorDao.findDonadorByName(nombreDonador);
+    }
+
+    //Crea un donador
+    public DonadorDto crearDonador(DonadorDto donador) {
+        return donadorDao.crearDonador(donador);
     }
 
 }

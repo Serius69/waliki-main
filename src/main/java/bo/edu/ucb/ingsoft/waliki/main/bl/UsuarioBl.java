@@ -35,15 +35,9 @@ public class UsuarioBl {
     public UsuarioDto findUsuarioById(Integer usuarioId) {
         return usuarioDao.findUsuarioById(usuarioId);
     }
-//Crea un donador
-    public DonadorDto crearDonador(DonadorDto donador) {
-        return donadorDao.crearDonador(donador);
-    }
 
-//Busca un donador por su nombre
-    public DonadorDto findDonadorByName(String nombreDonador) {
-        return donadorDao.findDonadorByName(nombreDonador);
-    }
+
+
 //Listado de todos los donadores
 
 
