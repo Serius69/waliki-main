@@ -11,6 +11,10 @@ import java.util.List;
 public class ProyectoBl {
     @Autowired
     ProyectoDao proyectoDao;
+    //Crear un nuevo proyecto
+    public ProyectoDto addProyecto(ProyectoDto proyecto) {
+        return proyectoDao.crearProyecto(proyecto);
+    }
 
     //Listado proyectos vigentes
     public List<ProyectoVigenteDto> findProyectoVigente (Integer estadoId) {

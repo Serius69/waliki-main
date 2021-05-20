@@ -1,0 +1,21 @@
+### Listado donadores - Funciona
+GET http://localhost:8080/donador/
+accept: application/json
+
+### Agrega un nuevo donador - Funciona
+POST http://localhost:8080/donador
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nombreUsuario": "usuarioprueba",
+  "correoElectronico": "fulanito@gmail.com",
+  "numeroTelefono": 789456,
+  "direccion": "Obrajes calle 2",
+  "contrasena": 123456
+
+}
+
+### Busqueda de donador por nombre - Falla
+GET http://localhost:8080/donador/Jose
+accept: application/json

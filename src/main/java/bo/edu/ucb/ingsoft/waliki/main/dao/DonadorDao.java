@@ -28,7 +28,7 @@ public class DonadorDao {
                 ) {
             //---Tabla direccion
             pstmt.setInt(1, donador.getDireccionId()); //id_direccion
-            pstmt.setString(2, donador.getDireccion()); //zona
+            pstmt.setString(2, "central"); //zona
             pstmt.setString(3, donador.getDireccion()); //calle
             pstmt.setString(4, "La Paz"); //ciudad
             pstmt.setString(5, "La Paz"); //departamento
@@ -50,7 +50,6 @@ public class DonadorDao {
             pstmt.setInt(18, donador.getDonadorId());
             pstmt.setInt(19, donador.getContratoId());
             pstmt.setInt(20, donador.getUsuarioId());
-
 
         } catch (Exception ex) {
             ex.printStackTrace();

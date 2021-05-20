@@ -1,0 +1,19 @@
+
+### Agregar un nuevo proyecto
+POST http://localhost:8080/proyecto
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nombreProyecto": "Proyecto de prueba",
+  "montoRecaudar": 100.0,
+  "descripcion": "El siguiente proyecto es un dato de prueba"
+}
+
+### Muestra los proyectos Vigentes - Falla
+GET http://localhost:8080/estado/1
+accept: application/json
+
+### Muestra los proyectos en proceso - Falla
+GET http://localhost:8080/estado/2
+accept: application/json

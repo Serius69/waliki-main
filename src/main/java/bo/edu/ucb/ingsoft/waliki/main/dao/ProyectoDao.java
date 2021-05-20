@@ -1,23 +1,23 @@
 package bo.edu.ucb.ingsoft.waliki.main.dao;
 
-import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.time.LocalDateTime;
+import javax.sql.*;
+import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoEnProcesoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoFinalizadoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoVigenteDto;
 import java.util.List;
+import java.util.Date;
 
 @Service
 public class ProyectoDao {
     @Autowired
     private DataSource dataSource;
-
     @Autowired
     private SequenceDao sequenceDao;
 
@@ -25,34 +25,32 @@ public class ProyectoDao {
     public ProyectoDto crearProyecto (ProyectoDto proyecto) {
         proyecto.setProyectoId(sequenceDao.getPrimaryKeyForTable("proyecto"));
 
-        DateTimeFormatter fechaActual = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        Date fechaActual = new Date();
         DateTimeFormatter horaActual = DateTimeFormatter.ofPattern("HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
 
         try(    Connection conn = dataSource.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement("INSERT INTO proyecto VALUES (?,?,?,?,?,?,?,?,?,?); INSERT INTO recompensas VALUES (?,?,?,?,?)")
+                PreparedStatement stmts = conn.prepareStatement("INSERT INTO proyecto VALUES (?,?,?,?,?,?,?,?,?,?); INSERT INTO recompensas VALUES (?,?,?,?,?)")
 
         ) {
-            //Para el proyecto
-            pstmt.setInt(1, proyecto.getProyectoId());//id_proyecto
-            pstmt.setString(2, proyecto.getNombreProyecto()); //
-            pstmt.setString(3, proyecto.getDescripcion());
-            pstmt.setDouble(4, proyecto.getMontoRecaudar());
-            pstmt.setInt(5,1); // id_emprendedor
-            pstmt.setString(6, String.valueOf(horaActual)); //hora_inicio
-            pstmt.setString(7, String.valueOf(horaActual)); //hora-final
-            pstmt.setInt(8, 1); //id_estado
-            pstmt.setString(9, String.valueOf(fechaActual)); //fecha_inicio
-            pstmt.setString(10, proyecto.getDescripcion()); //fecha_final
+            //--Tabla proyecto
+            stmts.setInt(1, proyecto.getProyectoId());//id_proyecto
+            stmts.setString(2, proyecto.getNombreProyecto()); //
+            stmts.setString(3, proyecto.getDescripcion());
+            stmts.setDouble(4, proyecto.getMontoRecaudar());
+            stmts.setInt(5,1); // id_emprendedor
+            stmts.setString(6, String.valueOf(horaActual)); //hora_inicio
+            stmts.setString(7, String.valueOf(horaActual)); //hora-fin
+            stmts.setInt(8, 1); //id_estado
+            stmts.setString(9, String.valueOf(fechaActual)); //fecha_inicio
+            stmts.setString(10, "mm/dd/yyyy"); //fecha_final
             //--Tabla recompensa
-            pstmt.setInt(11, 1); // id_recompensa
-            pstmt.setInt(12, 10); // valor_min
-            pstmt.setInt(13, 200); // valor_max
-            pstmt.setString(13, "Un prototipo"); // recompensa
-            pstmt.setInt(13, proyecto.getProyectoId()); // id_proyecto
-
-            //Para las recompensas
-
+            stmts.setInt(11, 1); // id_recompensa
+            stmts.setInt(12, 10); // valor_min
+            stmts.setInt(13, 200); // valor_max
+            stmts.setString(14, "Un prototipo"); // recompensa
+            stmts.setInt(15, proyecto.getProyectoId()); // id_proyecto
+            stmts.executeQuery();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

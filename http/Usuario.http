@@ -2,31 +2,11 @@
 GET http://localhost:8080/contrato/1
 accept: application/json
 
-### Agrega un nuevo donador
-POST http://localhost:8080/donador
-Content-Type: application/json
-Accept: application/json
-
-{
-  "usuarioId": 1,
-  "contratoId": 2
-}
-
-### Muestra los proyectos Vigentes - Falla
-GET http://localhost:8080/estado/1
-accept: application/json
-
-### Muestra los proyectos en proceso - Falla
-GET http://localhost:8080/estado/2
-accept: application/json
-
 ### Buscar un proyecto por su nombre - Falla
 GET http://localhost:8080/persona
 accept: application/json
 
-### Busqueda de donador por nombre - Falla
-GET http://localhost:8080/donador/Jose
-accept: application/json
+
 
 ### Agrega una nueva donacion - Funciona
 POST http://localhost:8080/donacion
@@ -41,6 +21,3 @@ accept: application/json
   "fecha_donacion": "5/13/2021"
 }
 
-### Listado donadores - Funciona
-GET http://localhost:8080/donador/
-accept: application/json

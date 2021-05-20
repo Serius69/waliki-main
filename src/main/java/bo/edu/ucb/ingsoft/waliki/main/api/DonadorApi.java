@@ -4,12 +4,14 @@ import bo.edu.ucb.ingsoft.waliki.main.bl.*;
 import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @RestController
 public class DonadorApi {
@@ -18,6 +20,11 @@ public class DonadorApi {
     @Autowired
     private DonadorBl donadorBl;
 
+    @GetMapping(path = "/donador")
+    public ResponseDto  findAllDonadores() {
+        return new ResponseDto( true, donadorBl.findAllDonadores(), "Listado de todos los donadores");
+
+    }
     @PostMapping(path = "/donacion")
     public DonacionDto addDonacion(@RequestBody DonacionDto donacion) {
         // Validar que los datos enviados son correctos.

@@ -1,19 +1,10 @@
 package bo.edu.ucb.ingsoft.waliki.main.api;
 
 import bo.edu.ucb.ingsoft.waliki.main.bl.ProyectoBl;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoEnProcesoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoFinalizadoDto;
-import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoVigenteDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.web.bind.annotation.*;
 import javax.sql.DataSource;
-import java.util.List;
 
 @RestController
 public class ProyectoApi {
@@ -22,35 +13,71 @@ public class ProyectoApi {
     @Autowired
     private ProyectoBl proyectoBl;
 
-    //Listado proyecto vigente
-    @GetMapping(path = "/estado/{estadoId}")
-    public List<ProyectoVigenteDto> findProyectoVigente(@PathVariable Integer estadoId) {
-        return proyectoBl.findProyectoVigente(estadoId);
+    //Crear nuevo proyectp
+    @PostMapping(path = "/proyecto")
+    public ResponseDto addProyecto(@RequestBody ProyectoDto proyecto) {
+        // Validar que los datos enviados son correctos.
+        if (proyecto.getNombreProyecto() == null || proyecto.getNombreProyecto().trim().equals("") ) {  // nombre_proyecto: "     "
+        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
+            return new ResponseDto( false, null, "El nombre del proyecto debe ser obligatorio");
+        }
+        if (proyecto.getMontoRecaudar() == null || proyecto.getMontoRecaudar()<0 ) {  // monto recaudar mayor a 0
+            //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
+            return new ResponseDto( false, null, "El monto a recaudar debe ser obligatorio y mayor a 0");
+        }
+        if (proyecto.getDescripcion() == null || proyecto.getDescripcion().trim().equals("") ) {  // nombre_proyecto: "     "
+            //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
+            return new ResponseDto( false, null, "La descripcion debe ser obligatoria");
+        }
+
+        return new ResponseDto(true, proyectoBl.addProyecto(proyecto), "Proyecto agregado con exito");
     }
+
+    //Listado proyecto vigente
+    @GetMapping(path = "/proyecto/estado/{estadoId}")
+    public ResponseDto findProyecto(@PathVariable Integer estadoId) {
+        if (estadoId==1 ) {  // nombre_proyecto: "     "
+            return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");
+        }
+        if (estadoId==2 ) {  // nombre_proyecto: "     "
+            return new ResponseDto(true, proyectoBl.findProyectoEnProceso(estadoId), "Proyectos en proceso");
+        }
+        if (estadoId==3 ) {  // nombre_proyecto: "     "
+            return new ResponseDto(true, proyectoBl.findProyectosFinalizados(estadoId), "Proyectos finalizados ");
+        }
+        if (estadoId==4 ) {  // nombre_proyecto: "     "
+            return new ResponseDto(true, proyectoBl.findAllProyectos(estadoId), "Todos los proyectos");
+        }
+        return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");
+    }
+    /*
     //Listado proyecto en proceso
     @GetMapping(path = "/estado/{estadoId}")
-    public List<ProyectoEnProcesoDto> findProyectoEnProceso(@PathVariable Integer estadoId) {
-        return proyectoBl.findProyectoEnProceso(estadoId);
+    public ResponseDto findProyectoEnProceso(@PathVariable Integer estadoId) {
+        return new ResponseDto(true, proyectoBl.findProyectoEnProceso(estadoId), "Proyectos en proceso");
     }
     //Listado proyecto finalizado
     @GetMapping(path = "/estado/{estadoId}")
-    public List<ProyectoFinalizadoDto> findProyectoFinalizado(@PathVariable Integer estadoId) {
-        return proyectoBl.findProyectosFinalizados(estadoId);
+    public ResponseDto  findProyectoFinalizado(@PathVariable Integer estadoId) {
+        return new ResponseDto(true, proyectoBl.findProyectosFinalizados(estadoId), "Proyectos finalizados");
     }
     //Listado proyecto todos
     @GetMapping(path = "/estado/{estadoId}")
-    public List<ProyectoDto> findAllProyectos(@PathVariable Integer estadoId) {
-        return proyectoBl.findAllProyectos(estadoId);
+    public ResponseDto  findAllProyectos(@PathVariable Integer estadoId) {
+        return new ResponseDto(true, proyectoBl.findAllProyectos(estadoId), "Todos los proyectos");
     }
 
     //Buscar proyecto por nombre
     @GetMapping(path = "/proyecto/{nombreproyecto}")
-    public ProyectoDto findProyectoByName(@PathVariable String nombreproyecto) {
+    public ResponseDto  findProyectoByName(@PathVariable String nombreproyecto) {
         ProyectoDto proyecto = proyectoBl.findProyectoByName(nombreproyecto);
         if (proyecto != null) {
-            return proyectoBl.findProyectoByName(nombreproyecto);
+            return new ResponseDto( true, proyecto, null);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe proyectos vigentes" + nombreproyecto );
+            return new ResponseDto( false, null, "No existe la persona con codigo:");
         }
     }
+    */
+
+
 }

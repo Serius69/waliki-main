@@ -45,8 +45,6 @@ public class UsuarioBl {
         return donadorDao.findDonadorByName(nombreDonador);
     }
 //Listado de todos los donadores
-    public List<ConsultaDto> findAllDonadores() {
-        return donadorDao.findAllDonadores();
-    }
+
 
 }
