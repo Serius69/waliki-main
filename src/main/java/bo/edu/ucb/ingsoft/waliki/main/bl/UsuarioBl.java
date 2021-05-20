@@ -39,10 +39,7 @@ public class UsuarioBl {
     public DonadorDto crearDonador(DonadorDto donador) {
         return donadorDao.crearDonador(donador);
     }
-//Busca un donador por su id
-    public DonadorDto findDonadorById(Integer donadorId) {
-        return donadorDao.findDonadorById(donadorId);
-    }
+
 //Busca un donador por su nombre
     public DonadorDto findDonadorByName(String nombreDonador) {
         return donadorDao.findDonadorByName(nombreDonador);

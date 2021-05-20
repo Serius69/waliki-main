@@ -14,9 +14,6 @@ public class ProyectoDto {
     private String fechaFin;
 
     public ProyectoDto(){
-
-
-
     }
 
     public String getFechaFin() {

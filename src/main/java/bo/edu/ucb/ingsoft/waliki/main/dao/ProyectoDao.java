@@ -8,6 +8,8 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,44 @@ public class ProyectoDao {
 
     @Autowired
     private SequenceDao sequenceDao;
+
+    //Crear un nuevo proyecto
+    public ProyectoDto crearProyecto (ProyectoDto proyecto) {
+        proyecto.setProyectoId(sequenceDao.getPrimaryKeyForTable("proyecto"));
+
+        DateTimeFormatter fechaActual = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter horaActual = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        try(    Connection conn = dataSource.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement("INSERT INTO proyecto VALUES (?,?,?,?,?,?,?,?,?,?); INSERT INTO recompensas VALUES (?,?,?,?,?)")
+
+        ) {
+            //Para el proyecto
+            pstmt.setInt(1, proyecto.getProyectoId());//id_proyecto
+            pstmt.setString(2, proyecto.getNombreProyecto()); //
+            pstmt.setString(3, proyecto.getDescripcion());
+            pstmt.setDouble(4, proyecto.getMontoRecaudar());
+            pstmt.setInt(5,1); // id_emprendedor
+            pstmt.setString(6, String.valueOf(horaActual)); //hora_inicio
+            pstmt.setString(7, String.valueOf(horaActual)); //hora-final
+            pstmt.setInt(8, 1); //id_estado
+            pstmt.setString(9, String.valueOf(fechaActual)); //fecha_inicio
+            pstmt.setString(10, proyecto.getDescripcion()); //fecha_final
+            //--Tabla recompensa
+            pstmt.setInt(11, 1); // id_recompensa
+            pstmt.setInt(12, 10); // valor_min
+            pstmt.setInt(13, 200); // valor_max
+            pstmt.setString(13, "Un prototipo"); // recompensa
+            pstmt.setInt(13, proyecto.getProyectoId()); // id_proyecto
+
+            //Para las recompensas
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return proyecto;
+    }
 
     //Listado de proyectos vigentes
     public List<ProyectoVigenteDto> findProyectoVigente(Integer estadoId) {

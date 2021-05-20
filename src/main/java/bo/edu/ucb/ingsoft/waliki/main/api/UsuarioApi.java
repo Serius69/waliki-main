@@ -49,16 +49,6 @@ public class UsuarioApi {
         return usuarioBl.crearPersona(persona);
     }
 
-    @GetMapping(path = "/donador/{donadorId}")
-    public DonadorDto findDonadorById(@PathVariable Integer donadorId) {
-        DonadorDto donador = usuarioBl.findDonadorById(donadorId);
-        if (donador != null) {
-            return usuarioBl.findDonadorById(donadorId);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con ID:" + donadorId);
-        }
-    }
-
     // Buscar un donador por su nombre
     @GetMapping(path = "/donador/{nombre_persona}")
     public DonadorDto findDonadorByName(@PathVariable String nombre_persona) {
@@ -79,10 +69,10 @@ public class UsuarioApi {
     @PostMapping(path = "/donador")
     public DonadorDto createDonador(@RequestBody DonadorDto donador) {
         // Validar que los datos enviados son correctos.
-        if (donador.usuarioId == null) {  // id_usuario: "     "
+        if (donador.getUsuarioId() == null) {  // id_usuario: "     "
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo de usuario es obligatorio");
         }
-        if (donador.contratoId == null) {  // id-contrato: "     "
+        if (donador.getContratoId() == null) {  // id-contrato: "     "
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo de contrato es obligatorio");
         }
         return usuarioBl.crearDonador(donador);

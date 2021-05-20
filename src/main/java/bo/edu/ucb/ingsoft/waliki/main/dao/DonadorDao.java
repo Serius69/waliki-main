@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +19,38 @@ public class DonadorDao {
 
     public DonadorDto crearDonador (DonadorDto donador) {
         donador.setDonadorId(sequenceDao.getPrimaryKeyForTable("donador"));
+        donador.setUsuarioId(sequenceDao.getPrimaryKeyForTable("usuario"));
+        donador.setPersonaId(sequenceDao.getPrimaryKeyForTable("persona"));
+        donador.setDireccionId(sequenceDao.getPrimaryKeyForTable("direccion"));
 
         try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO donador VALUES (?,?,?) ")
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO direccion VALUES (?,?,?,?,?); INSERT INTO persona VALUES (?,?,?,?,?); INSERT INTO usuario VALUES (?,?,?,?,?,?,?); INSERT INTO donador VALUES (?,?,?); ")
                 ) {
-            pstmt.setInt(1, donador.getUsuarioId());
-            pstmt.setInt(2, donador.getContratoId());
-            pstmt.setInt(3, donador.getDonadorId());
-            pstmt.setInt(4, donador.getDonadorId());
+            //---Tabla direccion
+            pstmt.setInt(1, donador.getDireccionId()); //id_direccion
+            pstmt.setString(2, donador.getDireccion()); //zona
+            pstmt.setString(3, donador.getDireccion()); //calle
+            pstmt.setString(4, "La Paz"); //ciudad
+            pstmt.setString(5, "La Paz"); //departamento
+            //---Tabla persona
+            pstmt.setInt(6, donador.getPersonaId());// ------
+            pstmt.setInt(7, donador.getPersonaId());// nombre
+            pstmt.setInt(8, donador.getPersonaId());// apellidos
+            pstmt.setInt(9, donador.getPersonaId());// id_direccion_fk
+            pstmt.setString(10, "mm/dd/yyyy");// fecha_nacimiento
+            //--- Tabla Usuario
+            pstmt.setInt(11, donador.getUsuarioId()); // id usuario
+            pstmt.setString(12, donador.getNombreUsuario()); //nombre usuario
+            pstmt.setString(13, donador.getContrasena()); // contrasenia
+            pstmt.setString(14, donador.getCorreoElectronico()); //correo electronico
+            pstmt.setInt(15, donador.getNumeroTelefono()); // numero telefono
+            pstmt.setInt(16, donador.getPersonaId()); // id_persona_fk
+            pstmt.setString(17, "Donador"); // tipo_usuario
+            //--Tabla donador
+            pstmt.setInt(18, donador.getDonadorId());
+            pstmt.setInt(19, donador.getContratoId());
+            pstmt.setInt(20, donador.getUsuarioId());
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -68,51 +89,22 @@ public class DonadorDao {
         return result;
     }
 
-    public DonadorDto findDonadorById(Integer donadorId) {
-        DonadorDto result = new DonadorDto();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT nombre_proyecto, dn.monto " +
-                            "FROM donador d " +
-                            "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
-                            "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
-
-                    "  WHERE d.id_donador = " + donadorId +" " +
-                            "GROUP BY  pr.nombre_proyecto, dn.monto;" +
-                            "     ");
-
-            if (rs.next()) {
-                result.setDonadorId(rs.getInt("id_persona"));
-                result.setContratoId(rs.getInt("id_contrato"));
-                result.setContratoId(rs.getInt("id_usuario"));
-            } else { // si no hay valores de BBDD
-                result = null;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
-    }
-// Toma todos los donadores de la BD
+    // Toma todos los donadores de la BD
     public List<ConsultaDto> findAllDonadores() {
         List<ConsultaDto> result = new ArrayList<>();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
-            try (ResultSet rs = stmt.executeQuery(
-                    "SELECT  nombre_persona, nombre_proyecto, monto " +
-                            "FROM donador d " +
-                            "JOIN proyecto pr  ON d.id_donador = pr.id_proyecto " +
-                            "JOIN donacion dn  ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us  ON us.id_usuario = d.id_usuario " +
-                            "JOIN persona pe  ON pe.id_persona = us.id_persona_fk " +
-                            "GROUP BY  pe.nombre_persona , pr.nombre_proyecto, dn.monto;" +
-                            " ")) {
+        try (
+                Connection conn = dataSource.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(
+                        "SELECT  nombre_persona, nombre_proyecto, monto " +
+                                "FROM donador d " +
+                                "JOIN proyecto pr  ON d.id_donador = pr.id_proyecto " +
+                                "JOIN donacion dn  ON d.id_donador = dn.id_donacion " +
+                                "JOIN usuario us ON us.id_usuario = d.id_usuario " +
+                                "JOIN persona pe  ON pe.id_persona = us.id_persona_fk " +
+                                "GROUP BY  pe.nombre_persona , pr.nombre_proyecto, dn.monto; ")
+                )
+        {  ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     ConsultaDto consulta = new ConsultaDto();
 
@@ -121,10 +113,9 @@ public class DonadorDao {
                     consulta.monto_donacion = rs.getDouble("monto");
                     result.add(consulta);
                 }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
         return result;
     }
 }
