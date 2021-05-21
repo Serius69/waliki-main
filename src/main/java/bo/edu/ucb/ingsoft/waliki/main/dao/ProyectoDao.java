@@ -16,6 +16,40 @@ public class ProyectoDao {
     @Autowired
     private SequenceDao sequenceDao;
 
+    public List<PrincipalProyectosDto> paginaPrincipal(){
+        List<PrincipalProyectosDto> result = new ArrayList<>();
+        try ( Connection conn2 = dataSource.getConnection();
+             //Statement stmt = conn.createStatement()
+              PreparedStatement pstmt = conn2.prepareStatement("" +
+                     "SELECT p.id_proyecto, nombre_proyecto, descripcion , monto_recaudar, estado " +
+                     "FROM proyecto p " +
+                     "JOIN estado e on p.id_estado = e.id_estado " +
+                     "ORDER BY p.id_proyecto ; ")
+
+        ){  //pstmt.setInt(1, estadoId);
+            /*ResultSet rs = stmt.executeQuery("SELECT nombre_proyecto, monto_recaudar, fecha_inicio FROM proyecto p " +
+                    "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
+                    "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
+                    "JOIN estado e ON p.id_estado = e.id_estado " +
+                    "WHERE p.id_estado = 1 " +
+                    "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio; ");*/
+            //stmt.setInt(1, estadoId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                PrincipalProyectosDto proyecto = new PrincipalProyectosDto();
+                proyecto.setProyectoId(rs.getInt("id_proyecto"));
+                proyecto.setProyectoNombre(rs.getString("nombre_proyecto"));
+                proyecto.setMonto_recaudar(rs.getDouble("monto_recaudar"));
+                proyecto.setDescripcion(rs.getString("descripcion"));
+                result.add(proyecto);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
     //Crear un nuevo proyecto
     public ProyectoDto crearProyecto (ProyectoDto proyecto) {
         proyecto.setProyectoId(sequenceDao.getPrimaryKeyForTable("proyecto"));
@@ -25,15 +59,12 @@ public class ProyectoDao {
         proyecto.setHoraFin("20:00:00");
         proyecto.setFechaInicio("5/20/2021");
         proyecto.setFechaFin("6/20/2021");
-
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-            PreparedStatement stmts = conn.prepareStatement("INSERT INTO proyecto VALUES (?,?,?,?,?,?,?,?,?,?); ");
-            //+
-            //        "INSERT INTO recompensas VALUES (?,?,?,?,?);");
-            //-----Tabla proyecto
-            //Integer a = (sequenceDao.getPrimaryKeyForTable("proyecto"));
+            PreparedStatement stmts = conn.prepareStatement("" +
+                    "INSERT INTO proyecto (id_proyecto, nombre_proyecto, descripcion, monto_recaudar, id_emprendedor, hora_inicio, hora_fin, id_estado, fecha_inicio, fecha_fin) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?); ");
             stmts.setInt(1, proyecto.getProyectoId());//id_proyecto
             stmts.setString(2, proyecto.getNombreProyecto()); //nombre proyecto
             stmts.setString(3, proyecto.getDescripcion());// descripcion
@@ -44,15 +75,6 @@ public class ProyectoDao {
             stmts.setInt(8, proyecto.getEstadoId()); //id_estado
             stmts.setString(9, proyecto.getFechaInicio()); //fecha_inicio
             stmts.setString(10, proyecto.getFechaFin()); //fecha_final
-
-            /*
-            //--Tabla recompensa
-            stmts.setInt(11, 1); // id_recompensa
-            stmts.setInt(12, 10); // valor_min
-            stmts.setInt(13, 200); // valor_max
-            stmts.setString(14, "Un prototipo"); // recompensa
-            stmts.setInt(15, proyecto.getProyectoId()); // id_proyecto
-            */
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

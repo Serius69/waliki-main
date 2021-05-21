@@ -7,7 +7,6 @@ public class EmprendedorDto {
     private Integer contratoId;
     private Integer usuarioId;
 
-
     public EmprendedorDto(){
 
     }

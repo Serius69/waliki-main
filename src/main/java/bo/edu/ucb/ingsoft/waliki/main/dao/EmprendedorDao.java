@@ -20,16 +20,30 @@ public class EmprendedorDao {
     @Autowired
     private SequenceDao sequenceDao;
 
-    public EmprendedorDto crearEmprendedor (EmprendedorDto emprendedor) {
+    public CreateEmprendedorDto crearEmprendedor (CreateEmprendedorDto emprendedor) {
         emprendedor.setEmprendedorId(sequenceDao.getPrimaryKeyForTable("emprendedor"));
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt  = conn.prepareStatement("INSERT INTO emprendedor VALUES (?,?,?,?,?) ")
                 ) {
+
+            //---Tabla direccion
+            //pstmt.setInt(1, donadorDto.getDireccionId()); //id_direccion
+            pstmt.setString(2, "central"); //zona
+            //pstmt.setString(3, donadorDto.getDireccion()); //calle
+            pstmt.setString(4, "La Paz"); //ciudad
+            pstmt.setString(5, "La Paz"); //departamento
+
+
             pstmt.setInt(1, emprendedor.getEmprendedorId());
-            pstmt.setInt(2, 1);
-            pstmt.setInt(3, 1);
-            pstmt.setInt(4, emprendedor.getContratoId());
-            pstmt.setInt(5, emprendedor.getUsuarioId());
+            pstmt.setString(2, emprendedor.getNombre());
+            pstmt.setString(3, emprendedor.getApellidos());
+            pstmt.setString(4, emprendedor.getFecha_nacimiento());
+            pstmt.setInt(5, emprendedor.getNomeroTelefono());
+            pstmt.setString(6, emprendedor.getDireccion());
+            pstmt.setString(7, emprendedor.getCorreoElectronico());
+            pstmt.setInt(8, emprendedor.getTipoemprendimientoId());
+            pstmt.setString(9, emprendedor.getContrasenia());
+
 
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -32,6 +32,12 @@ public class ProyectoBl {
     public List<ConsultaProyectoDto> findAllProyectos () {
         return proyectoDao.findAllProyectos();
     }
+
+    //Pagina Principal
+    public List<PrincipalProyectosDto> paginaPrincipal () {
+        return proyectoDao.paginaPrincipal();
+    }
+
     //Listado proyectos vigentes
 
     public ProyectoDto findProyectoByName (String nombreProyecto) {

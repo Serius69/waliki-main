@@ -7,9 +7,9 @@ insert into banco (id_banco, nombre_banco) values (5, 'Wiza Inc');
 
 
 -- tipo emprendimiento
-insert into tipo_emprendimiento (id_tipo_emprendimiento, tipo, area)values (1, 'basico', 1);
-insert into tipo_emprendimiento (id_tipo_emprendimiento, tipo, area) values (2, 'intermedio', 3);
-insert into tipo_emprendimiento (id_tipo_emprendimiento, tipo, area) values (3, 'avanzado', 1);
+insert into tipoemprendimiento (id_tipoemprendimiento, tipo, area)values (1, 'basico', 1);
+insert into tipoemprendimiento (id_tipoemprendimiento, tipo, area) values (2, 'intermedio', 3);
+insert into tipoemprendimiento (id_tipoemprendimiento, tipo, area) values (3, 'avanzado', 1);
 -- estado
 insert into estado (id_estado, estado) values (1, '');
 insert into estado (id_estado, estado) values (2, null);

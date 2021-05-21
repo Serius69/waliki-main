@@ -5,11 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
 @Service
 public class DonacionDao {
@@ -19,9 +15,19 @@ public class DonacionDao {
     private SequenceDao sequenceDao;
 
     public DonacionDto crearDonacion (DonacionDto donacion) {
-        donacion.donacionId = sequenceDao.getPrimaryKeyForTable("donacion");
-
+        donacion.setDonacionId(sequenceDao.getPrimaryKeyForTable("donacion"));
+        Connection conn = null;
         try {
+            conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO donacion VALUES (?,?,?,?,?,?) ");
+
+            stmt.setInt(1, donacion.getDonacionId());
+            stmt.setInt(2, donacion.getProyectoId());
+            stmt.setInt(3, donacion.getDonadorId());
+            stmt.setDouble(4,donacion.getMonto());
+            stmt.setString(5,donacion.getHora());
+            stmt.setString(6,donacion.getFecha_donacion());
+            /*
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
             stmt.execute(String.format("INSERT INTO donacion VALUES ('%d', '%d', '%d', '%s', '%s', '%s') ",
@@ -31,8 +37,18 @@ public class DonacionDao {
                     donacion.monto,
                     donacion.hora,
                     donacion.fecha_donacion));
+
+             */
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException sqex) {
+                    // No hacer nada intencionalemte;
+                }
+            }
         }
         return donacion;
     }
@@ -57,9 +73,9 @@ public class DonacionDao {
                             "     ");
 
             if (rs.next()) {
-                result.donacionId = rs.getInt("id_donacion");
-                result.fecha_donacion = rs.getString("fecha_donaciop");
-                result.monto = rs.getDouble("monto");
+                result.setDonacionId(rs.getInt("id_donacion"));
+                result.setFecha_donacion(rs.getString("fecha_donaciop"));
+                result.setMonto(rs.getDouble("monto"));
                 result2.nombre = rs.getString("pe.nombre");
                 result3.setFechaInicio(rs.getString("pr.nombre"));
             } else { // si no hay valores de BBDD

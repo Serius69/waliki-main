@@ -12,7 +12,11 @@ public class ProyectoApi {
     public DataSource dataSource;
     @Autowired
     private ProyectoBl proyectoBl;
-
+    //Pagina principal
+    @GetMapping(path = "/paginaprincipal")
+    public ResponseDto  paginaPrincipal() {
+        return new ResponseDto( true, proyectoBl.paginaPrincipal(), "Listado de todos los donadores");
+    }
     //Crear nuevo proyectp
     @PostMapping(path = "/proyecto")
     public ResponseDto addProyecto(@RequestBody ProyectoDto proyecto) {
@@ -32,7 +36,6 @@ public class ProyectoApi {
 
         return new ResponseDto(true, proyectoBl.addProyecto(proyecto), "Proyecto agregado con exito");
     }
-
     //Listado proyecto vigente
     @GetMapping(path = "estado/{estadoId}")
     public ResponseDto findProyecto(@PathVariable Integer estadoId) {
@@ -50,8 +53,7 @@ public class ProyectoApi {
         }
         return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");
     }
-
-
+    // BUscar un proyecto por el id
     @GetMapping(path = "/nombreProyecto/{nombre_proyecto}")
     public ResponseDto findPersonaById(@PathVariable String nombre_proyecto) {
         ProyectoDto proyecto = proyectoBl.findProyectoByName(nombre_proyecto);
@@ -61,36 +63,4 @@ public class ProyectoApi {
             return new ResponseDto( false, null, "No existe la persona con codigo:");
         }
     }
-
-
-    /*
-    //Listado proyecto en proceso
-    @GetMapping(path = "/estado/{estadoId}")
-    public ResponseDto findProyectoEnProceso(@PathVariable Integer estadoId) {
-        return new ResponseDto(true, proyectoBl.findProyectoEnProceso(estadoId), "Proyectos en proceso");
-    }
-    //Listado proyecto finalizado
-    @GetMapping(path = "/estado/{estadoId}")
-    public ResponseDto  findProyectoFinalizado(@PathVariable Integer estadoId) {
-        return new ResponseDto(true, proyectoBl.findProyectosFinalizados(estadoId), "Proyectos finalizados");
-    }
-    //Listado proyecto todos
-    @GetMapping(path = "/estado/{estadoId}")
-    public ResponseDto  findAllProyectos(@PathVariable Integer estadoId) {
-        return new ResponseDto(true, proyectoBl.findAllProyectos(estadoId), "Todos los proyectos");
-    }
-
-    //Buscar proyecto por nombre
-    @GetMapping(path = "/proyecto/{nombreproyecto}")
-    public ResponseDto  findProyectoByName(@PathVariable String nombreproyecto) {
-        ProyectoDto proyecto = proyectoBl.findProyectoByName(nombreproyecto);
-        if (proyecto != null) {
-            return new ResponseDto( true, proyecto, null);
-        } else {
-            return new ResponseDto( false, null, "No existe la persona con codigo:");
-        }
-    }
-    */
-
-
 }

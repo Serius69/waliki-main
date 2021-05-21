@@ -26,8 +26,14 @@ public class DonadorDao {
         donadorDto.setPersonaId(sequenceDao.getPrimaryKeyForTable("persona"));
         donadorDto.setDireccionId(sequenceDao.getPrimaryKeyForTable("direccion"));
 
+
+
         try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO direccion VALUES (?,?,?,?,?); INSERT INTO persona VALUES (?,?,?,?,?); INSERT INTO usuario VALUES (?,?,?,?,?,?,?); INSERT INTO donador VALUES (?,?,?); ")
+            PreparedStatement pstmt = conn.prepareStatement("" +
+                    "INSERT INTO direccion VALUES (?,?,?,?,?); " +
+                    "INSERT INTO persona VALUES (?,?,?,?,?); " +
+                    "INSERT INTO usuario VALUES (?,?,?,?,?,?,?); " +
+                    "INSERT INTO donador VALUES (?,?,?); ")
                 ) {
             //---Tabla direccion
             pstmt.setInt(1, donadorDto.getDireccionId()); //id_direccion

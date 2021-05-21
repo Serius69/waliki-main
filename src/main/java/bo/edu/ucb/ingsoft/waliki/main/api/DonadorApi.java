@@ -22,23 +22,23 @@ public class DonadorApi {
     @PostMapping(path = "/donacion")
     public ResponseDto addDonacion(@RequestBody DonacionDto donacion) {
         // Validar que los datos enviados son correctos.
-        if (donacion.proyectoId == null ) {  // id-proyecto: "     "
+        if (donacion.getProyectoId() == null || donacion.getProyectoId()<0) {  // id-proyecto: "     "
             //throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
             return new ResponseDto( false, null, "El codigo del proyecto debe ser obligatorio");
         }
-        if (donacion.donadorId == null ) {  // donadorId: "     "
+        if (donacion.getDonadorId() == null || donacion.getDonadorId()<0) {  // donadorId: "     "
             //throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ccodigo del donador debe ser obligatorio");
             return new ResponseDto( false, null, "El ccodigo del donador debe ser obligatorio");
         }
-        if (donacion.monto == null ) {  // monto: "     "
+        if (donacion.getMonto() == null || donacion.getDonacionId()<0 ) {  // monto: "     "
             //throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El monto debe ser obligatorio");
             return new ResponseDto( false, null, "El nombre debe ser obligatorio");
         }
-        if (donacion.hora == null || donacion.hora.trim().equals("") ) {  // id_usuario: "     "
+        if (donacion.getHora() == null || donacion.getHora().trim().equals("") ) {  // id_usuario: "     "
             //throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "la hora debe ser obligatoria");
             return new ResponseDto( false, null, "la hora debe ser obligatoria");
         }
-        if (donacion.fecha_donacion == null || donacion.fecha_donacion.trim().equals("") ) {  // id_usuario: "     "
+        if (donacion.getFecha_donacion() == null || donacion.getFecha_donacion().trim().equals("") ) {  // id_usuario: "     "
             //throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La fecha de donacion debe debe ser obligatoria");
             return new ResponseDto( false, null, "La fecha de donacion debe debe ser obligatoria");
         }
