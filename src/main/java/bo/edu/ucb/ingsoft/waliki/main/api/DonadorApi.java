@@ -71,11 +71,11 @@ public class DonadorApi {
     }
 
     // Buscar un donador por su nombre
-    @GetMapping(path = "/donador/{nombre_persona}")
-    public ResponseDto findDonadorByName(@PathVariable String nombre_persona) {
-        DonadorDto donador = donadorBl.findDonadorByName(nombre_persona);
+    @GetMapping(path = "/donador/{donadorId}")
+    public ResponseDto findDonadorByName(@PathVariable Integer donadorId) {
+        ConsultaDonadorDto donador = donadorBl.findDonadorByName(donadorId);
         if (donador != null) {
-            return new ResponseDto(true, donadorBl.findDonadorByName(nombre_persona), null);
+            return new ResponseDto(true, donadorBl.findDonadorByName(donadorId), null);
         } else {
             //throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con nombre:" + nombre_persona);
             return new ResponseDto( false, null, "El apellido debe ser obligatorio");

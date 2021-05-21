@@ -12,16 +12,16 @@ import java.util.List;
 @Service
 public class ProyectoDao {
     @Autowired
-    private DataSource dataSource;
+    private DataSource dataSource2;
     @Autowired
     private SequenceDao sequenceDao;
 
     public List<PrincipalProyectosDto> paginaPrincipal(){
         List<PrincipalProyectosDto> result = new ArrayList<>();
-        try ( Connection conn2 = dataSource.getConnection();
+        try ( Connection conn2 = dataSource2.getConnection();
              //Statement stmt = conn.createStatement()
               PreparedStatement pstmt = conn2.prepareStatement("" +
-                     "SELECT p.id_proyecto, nombre_proyecto, descripcion , monto_recaudar, estado " +
+                     "SELECT p.id_proyecto, nombre_proyecto, descripcion, monto_recaudar, estado " +
                      "FROM proyecto p " +
                      "JOIN estado e on p.id_estado = e.id_estado " +
                      "ORDER BY p.id_proyecto ; ")
@@ -51,18 +51,37 @@ public class ProyectoDao {
     }
 
     //Crear un nuevo proyecto
-    public ProyectoDto crearProyecto (ProyectoDto proyecto) {
-        proyecto.setProyectoId(sequenceDao.getPrimaryKeyForTable("proyecto"));
-        proyecto.setEmprendedorId(1);
-        proyecto.setEstadoId(1);
-        proyecto.setHoraInicio("20:00:00");
-        proyecto.setHoraFin("20:00:00");
-        proyecto.setFechaInicio("5/20/2021");
-        proyecto.setFechaFin("6/20/2021");
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+    public ProyectoDto crearProyecto (ProyectoDto proyectoDto) {
+        proyectoDto.setProyectoId(sequenceDao.getPrimaryKeyForTable("proyecto"));
+        proyectoDto.setEmprendedorId(23);
+        proyectoDto.setEstadoId(1);
+        proyectoDto.setHoraInicio("20:00:00");
+        proyectoDto.setHoraFin("20:00:00");
+        proyectoDto.setFechaInicio("5/20/2021");
+        proyectoDto.setFechaFin("6/20/2021");
+        proyectoDto.setMontoRecaudar(proyectoDto.getMontoRecaudar());
+        try (Connection conn = dataSource2.getConnection()) //cerrado de conexion
+        {
             PreparedStatement stmts = conn.prepareStatement("" +
+                    "INSERT INTO proyecto (id_proyecto, nombre_proyecto, descripcion, monto_recaudar, id_emprendedor, hora_inicio, hora_fin, id_estado, fecha_inicio, fecha_fin) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?); ");
+            stmts.setInt(1, proyectoDto.getProyectoId());//id_proyecto
+            stmts.setString(2, proyectoDto.getNombreProyecto()); //nombre proyecto
+            stmts.setString(3, proyectoDto.getDescripcion());// descripcion
+            stmts.setDouble(4, proyectoDto.getMontoRecaudar()); // monto_recaudar
+            stmts.setInt(5, proyectoDto.getEmprendedorId()); // id_emprendedor
+            stmts.setString(6, proyectoDto.getHoraInicio()); //hora_inicio
+            stmts.setString(7, proyectoDto.getHoraFin()); //hora-fin
+            stmts.setInt(8, proyectoDto.getEstadoId()); //id_estado
+            stmts.setString(9, proyectoDto.getFechaInicio()); //fecha_inicio
+            stmts.setString(10, proyectoDto.getFechaFin()); //fecha_final
+            stmts.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        // No hacer nada intencionalemte;
+            /*
+        PreparedStatement stmts = conn.prepareStatement("" +
                     "INSERT INTO proyecto (id_proyecto, nombre_proyecto, descripcion, monto_recaudar, id_emprendedor, hora_inicio, hora_fin, id_estado, fecha_inicio, fecha_fin) " +
                     "VALUES (?,?,?,?,?,?,?,?,?,?); ");
             stmts.setInt(1, proyecto.getProyectoId());//id_proyecto
@@ -75,18 +94,8 @@ public class ProyectoDao {
             stmts.setInt(8, proyecto.getEstadoId()); //id_estado
             stmts.setString(9, proyecto.getFechaInicio()); //fecha_inicio
             stmts.setString(10, proyecto.getFechaFin()); //fecha_final
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException sex) {
-                    // No hacer nada intencionalemte;
-                }
-            }
-        }
-        return proyecto;
+         */
+        return proyectoDto;
 /*
         Date fechaActual = new Date();
         DateTimeFormatter horaActual = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -124,16 +133,17 @@ public class ProyectoDao {
     //Listado de proyectos vigentes
     public List<ProyectoVigenteDto> findProyectoVigente(Integer estadoId) {
         List<ProyectoVigenteDto> result = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource2.getConnection();
              //Statement stmt = conn.createStatement()
              PreparedStatement pstmt = conn.prepareStatement("" +
-                     "SELECT nombre_proyecto, monto_recaudar, fecha_inicio " +
+                     "SELECT nombre_proyecto, monto_recaudar, split_part(fecha_fin, '/', 2) AS diasfaltantes " +
                      "FROM proyecto p " +
                      "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                      "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                      "JOIN estado e ON p.id_estado = e.id_estado " +
                      "WHERE p.id_estado = ? " +
-                     "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio; ")
+                     "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio,p.fecha_fin " +
+                     "ORDER BY p.fecha_inicio DESC; ")
 
         ){  pstmt.setInt(1, estadoId);
             /*ResultSet rs = stmt.executeQuery("SELECT nombre_proyecto, monto_recaudar, fecha_inicio FROM proyecto p " +
@@ -161,17 +171,19 @@ public class ProyectoDao {
     //Listado de proyectos en proceso
     public List<ProyectoEnProcesoDto> findProyectoEnProceso(Integer estadoId) {
         List<ProyectoEnProcesoDto> result = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource2.getConnection();
              //Statement stmt = conn.createStatement()
              PreparedStatement pstmt = conn.prepareStatement("" +
+                     //proyectos q se encuentran con donaciones
                      "SELECT p.id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio, fecha_fin, SUM(monto) " +
                      "FROM proyecto p " +
-                     "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
-                     "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
+                     //"JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
+                     //"JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                      "JOIN estado e ON p.id_estado = e.id_estado " +
                      "JOIN donacion d on p.id_proyecto = d.id_proyecto " +
                      "WHERE p.id_estado = ? " +
                      "GROUP BY p.id_proyecto,p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio,p.fecha_fin; ")
+                     //"ORDER BY p.id_proyecto; ")
 
         ){  pstmt.setInt(1, estadoId);
             /*ResultSet rs = stmt.executeQuery("SELECT nombre_proyecto, monto_recaudar, fecha_inicio FROM proyecto p " +
@@ -200,16 +212,17 @@ public class ProyectoDao {
     //Listado de proyectos finalizados
     public List<ProyectoFinalizadoDto> findProyectoFinalizado(Integer estadoId) {
         List<ProyectoFinalizadoDto> result = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource2.getConnection();
              //Statement stmt = conn.createStatement()
              PreparedStatement pstmt = conn.prepareStatement("" +
-                     "SELECT p.id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio " +
+                     "SELECT p.id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio , fecha_fin " +
                      "FROM proyecto p " +
-                     "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
-                     "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
+                     //"JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
+                     //"JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                      "JOIN estado e ON p.id_estado = e.id_estado " +
                      "WHERE p.id_estado = ? " +
-                     "GROUP BY p.id_proyecto,p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio; ")
+                     "GROUP BY p.id_proyecto,p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio,p.fecha_fin " +
+                     "ORDER BY p.id_proyecto; ")
 
         ){  pstmt.setInt(1, estadoId);
             /*ResultSet rs = stmt.executeQuery("SELECT nombre_proyecto, monto_recaudar, fecha_inicio FROM proyecto p " +
@@ -238,7 +251,7 @@ public class ProyectoDao {
     //Listado de todos los proyectos
     public List<ConsultaProyectoDto> findAllProyectos() {
         List<ConsultaProyectoDto> result = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource2.getConnection();
              //Statement stmt = conn.createStatement()
              PreparedStatement pstmt = conn.prepareStatement("" +
                      "SELECT p.id_proyecto, nombre_proyecto, descripcion , monto_recaudar, estado " +
@@ -273,7 +286,7 @@ public class ProyectoDao {
     // Buscar un proyecto por su nombre
     public ProyectoDto findProyectoByName(String nombreProyecto) {
         ProyectoDto result = new ProyectoDto();
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = dataSource2.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("" +
                      "SELECT p.id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio, id_estado " +
                      "FROM proyecto p " +

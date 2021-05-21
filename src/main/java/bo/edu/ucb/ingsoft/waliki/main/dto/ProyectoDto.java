@@ -16,9 +16,7 @@ public class ProyectoDto {
     public ProyectoDto(){
     }
 
-    public String getFechaFin() {
-        return fechaFin;
-    }
+    public String getFechaFin() {      return fechaFin;  }
 
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
@@ -68,9 +66,7 @@ public class ProyectoDto {
         return montoRecaudar;
     }
 
-    public void setMontoRecaudar(Double montoRecaudar) {
-        this.montoRecaudar = montoRecaudar;
-    }
+    public void setMontoRecaudar(Double montoRecaudar) { this.montoRecaudar = montoRecaudar; }
 
     public String getDescripcion() {
         return descripcion;

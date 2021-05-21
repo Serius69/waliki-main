@@ -15,10 +15,11 @@ public class DonadorBl {
     DonadorDao donadorDao;
     @Autowired
     ContratoDao contratodao;
-    public DonacionDto addDonacion(DonacionDto donacion) {
-         return donaciondao.crearDonacion(donacion);
+    //Agregar una nueva donacion
+    public DonacionDto addDonacion(DonacionDto donacionDto) {
+         return donaciondao.crearDonacion(donacionDto);
     }
-
+    //Buscar donacion por ID
     public DonacionDto findDonacionById(Integer donacionId) {
         return donaciondao.findDonacionById(donacionId);
     }
@@ -27,12 +28,12 @@ public class DonadorBl {
         return contratodao.findContratoById(contratoId);
     }
     //Listado donadores
-    public List<ConsultaDto> findAllDonadores() {
+    public List<ConsultaDonadorDto> findAllDonadores() {
         return donadorDao.findAllDonadores();
     }
-    //Busca un donador por su nombre
-    public DonadorDto findDonadorByName(String nombreDonador) {
-        return donadorDao.findDonadorByName(nombreDonador);
+    //Busca un donador por su id
+    public ConsultaDonadorDto findDonadorByName(Integer idDonador) {
+        return donadorDao.findDonadorByName(idDonador);
     }
 
     //Crea un donador

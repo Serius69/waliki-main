@@ -9,7 +9,6 @@ public class DonacionDto {
     private String fecha_donacion;
 
     public DonacionDto(){
-
     }
 
     public Integer getDonacionId() {

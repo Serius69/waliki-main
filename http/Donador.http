@@ -9,10 +9,10 @@ Accept: application/json
 
 {
   "nombreUsuario": "usuarioprueba",
-  "correoElectronico": "fulanito@gmail.com",
+  "correoElectronico": "estenoesblitzcrank@gmail.com",
   "numeroTelefono": 789456,
   "direccion": "Obrajes calle 2",
-  "contrasena": 123456
+  "contrasena": "6754281SdTM"
 }
 
 ### Busqueda de donador por nombre - Falla
@@ -22,3 +22,16 @@ Content-Type: application/json
 ### Tomar un contrato - Funciona
 GET http://localhost:8080/contrato/1
 accept: application/json
+
+### Agrega una nueva donacion - Funciona
+POST http://localhost:8080/donacion
+Content-Type: application/json
+accept: application/json
+
+{
+  "proyectoId": 1,
+  "donadorId": 1,
+  "monto": 1000,
+  "hora": "14:00",
+  "fecha_donacion": "5/13/2021"
+}

@@ -14,19 +14,21 @@ public class DonacionDao {
     @Autowired
     private SequenceDao sequenceDao;
 
-    public DonacionDto crearDonacion (DonacionDto donacion) {
-        donacion.setDonacionId(sequenceDao.getPrimaryKeyForTable("donacion"));
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO donacion VALUES (?,?,?,?,?,?) ");
+    public DonacionDto crearDonacion (DonacionDto donacionDto) {
+        donacionDto.setDonacionId(sequenceDao.getPrimaryKeyForTable("donacion"));
+        try (Connection conn = dataSource.getConnection()) //cerrado de conexion
+        {
+            PreparedStatement stmt = conn.prepareStatement("" +
+                    "INSERT INTO donacion (id_donacion, id_proyecto, id_donador, monto, hora, fecha_donacion) " +
+                    "VALUES (?,?,?,?,?,?) ");
 
-            stmt.setInt(1, donacion.getDonacionId());
-            stmt.setInt(2, donacion.getProyectoId());
-            stmt.setInt(3, donacion.getDonadorId());
-            stmt.setDouble(4,donacion.getMonto());
-            stmt.setString(5,donacion.getHora());
-            stmt.setString(6,donacion.getFecha_donacion());
+            stmt.setInt(1, donacionDto.getDonacionId());
+            stmt.setInt(2, donacionDto.getProyectoId());
+            stmt.setInt(3, donacionDto.getDonadorId());
+            stmt.setDouble(4, donacionDto.getMonto());
+            stmt.setString(5, donacionDto.getHora());
+            stmt.setString(6, donacionDto.getFecha_donacion());
+            stmt.executeQuery();
             /*
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
@@ -41,16 +43,9 @@ public class DonacionDao {
              */
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException sqex) {
-                    // No hacer nada intencionalemte;
-                }
-            }
         }
-        return donacion;
+        // No hacer nada intencionalemte;
+        return donacionDto;
     }
     public DonacionDto findDonacionById(Integer donacionId) {
         DonacionDto result = new DonacionDto();

@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 @RestController
 public class ProyectoApi {
     @Autowired
-    public DataSource dataSource;
+    private DataSource dataSource;
     @Autowired
     private ProyectoBl proyectoBl;
     //Pagina principal
@@ -17,7 +17,7 @@ public class ProyectoApi {
     public ResponseDto  paginaPrincipal() {
         return new ResponseDto( true, proyectoBl.paginaPrincipal(), "Listado de todos los donadores");
     }
-    //Crear nuevo proyectp
+    //Crear nuevo proyecto
     @PostMapping(path = "/proyecto")
     public ResponseDto addProyecto(@RequestBody ProyectoDto proyecto) {
         // Validar que los datos enviados son correctos.
@@ -33,7 +33,6 @@ public class ProyectoApi {
             //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
             return new ResponseDto( false, null, "La descripcion debe ser obligatoria");
         }
-
         return new ResponseDto(true, proyectoBl.addProyecto(proyecto), "Proyecto agregado con exito");
     }
     //Listado proyecto vigente
