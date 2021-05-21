@@ -160,7 +160,7 @@ public class ProyectoDao {
                 //proyecto.setProyectoId(rs.getInt("id_proyecto"));
                 proyecto.setNombreProyecto(rs.getString("nombre_proyecto"));
                 proyecto.setMontoRQ(rs.getDouble("monto_recaudar"));
-                proyecto.setTiempoRestante(rs.getString("fecha_inicio"));
+                proyecto.setTiempoRestante(rs.getString("diasfaltantes"));
                 result.add(proyecto);
             }
         } catch (Exception ex) {
@@ -215,11 +215,12 @@ public class ProyectoDao {
         try (Connection conn = dataSource2.getConnection();
              //Statement stmt = conn.createStatement()
              PreparedStatement pstmt = conn.prepareStatement("" +
-                     "SELECT p.id_proyecto, nombre_proyecto, monto_recaudar, fecha_inicio , fecha_fin " +
+                     "SELECT p.id_proyecto, nombre_proyecto, SUM(dn.monto), fecha_inicio , fecha_fin " +
                      "FROM proyecto p " +
                      //"JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                      //"JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                      "JOIN estado e ON p.id_estado = e.id_estado " +
+                     "JOIN donacion dn ON p.id_proyecto = dn.id_proyecto " +
                      "WHERE p.id_estado = ? " +
                      "GROUP BY p.id_proyecto,p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio,p.fecha_fin " +
                      "ORDER BY p.id_proyecto; ")
@@ -238,7 +239,7 @@ public class ProyectoDao {
                 ProyectoFinalizadoDto proyecto = new ProyectoFinalizadoDto();
                 proyecto.setProyectoId(rs.getInt("id_proyecto"));
                 proyecto.setNombreProyecto(rs.getString("nombre_proyecto"));
-                proyecto.setMontoFinalRecaudado(rs.getDouble("monto_recaudar"));
+                proyecto.setMontoFinalRecaudado(rs.getDouble("SUM"));
                 proyecto.setFechaInicio(rs.getString("fecha_inicio"));
                 proyecto.setFechaFin(rs.getString("fecha_fin"));
                 result.add(proyecto);
@@ -283,6 +284,38 @@ public class ProyectoDao {
         }
         return result;
     }
+    public ConsultaProyectoDto findProyectobyId(Integer proyectoId) {
+        ConsultaProyectoDto result = new ConsultaProyectoDto();
+        try (Connection conn = dataSource2.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement("" +
+                     "SELECT p.id_proyecto, nombre_proyecto, descripcion, monto_recaudar, estado " +
+                     "FROM proyecto p " +
+                     "JOIN emprendedor em ON p.id_emprendedor = em.id_emprendedor " +
+                     "JOIN usuario us ON us.id_usuario = em.id_usuario " +
+                     "JOIN persona pe ON pe.id_persona = us.id_persona_fk " +
+                     "JOIN estado e ON p.id_estado = e.id_estado " +
+                     "WHERE id_proyecto = ? " +
+                     "GROUP BY p.id_proyecto, p.nombre_proyecto, descripcion, p.monto_recaudar, e.estado ; " +
+                     "")
+
+        ){  pstmt.setInt(1, proyectoId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                result.setProyectoId(rs.getInt("id_proyecto"));
+                result.setNombreProyecto(rs.getString("nombre_proyecto"));
+                result.setEstado(rs.getString("estado"));
+                result.setMontoRecaudar(rs.getDouble("monto_recaudar"));
+                result.setDescripcion(rs.getString("descripcion"));
+            } else { // si no hay valores de BBDD
+                result = null;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
     // Buscar un proyecto por su nombre
     public ProyectoDto findProyectoByName(String nombreProyecto) {
         ProyectoDto result = new ProyectoDto();

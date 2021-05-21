@@ -62,4 +62,14 @@ public class ProyectoApi {
             return new ResponseDto( false, null, "No existe la persona con codigo:");
         }
     }
+    // BUscar un proyecto por el id
+    @GetMapping(path = "/proyecto/{proyectoId}")
+    public ResponseDto findProyectoById(@PathVariable Integer proyectoId) {
+        ConsultaProyectoDto proyecto = proyectoBl.findProyectobyId(proyectoId);
+        if (proyecto != null) {
+            return new ResponseDto( true, proyecto, null);
+        } else {
+            return new ResponseDto( false, null, "No existe la persona con codigo:");
+        }
+    }
 }

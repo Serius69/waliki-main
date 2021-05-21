@@ -39,5 +39,9 @@ public class ProyectoBl {
     public ProyectoDto findProyectoByName (String nombreProyecto) {
         return proyectoDao.findProyectoByName(nombreProyecto);
     }
+    public ConsultaProyectoDto findProyectobyId (Integer proyectoId) {
+        return proyectoDao.findProyectobyId(proyectoId);
+    }
+
 
 }
