@@ -5,7 +5,7 @@ Accept: application/json
 
 {
   "nombreProyecto": "Proyecto de prueba",
-  "montoRecaudar": 100,
+  "montoRecaudar": 200,
   "descripcion": "El siguiente proyecto es un dato de prueba"
 }
 ### Muestra los proyectos Vigentes - Funcioma
@@ -21,7 +21,7 @@ accept: application/json
 GET http://localhost:8080/estado/4
 accept: application/json
 ### Busqueda de proyecto - Falla
-POST http://localhost:8080/nombreProyecto/proyecto
-accept: application/json
+###POST http://localhost:8080/nombreProyecto/proyecto
+###accept: application/json
 ### Busqueda de proyecto por id - Funciona
 GET http://localhost:8080/proyecto/1
