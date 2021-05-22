@@ -3,7 +3,9 @@ package bo.edu.ucb.ingsoft.waliki.main.api;
 import bo.edu.ucb.ingsoft.waliki.main.bl.*;
 import bo.edu.ucb.ingsoft.waliki.main.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
 
@@ -69,7 +71,15 @@ public class DonadorApi {
         }
         return new ResponseDto( true, donadorBl.crearDonador(donador), "Donador agregado correctamente");
     }
-
+    @GetMapping(path = "/contrato/{contratoId}")
+    public ContratoDto findContrato (@PathVariable Integer contratoId) {
+        ContratoDto contrato = donadorBl.findContratoById(contratoId);
+        if (contrato == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el contrato:" + contratoId );
+        } else {
+            return contrato;
+        }
+    }
     // Buscar un donador por su nombre
     @GetMapping(path = "/donador/{donadorId}")
     public ResponseDto findDonadorByName(@PathVariable Integer donadorId) {

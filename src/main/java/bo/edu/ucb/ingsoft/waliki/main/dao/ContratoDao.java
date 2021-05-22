@@ -22,7 +22,6 @@ public class ContratoDao {
 
             try (ResultSet rs = stmt.executeQuery(
                     String.format("SELECT id_contrato, contenido, tipo_contrato FROM contrato WHERE id_contrato = %d GROUP BY id_contrato;", contratoId))) {
-
                 if (rs.next()) {
                     result.contratoId = rs.getInt("id_contrato");
                     result.contrato = rs.getString("contenido");

@@ -33,7 +33,6 @@ public class EmprendedorDao {
             pstmt.setString(4, "La Paz"); //ciudad
             pstmt.setString(5, "La Paz"); //departamento
 
-
             pstmt.setInt(1, emprendedor.getEmprendedorId());
             pstmt.setString(2, emprendedor.getNombre());
             pstmt.setString(3, emprendedor.getApellidos());

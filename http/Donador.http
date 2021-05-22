@@ -23,7 +23,7 @@ Content-Type: application/json
 GET http://localhost:8080/contrato/1
 accept: application/json
 
-### Agrega una nueva donacion - Funciona
+### Agrega una nueva donacion - Falla
 POST http://localhost:8080/donacion
 Content-Type: application/json
 accept: application/json
