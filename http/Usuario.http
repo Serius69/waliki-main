@@ -1,8 +1,0 @@
-
-
-### Buscar una persona por su nombre - Falla
-GET http://localhost:8080/persona
-accept: application/json
-
-
-
