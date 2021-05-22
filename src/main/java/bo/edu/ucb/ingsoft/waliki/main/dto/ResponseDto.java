@@ -15,7 +15,6 @@ public class ResponseDto {
         return status;
     }
 
-
     public Object getResponse() {
         return response;
     }

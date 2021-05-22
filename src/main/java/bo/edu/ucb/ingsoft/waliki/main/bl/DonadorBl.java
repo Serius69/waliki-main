@@ -19,10 +19,6 @@ public class DonadorBl {
     public DonacionDto addDonacion(DonacionDto donacionDto) {
          return donaciondao.crearDonacion(donacionDto);
     }
-    //Buscar donacion por ID
-    public DonacionDto findDonacionById(Integer donacionId) {
-        return donaciondao.findDonacionById(donacionId);
-    }
 
     public ContratoDto findContratoById(Integer contratoId) {
         return contratodao.findContratoById(contratoId);

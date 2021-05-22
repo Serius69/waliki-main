@@ -1,12 +1,17 @@
 package bo.edu.ucb.ingsoft.waliki.main.dto;
 
 public class PersonaDto {
-    public Integer personaId;
-    public String nombre;
-    public String apellidos;
-    public Integer direccionId;
-    public String fechaNacimimento;
+
+    private String nombre;
 
     public PersonaDto() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

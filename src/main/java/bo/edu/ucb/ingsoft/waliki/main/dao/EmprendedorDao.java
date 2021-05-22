@@ -68,7 +68,7 @@ public class EmprendedorDao {
             if (rs.next()) {
                 result.setEmprendedorId(rs.getInt("id_emprendedor"));
                 result1.setNombreProyecto(rs.getString("nombre_proyecto"));
-                result2.nombre = rs.getString("nombre_persona");
+                result2.setNombre(rs.getString("nombre_persona"));
             } else { // si no hay valores de BBDD
                 result = null;
             }

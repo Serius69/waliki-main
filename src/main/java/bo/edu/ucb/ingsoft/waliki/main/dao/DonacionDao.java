@@ -47,39 +47,4 @@ public class DonacionDao {
         // No hacer nada intencionalemte;
         return donacionDto;
     }
-    public DonacionDto findDonacionById(Integer donacionId) {
-        DonacionDto result = new DonacionDto();
-        PersonaDto result2 = new PersonaDto();
-        ProyectoDto result3 = new ProyectoDto();
-        try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT pr.nombre_proyecto, d.monto " +
-                            "FROM donacion d " +
-                            "JOIN proyecto pr ON  d.id_donador= pr.id_proyecto " +
-                            "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
-                            "JOIN usuario us ON us.id_usuario = d.id_donador " +
-                            "JOIN persona pe ON pe.id_persona = us.id_persona_fk" +
-
-                            "  WHERE d.id_donacion = " + donacionId +" " +
-                            "GROUP BY pr.nombre_proyecto, dn.monto;" +
-                            "     ");
-
-            if (rs.next()) {
-                result.setDonacionId(rs.getInt("id_donacion"));
-                result.setFecha_donacion(rs.getString("fecha_donaciop"));
-                result.setMonto(rs.getDouble("monto"));
-                result2.nombre = rs.getString("pe.nombre");
-                result3.setFechaInicio(rs.getString("pr.nombre"));
-            } else { // si no hay valores de BBDD
-                result = null;
-            }
-            conn.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
-    }
 }
