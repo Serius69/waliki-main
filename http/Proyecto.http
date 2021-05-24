@@ -20,8 +20,5 @@ accept: application/json
 ### Muestra todos los proyectos - Funcioma
 GET http://localhost:8080/estado/4
 accept: application/json
-### Busqueda de proyecto - Falla
-###POST http://localhost:8080/nombreProyecto/proyecto
-###accept: application/json
 ### Busqueda de proyecto por id - Funciona
 GET http://localhost:8080/proyecto/1

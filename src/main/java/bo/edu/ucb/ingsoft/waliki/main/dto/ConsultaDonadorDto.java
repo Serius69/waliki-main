@@ -11,13 +11,9 @@ public class ConsultaDonadorDto {
 
     }
 
-    public Integer getDonadorId() {
-        return donadorId;
-    }
+    public Integer getDonadorId() {        return donadorId;    }
 
-    public void setDonadorId(Integer donadorId) {
-        this.donadorId = donadorId;
-    }
+    public void setDonadorId(Integer donadorId) {        this.donadorId = donadorId;    }
 
     public String getNombrePersona() {
         return nombrePersona;

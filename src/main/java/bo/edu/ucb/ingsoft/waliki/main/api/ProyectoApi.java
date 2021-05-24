@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 @RestController
 public class ProyectoApi {
     @Autowired
-    private DataSource dataSource;
+    public DataSource dataSource;
     @Autowired
     private ProyectoBl proyectoBl;
     //Pagina principal
@@ -22,15 +22,12 @@ public class ProyectoApi {
     public ResponseDto addProyecto(@RequestBody ProyectoDto proyecto) {
         // Validar que los datos enviados son correctos.
         if (proyecto.getNombreProyecto() == null || proyecto.getNombreProyecto().trim().equals("") ) {  // nombre_proyecto: "     "
-        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
             return new ResponseDto( false, null, "El nombre del proyecto debe ser obligatorio");
         }
         if (proyecto.getMontoRecaudar() == null || proyecto.getMontoRecaudar()<0 ) {  // monto recaudar mayor a 0
-            //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
             return new ResponseDto( false, null, "El monto a recaudar debe ser obligatorio y mayor a 0");
         }
-        if (proyecto.getDescripcion() == null || proyecto.getDescripcion().trim().equals("") ) {  // nombre_proyecto: "     "
-            //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El codigo del proyecto debe ser obligatorio");
+        if (proyecto.getDescripcion() == null || proyecto.getDescripcion().trim().equals("") ) {  // descripcion: "     "
             return new ResponseDto( false, null, "La descripcion debe ser obligatoria");
         }
         return new ResponseDto(true, proyectoBl.addProyecto(proyecto), "Proyecto agregado con exito");
@@ -53,23 +50,19 @@ public class ProyectoApi {
         return new ResponseDto(true, proyectoBl.findProyectoVigente(estadoId), "Proyectos vigentes");
     }
     // BUscar un proyecto por el id
-    @GetMapping(path = "/nombreProyecto/{nombre_proyecto}")
-    public ResponseDto findPersonaById(@PathVariable String nombre_proyecto) {
-        ProyectoDto proyecto = proyectoBl.findProyectoByName(nombre_proyecto);
-        if (proyecto != null) {
-            return new ResponseDto( true, proyecto, null);
-        } else {
-            return new ResponseDto( false, null, "No existe la persona con codigo:");
-        }
-    }
-    // BUscar un proyecto por el id
     @GetMapping(path = "/proyecto/{proyectoId}")
     public ResponseDto findProyectoById(@PathVariable Integer proyectoId) {
         ConsultaProyectoDto proyecto = proyectoBl.findProyectobyId(proyectoId);
-        if (proyecto != null) {
-            return new ResponseDto( true, proyecto, null);
+        if (proyecto != null ) {
+            if (proyectoId<0){
+                return new ResponseDto( false, null, "No puede ser un valor negativo:");
+            }else {
+                return new ResponseDto( true, proyecto, null);
+            }
         } else {
             return new ResponseDto( false, null, "No existe la persona con codigo:");
+            }
+
         }
     }
-}
+

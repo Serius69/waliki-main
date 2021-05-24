@@ -16,22 +16,9 @@ Accept: application/json
 }
 
 ### Busqueda de donador por nombre - Falla
-GET http://localhost:8080/donador/Garold
+GET http://localhost:8080/donador/1
 Content-Type: application/json
 
 ### Tomar un contrato - Funciona
 GET http://localhost:8080/contrato/1
 accept: application/json
-
-### Agrega una nueva donacion - Falla
-POST http://localhost:8080/donacion
-Content-Type: application/json
-accept: application/json
-
-{
-  "proyectoId": 1,
-  "donadorId": 1,
-  "monto": 1000,
-  "hora": "14:00",
-  "fecha_donacion": "5/13/2021"
-}

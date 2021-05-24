@@ -11,21 +11,17 @@ import java.util.List;
 
 @Service
 public class DonadorDao {
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private SequenceDao sequenceDao;
 
-    private final DataSource dataSource;
-    private final SequenceDao sequenceDao;
-
-    public DonadorDao(DataSource dataSource, SequenceDao sequenceDao) {
-        this.dataSource = dataSource;
-        this.sequenceDao = sequenceDao;
-    }
-
+    //Crear un nuevo donador
     public DonadorDto crearDonador (DonadorDto donadorDto) {
         donadorDto.setDonadorId(sequenceDao.getPrimaryKeyForTable("donador"));
         donadorDto.setUsuarioId(sequenceDao.getPrimaryKeyForTable("usuario"));
         donadorDto.setPersonaId(sequenceDao.getPrimaryKeyForTable("persona"));
         donadorDto.setDireccionId(sequenceDao.getPrimaryKeyForTable("direccion"));
-
 
         donadorDto.setContratoId(1);
         donadorDto.setContrato("borrado");
@@ -68,8 +64,8 @@ public class DonadorDao {
         }
         return donadorDto;
     }
-
-    public ConsultaDonadorDto findDonadorByName(Integer idDonador) {
+    //Buscar un donador por su id
+    public ConsultaDonadorDto findDonadorById(Integer idDonador) {
         ConsultaDonadorDto result = new ConsultaDonadorDto();
         try(
                 Connection conn = dataSource.getConnection();
@@ -81,7 +77,7 @@ public class DonadorDao {
                         "JOIN usuario us ON us.id_usuario = d.id_usuario " +
                         "JOIN persona pe ON pe.id_persona = us.id_persona_fk " +
                         "WHERE d.id_donador = ? " + // falla con el signo de ?
-                        "GROUP BY pe.nombre_persona, pr.nombre_proyecto, dn.monto;")
+                        "GROUP BY d.id_donador, pe.nombre_persona, pr.nombre_proyecto, dn.monto;")
                 )
         {   pstmt.setInt(1, idDonador );
             ResultSet rs = pstmt.executeQuery();
@@ -98,24 +94,23 @@ public class DonadorDao {
         }
         return result;
     }
-
-
     // Toma todos los donadores de la BD
     public List<ConsultaDonadorDto> findAllDonadores() {
         List<ConsultaDonadorDto> result = new ArrayList<>();
         try (
                 Connection conn = dataSource.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(
-                        "SELECT d.id_donador, nombre_persona, nombre_proyecto, monto " +
+                        "SELECT d.id_donador, nombre_persona as nombre_del_donador, nombre_proyecto as proyecto_al_que_dono, monto as monto_que_dono " +
                                 "FROM donador d " +
                                 "JOIN donacion dn  ON d.id_donador = dn.id_donador " +
                                 "JOIN proyecto pr  ON dn.id_proyecto = pr.id_proyecto " +
                                 "JOIN usuario us ON us.id_usuario = d.id_usuario " +
                                 "JOIN persona pe  ON pe.id_persona = us.id_persona_fk " +
                                 "WHERE d.id_donador = dn.id_donador " +
-                                "AND us.id_usuario = d.id_usuario "+
-                                "AND us.id_persona_fk = pe.id_persona "+
-                                "GROUP BY  d.id_donador, pe.nombre_persona , pr.nombre_proyecto, dn.monto; ")
+                                "AND us.id_usuario = d.id_usuario " +
+                                "AND us.id_persona_fk = pe.id_persona " +
+                                "GROUP BY  d.id_donador, pe.nombre_persona , pr.nombre_proyecto, dn.monto " +
+                                "ORDER BY d.id_donador; ")
                 )
         {  ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
@@ -123,7 +118,7 @@ public class DonadorDao {
                     consulta.setDonadorId(rs.getInt("id_donador"));
                     consulta.setNombrePersona(rs.getString("nombre_persona"));
                     consulta.setNombreProyecto(rs.getString("nombre_proyecto"));
-                    consulta.setMonto_donacion(rs.getDouble("monto"));
+                    consulta.setMonto_donacion(rs.getDouble("monto_que_dono"));
                     result.add(consulta);
                 }
             } catch (SQLException throwables) {

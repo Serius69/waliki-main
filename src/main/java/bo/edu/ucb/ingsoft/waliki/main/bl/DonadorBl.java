@@ -10,16 +10,10 @@ import java.util.List;
 @Service
 public class DonadorBl {
     @Autowired
-    DonacionDao donaciondao;
-    @Autowired
     DonadorDao donadorDao;
     @Autowired
     ContratoDao contratodao;
-    //Agregar una nueva donacion
-    public DonacionDto addDonacion(DonacionDto donacionDto) {
-         return donaciondao.crearDonacion(donacionDto);
-    }
-
+    //Buscar un contrato por su id
     public ContratoDto findContratoById(Integer contratoId) {
         return contratodao.findContratoById(contratoId);
     }
@@ -28,10 +22,9 @@ public class DonadorBl {
         return donadorDao.findAllDonadores();
     }
     //Busca un donador por su id
-    public ConsultaDonadorDto findDonadorByName(Integer idDonador) {
-        return donadorDao.findDonadorByName(idDonador);
+    public ConsultaDonadorDto findDonadorById(Integer idDonador) {
+        return donadorDao.findDonadorById(idDonador);
     }
-
     //Crea un donador
     public DonadorDto crearDonador(DonadorDto donador) {
         return donadorDao.crearDonador(donador);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -13,24 +14,23 @@ import java.sql.Statement;
 public class ContratoDao {
     @Autowired
     private DataSource dataSource;
-
+    //Buscar un contrato por su id
     public ContratoDto findContratoById(Integer contratoId) {
         ContratoDto result = new ContratoDto();
-        try ( Connection conn = dataSource.getConnection()){
-
-            Statement stmt = conn.createStatement();
-
-            try (ResultSet rs = stmt.executeQuery(
-                    String.format("SELECT id_contrato, contenido, tipo_contrato FROM contrato WHERE id_contrato = %d GROUP BY id_contrato;", contratoId))) {
-                if (rs.next()) {
-                    result.contratoId = rs.getInt("id_contrato");
-                    result.contrato = rs.getString("contenido");
-                    result.tipoContrato = rs.getString("tipo_contrato");
-                } else { // si no hay valores de BBDD
-                    result.contratoId = null;
-                    result.contrato = null;
-                }
-                conn.close();
+        try(
+                Connection conn = dataSource.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(
+                        "SELECT id_contrato, contenido, tipo_contrato FROM contrato WHERE id_contrato = ? GROUP BY id_contrato; " )
+        )
+        {   pstmt.setInt(1, contratoId );
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                result.setContratoId(rs.getInt("id_contrato"));
+                result.setContrato(rs.getString("contenido"));
+                result.setTipoContrato(rs.getString("tipo_contrato"));
+            } else { // si no hay valores de BBDD
+                result.setContratoId(null);
+                result.setContrato(null);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

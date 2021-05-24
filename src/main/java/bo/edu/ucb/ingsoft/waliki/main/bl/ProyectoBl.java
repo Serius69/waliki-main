@@ -35,10 +35,7 @@ public class ProyectoBl {
     public List<PrincipalProyectosDto> paginaPrincipal () {
         return proyectoDao.paginaPrincipal();
     }
-    //Listado proyectos vigentes
-    public ProyectoDto findProyectoByName (String nombreProyecto) {
-        return proyectoDao.findProyectoByName(nombreProyecto);
-    }
+    //Buscar proyecto por si Id
     public ConsultaProyectoDto findProyectobyId (Integer proyectoId) {
         return proyectoDao.findProyectobyId(proyectoId);
     }

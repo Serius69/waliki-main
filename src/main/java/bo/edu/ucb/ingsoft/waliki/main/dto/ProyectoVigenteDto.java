@@ -2,7 +2,6 @@ package bo.edu.ucb.ingsoft.waliki.main.dto;
 
 public class ProyectoVigenteDto {
 
-    //private Integer proyectoId;
     private String nombreProyecto;
     private Double montoRQ;
     private String tiempoRestante;
@@ -35,8 +34,4 @@ public class ProyectoVigenteDto {
     public void setNombreProyecto(String nombreProyecto) {
         this.nombreProyecto = nombreProyecto;
     }
-
-    //public Integer getProyectoId() {        return proyectoId;    }
-
-    //public void setProyectoId(Integer proyectoId) {        this.proyectoId = proyectoId;    }
 }
