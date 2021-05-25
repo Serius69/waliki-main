@@ -81,21 +81,21 @@ public class ProyectoDao {
         List<ProyectoVigenteDto> result = new ArrayList<>();
         try (Connection conn = dataSource2.getConnection(); //cerrado de conexion
              PreparedStatement pstmt = conn.prepareStatement("" +
-                     "SELECT nombre_proyecto, monto_recaudar, split_part(fecha_fin, '/', 2) AS diasfaltantes " +
+                     "SELECT p.id_proyecto ,nombre_proyecto, monto_recaudar, split_part(fecha_fin, '/', 2) AS diasfaltantes " +
                      "FROM proyecto p " +
                      "JOIN imagen_proyecto ip ON p.id_proyecto = ip.id_proyecto " +
                      "JOIN imagen img ON ip.id_imagen = img.id_imagen " +
                      "JOIN estado e ON p.id_estado = e.id_estado " +
                      "WHERE p.id_estado = ? " +
-                     "GROUP BY p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio,p.fecha_fin " +
-                     "ORDER BY p.fecha_inicio DESC; ")
+                     "GROUP BY p.id_proyecto, p.nombre_proyecto, p.monto_recaudar, p.fecha_inicio,p.fecha_fin " +
+                     "ORDER BY diasfaltantes DESC; ")
 
         ){  pstmt.setInt(1, estadoId);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 ProyectoVigenteDto proyecto = new ProyectoVigenteDto();
-                //proyecto.setProyectoId(rs.getInt("id_proyecto"));
+                proyecto.setProyectoId(rs.getInt("id_proyecto"));
                 proyecto.setNombreProyecto(rs.getString("nombre_proyecto"));
                 proyecto.setMontoRQ(rs.getDouble("monto_recaudar"));
                 proyecto.setTiempoRestante(rs.getString("diasfaltantes"));

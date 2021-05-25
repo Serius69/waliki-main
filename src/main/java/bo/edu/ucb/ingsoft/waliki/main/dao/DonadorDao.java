@@ -76,14 +76,14 @@ public class DonadorDao {
                         "JOIN donacion dn ON d.id_donador = dn.id_donacion " +
                         "JOIN usuario us ON us.id_usuario = d.id_usuario " +
                         "JOIN persona pe ON pe.id_persona = us.id_persona_fk " +
-                        "WHERE d.id_donador = ? " + // falla con el signo de ?
+                        "WHERE d.id_donador = ? " + //
                         "GROUP BY d.id_donador, pe.nombre_persona, pr.nombre_proyecto, dn.monto;")
                 )
         {   pstmt.setInt(1, idDonador );
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 result.setDonadorId(rs.getInt("id_donador"));
-                result.setNombrePersona(rs.getString("nompre_persona"));
+                result.setNombrePersona(rs.getString("nombre_persona"));
                 result.setNombreProyecto(rs.getString("nombre_proyecto"));
                 result.setMonto_donacion(rs.getDouble("monto"));
             } else { // si no hay valores de BBDD
@@ -110,14 +110,14 @@ public class DonadorDao {
                                 "AND us.id_usuario = d.id_usuario " +
                                 "AND us.id_persona_fk = pe.id_persona " +
                                 "GROUP BY  d.id_donador, pe.nombre_persona , pr.nombre_proyecto, dn.monto " +
-                                "ORDER BY d.id_donador; ")
+                                "ORDER BY d.id_donador;")
                 )
         {  ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     ConsultaDonadorDto consulta = new ConsultaDonadorDto();
                     consulta.setDonadorId(rs.getInt("id_donador"));
-                    consulta.setNombrePersona(rs.getString("nombre_persona"));
-                    consulta.setNombreProyecto(rs.getString("nombre_proyecto"));
+                    consulta.setNombrePersona(rs.getString("nombre_del_donador"));
+                    consulta.setNombreProyecto(rs.getString("proyecto_al_que_dono"));
                     consulta.setMonto_donacion(rs.getDouble("monto_que_dono"));
                     result.add(consulta);
                 }

@@ -19,7 +19,6 @@ public class DonadorApi {
     @GetMapping(path = "/donador")
     public ResponseDto  findAllDonadores() {
         return new ResponseDto( true, donadorBl.findAllDonadores(), "Listado de todos los donadores");
-
     }
 
     //Crear un nuevo donador
@@ -29,7 +28,7 @@ public class DonadorApi {
         if (donador.getNombreUsuario() == null || donador.getNombreUsuario().trim().equals("") ) {  // nombre usuario: "     "
             return new ResponseDto( false, null, "El nombre de usuario es obligatori");
         }
-        if (donador.getCorreoElectronico() == null || donador.getCorreoElectronico().trim().equals("")) {  // correo electronico: "     "
+        if (donador.getCorreoElectronico() == null || donador.getCorreoElectronico().trim().equals("") ) {  // correo electronico: "     "
             return new ResponseDto( false, null, "El correo electronico es obligatorio");
         }
         if (donador.getNumeroTelefono() == null || donador.getNumeroTelefono()<0) {  // numero telefnono: "     "
@@ -55,10 +54,10 @@ public class DonadorApi {
     }
     // Buscar un donador por su ID
     @GetMapping(path = "/donador/{donadorId}")
-    public ResponseDto findDonadorByName(@PathVariable Integer donadorId) {
+    public ResponseDto findDonadorById(@PathVariable Integer donadorId) {
         ConsultaDonadorDto donador = donadorBl.findDonadorById(donadorId);
         if (donador != null) {
-            return new ResponseDto(true, donador, null);
+            return new ResponseDto(true, donador, "El donador solicitado");
         } else {
             //throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el donador con nombre:" + nombre_persona);
             return new ResponseDto( false, null, "El apellido debe ser obligatorio");
