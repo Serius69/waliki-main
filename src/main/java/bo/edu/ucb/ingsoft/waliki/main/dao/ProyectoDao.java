@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import javax.sql.*;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +49,15 @@ public class ProyectoDao {
         proyectoDto.setProyectoId(sequenceDao.getPrimaryKeyForTable("proyecto"));
         proyectoDto.setEmprendedorId(23); // id_emprendedor
         proyectoDto.setEstadoId(1);
-        proyectoDto.setHoraInicio("20:00:00"); // Hora
-        proyectoDto.setHoraFin("20:00:00");
-        proyectoDto.setFechaInicio("5/20/2021"); // Fecha
-        proyectoDto.setFechaFin("6/20/2021");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String HoraInicio =(dtf.format(LocalDateTime.now()));
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String FechaInicio =(dtf1.format(LocalDateTime.now()));
+
+        proyectoDto.setHoraInicio(HoraInicio); // Hora actual
+        proyectoDto.setHoraFin("HH:mm:ss"); // Hora
+        proyectoDto.setFechaInicio(FechaInicio); // Fecha
+        proyectoDto.setFechaFin("MM/dd/yyyy");
         proyectoDto.setMontoRecaudar(proyectoDto.getMontoRecaudar());
         try (Connection conn = dataSource2.getConnection()) //cerrado de conexion
         {

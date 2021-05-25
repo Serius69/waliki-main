@@ -4,7 +4,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "nombreProyecto": "Proyecto de prueba",
+  "nombreProyecto": "Proyecto de prueba x",
   "montoRecaudar": 200,
   "descripcion": "El siguiente proyecto es un dato de prueba"
 }
