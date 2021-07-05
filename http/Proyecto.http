@@ -5,7 +5,7 @@ Accept: application/json
 
 {
   "nombreProyecto": "Proyecto de prueba x",
-  "montoRecaudar": 200,
+  "montoRecaudar": -1,
   "descripcion": "El siguiente proyecto es un dato de prueba"
 }
 ### Muestra los proyectos Vigentes - Funcioma

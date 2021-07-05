@@ -1,24 +1,24 @@
 ### Listado donadores - Funciona
-GET http://localhost:8080/donador/
+GET http://localhost:8081/donador/
 accept: application/json
 
 ### Agrega un nuevo donador - Funciona
-POST http://localhost:8080/donador
+POST http://localhost:8081/donador
 Content-Type: application/json
 Accept: application/json
 
 {
   "nombreUsuario": "usuarioprueba",
   "correoElectronico": "estenoesblitzcrank@gmail.com",
-  "numeroTelefono": 789456,
+  "numeroTelefono": -1,
   "direccion": "Obrajes calle 2",
   "contrasena": "6754281SdTM"
 }
 
-### Busqueda de donador por nombre - Falla
-GET http://localhost:8080/donador/2
+### Busqueda de donador por id
+GET http://localhost:8081/donador/2
 Content-Type: application/json
 
 ### Tomar un contrato - Funciona
-GET http://localhost:8080/contrato/1
+GET http://localhost:8081/contrato/1
 accept: application/json

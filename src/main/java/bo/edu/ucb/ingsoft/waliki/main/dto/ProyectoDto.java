@@ -68,9 +68,7 @@ public class ProyectoDto {
 
     public void setMontoRecaudar(Double montoRecaudar) { this.montoRecaudar = montoRecaudar; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public String getDescripcion() {  return descripcion;    }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
