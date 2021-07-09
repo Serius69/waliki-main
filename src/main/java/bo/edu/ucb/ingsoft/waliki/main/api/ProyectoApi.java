@@ -1,21 +1,30 @@
 package bo.edu.ucb.ingsoft.waliki.main.api;
 
+import org.springframework.web.bind.annotation.*;
 import bo.edu.ucb.ingsoft.waliki.main.bl.ProyectoBl;
-import bo.edu.ucb.ingsoft.waliki.main.dto.*;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ConsultaProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ProyectoDto;
+import bo.edu.ucb.ingsoft.waliki.main.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import javax.sql.DataSource;
 
+//http
+
 @RestController
+@RequestMapping("/foo")
+@CrossOrigin (origins = "http://localhost:4200")
 public class ProyectoApi {
     @Autowired
     public DataSource dataSource;
     @Autowired
     private ProyectoBl proyectoBl;
+
     //Pagina principal
     @GetMapping(path = "/paginaprincipal")
     public ResponseDto  paginaPrincipal() {
-        return new ResponseDto( true, proyectoBl.paginaPrincipal(), "Listado de todos los donadores");
+        return new ResponseDto( true, proyectoBl.paginaPrincipal(), "Listado de todos los proyectos");
     }
     //Crear nuevo proyecto
     @PostMapping(path = "/proyecto")
