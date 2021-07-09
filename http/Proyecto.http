@@ -1,5 +1,5 @@
 ### Agregar un nuevo proyecto - Falla
-POST http://localhost:8080/proyecto
+POST http://localhost:8081/proyecto
 Content-Type: application/json
 Accept: application/json
 
@@ -9,16 +9,18 @@ Accept: application/json
   "descripcion": "El siguiente proyecto es un dato de prueba"
 }
 ### Muestra los proyectos Vigentes - Funcioma
-GET http://localhost:8080/estado/1
+GET http://localhost:8081/estado/1
 accept: application/json
 ### Muestra los proyectos en proceso - Funcioma
-GET http://localhost:8080/estado/2
+GET http://localhost:8081/estado/2
 accept: application/json
 ### Muestra los proyectos Finalizados - Funcioma
-GET http://localhost:8080/estado/3
+GET http://localhost:8081/estado/3
 accept: application/json
 ### Muestra todos los proyectos - Funcioma
-GET http://localhost:8080/estado/4
+GET http://localhost:8081/estado/4
 accept: application/json
 ### Busqueda de proyecto por id - Funciona
-GET http://localhost:8080/proyecto/1
+GET http://localhost:8081/proyecto/1
+### Pagina PRicipal
+GET http://localhost:8081/paginaprincipal

@@ -10,6 +10,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.sql.DataSource;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
+@RequestMapping(value="/api")
 public class DonadorApi {
     @Autowired
     public DataSource dataSource;
